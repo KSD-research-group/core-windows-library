@@ -10,44 +10,101 @@ using System.Net.Http;
 
 namespace Ksd.Mediatum
 {
+    /**
+     <summary>  Connector to the MediaTUM server. </summary>
+    
+     <remarks>  Dr. Torsten Thurow, TU München, 22.07.2014. </remarks>
+     */
+    [Serializable()]
     public class Server
     {
+        /**
+         <summary>  Gets or sets the network name or address of the server. </summary>
+        
+         <value>    The network name or address of the server. </value>
+         */
         public String ServerName { get; set; }
 
-        public String UploadLink { get; set; }
+        /**
+         <summary>  Gets or sets the upload path. </summary>
+        
+         <value>    The upload path. </value>
+         */
+        public String UploadPath { get; set; }
 
-        public String UpdateLink { get; set; }
+        /**
+         <summary>  Gets or sets the update path. </summary>
+        
+         <value>    The update path. </value>
+         */
+        public String UpdatePath { get; set; }
 
-        public String ExportLink { get; set; }
+        /**
+         <summary>  Gets or sets the export path. </summary>
+        
+         <value>    The export path. </value>
+         */
+        public String ExportPath { get; set; }
 
-
-
+        /**
+         <summary>  Gets or sets the OAuth profile of the user. </summary>
+        
+         <value>    The OAuth profile of the user. </value>
+         */
         public OAuth User { get; set; }
 
+        /**
+         <summary>  Constructor. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 22.07.2014. </remarks>
+        
+         <param name="user">        The OAuth profile of the user. </param>
+         <param name="serverName">  (Optional) The network name or address of the server. </param>
+         */
         public Server(OAuth user, string serverName = "mediatum.ub.tum.de")
         {
             this.User = user;
             this.ServerName = serverName;
-            this.UploadLink = "service/upload/new";
-            this.UpdateLink = "services/update";
-            this.ExportLink = "services/export";
-        }
-
-        public async Task<string> ExportAsync(UInt32 id)
-        {
-            // http://mediatum.ub.tum.de/services/export
-
-            var client = new HttpClient(new HttpClientHandler());
-            Uri uri = new Uri("https://" + this.ServerName + '/' + this.ExportLink + "/node/" + id.ToString());
-
-            var response = await client.GetAsync(uri);
-            response.EnsureSuccessStatusCode();
-
-            return await response.Content.ReadAsStringAsync();
+            this.UploadPath = "services/upload/new";
+            this.UpdatePath = "services/update";
+            this.ExportPath = "services/export";
         }
 
         /**
-         <summary>  Uploads asynchronous a file to an node . </summary>
+         <summary>  Exports. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 22.07.2014. </remarks>
+        
+         <param name="nodeId">  The ID of the node to read. </param>
+         <param name="postfix"> The postfix of the request. </param>
+         <param name="uri">     [out] The URI of the request. </param>
+        
+         <returns>  The result string of the request. </returns>
+         */
+        public string Export(UInt32 nodeId, string postfix, out Uri uri)
+        {
+            // http://mediatum.ub.tum.de/services/export
+
+            string prefix = this.ExportPath + "/node/" + nodeId.ToString();
+            if (postfix != "")
+                prefix += '/' + postfix;
+            
+            String uriString = "https://" + this.ServerName + '/' + prefix;
+            uri = new Uri(uriString);
+
+            System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection();
+            this.User.GetMd5Hash(prefix, parameters);
+            String callString = uriString + "/?" + OAuth.GetSortedParameterString(parameters);
+
+            WebClient wc = new WebClient();
+            string result = wc.DownloadString(callString);
+            WebHeaderCollection col = wc.ResponseHeaders;
+
+            return result;
+        }
+
+        /**
+         <summary>  Uploads a file to an node . </summary>
         
          <remarks>  Dr. Torsten Thurow, TU München, 16.07.2014. </remarks>
         
@@ -59,64 +116,82 @@ namespace Ksd.Mediatum
         
          <returns>  A Task&lt;string&gt; </returns>
          */
-        public async Task<UInt32> UploadAsync(UInt32 parent, string type, string name, string metadata, byte[] data)
+        internal UInt32 Upload(UInt32 parent, string type, string name, string metadata, byte[] data)
         {
             // http://mediatum.ub.tum.de/services/upload
-
+            
             string base64String = System.Convert.ToBase64String(data, 0, data.Length);
-
-            SortedDictionary<string, string> parameters = new SortedDictionary<string, string>
+            string uri = "https://" + this.ServerName + '/' + this.UploadPath;
+            
+            System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection
             {
                 { "parent", parent.ToString() },
                 { "type", type },
                 { "name", name },
-//                { "metadata", Uri.EscapeUriString(metadata) },
-                { "metadata", metadata },
+                { "metadata", Uri.EscapeUriString(metadata) },
+//                { "metadata", metadata },
                 { "data", base64String },
             };
 
-            var values = new FormUrlEncodedContent(parameters);
-            var client = new HttpClient(new HttpClientHandler());
-            Uri uri = new Uri("https://" + this.ServerName + '/' + this.UploadLink);
-            
-            var response = await client.PostAsync(uri, values);
-            response.EnsureSuccessStatusCode();
+            //this.User.GetMd5Hash(this.UploadPath, parameters);
 
-            return 0;
+            WebClient wc = new WebClient();
+            byte[] result = wc.UploadValues(uri, parameters);
+            string s = Encoding.UTF8.GetString(result, 0, result.Length);
+            WebHeaderCollection col = wc.ResponseHeaders;
+
+            string idString = col["NodeID"];
+
+            return Convert.ToUInt32(idString);
         }
 
         /**
-         <summary>  Updates the asynchronous. </summary>
+         <summary>  Updates an node. </summary>
         
          <remarks>  Dr. Torsten Thurow, TU München, 18.07.2014. </remarks>
         
-         <param name="parent">      The new ID of the parent node. </param>
-         <param name="name">        The name. </param>
-         <param name="metadata">    The new key value pairs containing the metadata, either in XML or JSON. </param>
-         <param name="data">        The new raw data of the image to upload. </param>
-        
-         <returns>  A Task&lt;string&gt; </returns>
+         <param name="nodeId">      The ID of the node to update. </param>
+         <param name="name">        The new name of node, will be stored in the node table, field name. </param>
+         <param name="metadata">    The new metadatafields to given file. Use the json format e.g. {"nodename":"name", ...}. </param>
          */
-        public async void UpdateAsync(UInt32 parent, string format, string metadata, byte[] data)
+        internal void Update(UInt32 nodeId, string name, string metadata)
         {
-            // http://mediatum.ub.tum.de/services/upload
+            // http://mediatum.ub.tum.de/services/update
 
-            string base64String = System.Convert.ToBase64String(data, 0, data.Length);
+            string uri = "https://" + this.ServerName + '/' + this.UpdatePath + '/' + nodeId.ToString();
 
-            SortedDictionary<string, string> parameters = new SortedDictionary<string, string>
+            System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection
             {
-                { "parent", parent.ToString() },
-                { "format", format },
+                { "name", name },
                 { "metadata", Uri.EscapeUriString(metadata) },
-                { "data", base64String }
             };
 
-            var values = new FormUrlEncodedContent(parameters);
-            var client = new HttpClient(new HttpClientHandler());
-            Uri uri = new Uri("https://" + this.ServerName + '/' + this.UpdateLink);
+            //this.User.GetMd5Hash(this.UploadPath, parameters);
 
-            var response = await client.PostAsync(uri, values);
-            response.EnsureSuccessStatusCode();
+            WebClient wc = new WebClient();
+            byte[] result = wc.UploadValues(uri, parameters);
+            string s = Encoding.UTF8.GetString(result, 0, result.Length);
+            WebHeaderCollection col = wc.ResponseHeaders;
+        }
+
+        internal Dictionary<UInt32, Node> nodeTable = new Dictionary<uint,Node>();
+
+        /**
+         <summary>  Gets a node form MediaTUM. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 22.07.2014. </remarks>
+        
+         <param name="nodeId">  The ID of the node to read. </param>
+        
+         <returns>  The node. </returns>
+         */
+        public Node GetNode(UInt32 nodeId)
+        {
+            Node node;
+            if (!this.nodeTable.TryGetValue(nodeId, out node))
+                return new Node(this, nodeId);
+
+            return node;
         }
     }
 }

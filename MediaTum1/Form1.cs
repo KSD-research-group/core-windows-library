@@ -12,7 +12,8 @@ namespace MediaTum1
 {
     public partial class Form1 : Form
     {
-        Ksd.Mediatum.OAuth oAuth = new Ksd.Mediatum.OAuth("ga76juy", "b33db3e738ee71a");
+//        Ksd.Mediatum.OAuth oAuth = new Ksd.Mediatum.OAuth("ga76juy", "b33db3e738ee71a");
+        Ksd.Mediatum.OAuth oAuth = new Ksd.Mediatum.OAuth("ga54yoc", "6ababd6e13fe7df");
 
         public Form1()
         {
@@ -20,10 +21,17 @@ namespace MediaTum1
         }
 
  
-        private async void buttonCheck_Click(object sender, EventArgs e)
+        private void buttonCheck_Click(object sender, EventArgs e)
         {
+            // Test 1085713 // frei sichtbar
+            // Grundrissanalyse 1220070 // verborgen
+            // Mobil 1219454
+            // BIMServer 1219448
+            // ar:searchbox 1085713
             Ksd.Mediatum.Server server = new Ksd.Mediatum.Server(this.oAuth);
-            string result = await server.ExportAsync(1085713);
+            Ksd.Mediatum.Node node = server.GetNode(1085713);
+            List<Ksd.Mediatum.Node> children = new List<Ksd.Mediatum.Node>(node.Children);
+            List<Ksd.Mediatum.Node> parents = new List<Ksd.Mediatum.Node>(node.Parents);
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
@@ -53,12 +61,16 @@ namespace MediaTum1
             }
 
 	        String name = "arno_test_java";
-	        UInt32 parent = 1222315;
+            UInt32 parent = 1219448;
 	        String type = "image/project-arc";
-	        String metadata = "\"{\"nodename\":\"arno_test_node\"}\"";
+	        String metadata = "{\"nodename\":\"arno_test_node\"}";
 
+            node = server.GetNode(parent);
 
-            UInt32 id = await server.UploadAsync(parent, type, name, metadata, binaryData);
+            Ksd.Mediatum.Node loadedNode = node.Upload(type, name, metadata, binaryData);
+
+            loadedNode.Update(name, metadata);
         }
     }
 }
+

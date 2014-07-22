@@ -15,6 +15,7 @@ namespace Ksd.Mediatum
        <a href="http://gitlab.ai.ar.tum.de/ksd-research-group/ksd-documentation/wikis/mediaTumBasicAuthentication">here</a>
      </remarks>
      */
+    [Serializable()]
     public class OAuth
     {
         #region Signing Configuration
@@ -52,58 +53,6 @@ namespace Ksd.Mediatum
         }
 
         /**
-         <summary>  Gets signed URL. </summary>
-        
-         <remarks>
-         The signing is based on a common signing algorithm on both the server and client side.
-         
-            Sort the parameters alphabetically ( yxz=foo user=MyUsername abc=baz becomes abc=baz user=MyUsername yxz=foo )
-            Concatenate the keys and values to one string like in URL ( => abc=baz&amp;user=MyUsername&amp;yxz=foo)
-            Prefix the string with the request path (/service/export/abc=baz&amp;user=MyUsername&amp;yxz=foo)
-            Prefix the resulting string with the shared secret (MySharedSecret/service/export/abc=baz&amp;user=MyUsername&amp;yxz=foo)
-            Create the MD5 sum of that string ( MD5 = 1676a3873fc5dd035d362a3a01450dcc)
-            Use this hash string as parameter sign.
-         
-         The resulting request would look like: http://server.de/service/export/?yxz=foo&amp;user=MyUsername&amp;abc=baz&amp;
-         sign=1676a3873fc5dd035d362a3a01450dcc.
-         </remarks>
-        
-         <param name="prefix">      The prefix. </param>
-         <param name="postfix">     The postfix. </param>
-         <param name="parameters">  (Optional) Options for controlling the operation. </param>
-        
-         <returns>  The signed URL. </returns>
-        public Uri GetSignedUrl(string postfix, SortedDictionary<string, string> parameters = null)
-        {
-            if (parameters == null)
-                parameters = new SortedDictionary<string, string>();
-
-            parameters.Add("user", UserName);
-            String parameterString = GetParameterString(parameters);
-            String sig = this.PresharedTag + '/' + postfix + '/' + parameterString;
-            String cleanedSig = Uri.EscapeUriString(sig);
-            String newSig = GetMd5Hash(cleanedSig);
-
-            parameters.Add("sign", newSig);
-            parameterString = GetParameterString(parameters);
-            String url = prefix + '/' + postfix + "/?" + parameterString;
-            String cleanedUrl = Uri.EscapeUriString(url);
-
-            return new Uri(cleanedUrl);
-        }
-
-        public Uri GetUnsignedUrl(string prefix, string postfix, SortedDictionary<string, string> parameters = null)
-        {
-            String parameterString = GetParameterString(parameters);
-            String url = prefix + '/' + postfix;
-            if (parameterString != null)
-                url += '?' + parameterString;
-
-            return new Uri(url);
-        }
-         */
-
-        /**
          <summary>  Gets parameter string of a URI. </summary>
         
          <remarks>  Dr. Torsten Thurow, TU München, 16.07.2014. </remarks>
@@ -112,15 +61,26 @@ namespace Ksd.Mediatum
         
          <returns>  The parameter string. </returns>
          */
-        private static string GetParameterString(SortedDictionary<string, string> parameters)
+        public static string GetSortedParameterString(System.Collections.Specialized.NameValueCollection parameters)
         {
             if (parameters == null)
                 return null;
 
-            IEnumerator<KeyValuePair<string, string>> enumerator = parameters.GetEnumerator();
+            SortedDictionary<string, string> sorted = new SortedDictionary<string, string>();
+
+            for (int index = 0; index < parameters.Count; index++)
+            {
+                string key = parameters.GetKey(index);
+                string[] values = parameters.GetValues(index);
+                Array.Sort<string>(values);
+                foreach (string value in values)
+                    sorted.Add(key, value);
+            }
+
+            IEnumerator<KeyValuePair<string, string>> enumerator = sorted.GetEnumerator();
             if (!enumerator.MoveNext())
                 return null;
-            
+
             KeyValuePair<string, string> pair = enumerator.Current;
             string result = pair.Key + '=' + pair.Value;
 
@@ -169,9 +129,9 @@ namespace Ksd.Mediatum
         
          <param name="input">   The input string to hash. </param>
         
-         <returns>  The MD5 hash for OAuth. </returns>
+         <returns>  The MD5 hash for OAuth as string. </returns>
          */
-        private static String GetMd5Hash(String input)
+        public static String GetMd5Hash(String input)
         {
             // Code von http://dotnet-snippets.de/snippet/gibt-den-md5-hash-eines-stings-als-string-zurueck/18, Stand: 07.04.2014
 
@@ -190,6 +150,22 @@ namespace Ksd.Mediatum
                 Byte2Hex(resultString, index * 2, result[index]);
 
             return new String(resultString);
+        }
+
+        /**
+         <summary>  Gets Md5 hash for OAuth. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 22.07.2014. </remarks>
+        
+         <param name="prefix">      The prefix of the URI. </param>
+         <param name="parameters">  The parameters of the URI, this function adds the parameters user and sign. </param>
+         */
+        public void GetMd5Hash(String prefix, System.Collections.Specialized.NameValueCollection parameters)
+        {
+            parameters.Add("user", this.UserName);
+            string input = this.PresharedTag + '/' + prefix + '/' + GetSortedParameterString(parameters);
+            string sign = GetMd5Hash(input);
+            parameters.Add("sign", sign);
         }
     }
 }
