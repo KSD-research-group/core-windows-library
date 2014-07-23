@@ -8,27 +8,6 @@ using System.Threading.Tasks;
 namespace Ksd.Mediatum
 {
     [Serializable()]
-    public class NodeAttribute
-    {
-        public string Name { get; set; }
-        public string Value { get; set; }
-
-        public Node Parent { get; set; }
-
-        public NodeAttribute()
-        { }
-
-        public NodeAttribute(Node parent, XmlElement xmlNode)
-        {
-            this.Parent = parent;
-            this.Name = xmlNode.Attributes["name"].Value;
-            XmlNode childNode = xmlNode.ChildNodes[0];
-            XmlCDataSection cdataSection = childNode as XmlCDataSection;
-            this.Value = cdataSection.Value;
-        }
-    }
-
-    [Serializable()]
     public class NodeFile
     {
         public string Type { get; set; }
@@ -137,8 +116,11 @@ namespace Ksd.Mediatum
 
                             Node parentNode;
                             if (!this.Server.nodeTable.TryGetValue(newId, out parentNode))
-                                parentNode = new Node(this.Server, (XmlElement)nextXmlNode, result);
-                                
+                            {
+                                string typeOfNewNode = nextXmlNode.Attributes["type"].Value;
+                                parentNode = this.Server.CreateNode(typeOfNewNode, (XmlElement)nextXmlNode, result);
+                            }
+   
                             this.parents.Add(parentNode);
                         }
                     }
@@ -207,7 +189,10 @@ namespace Ksd.Mediatum
 
                             Node childNode;
                             if (!this.Server.nodeTable.TryGetValue(newId, out childNode))
-                                childNode = new Node(this.Server, (XmlElement)nextXmlNode, result);
+                            {
+                                string typeOfNewNode = nextXmlNode.Attributes["type"].Value;
+                                childNode = this.Server.CreateNode(typeOfNewNode, (XmlElement)nextXmlNode, result);
+                            }
 
                             this.children.Add(childNode);
                         }
@@ -224,7 +209,7 @@ namespace Ksd.Mediatum
 
         public string Xml { get; private set; }
 
-        public Dictionary<string, NodeAttribute> Attributes = new Dictionary<string, NodeAttribute>();
+        public IDictionary<string, string> Attributes = new Dictionary<string, string>();
 
         public Dictionary<string, NodeMask> Masks = new Dictionary<string, NodeMask>();
 
@@ -302,8 +287,12 @@ namespace Ksd.Mediatum
                 {
                     case "attribute":
                         {
-                            NodeAttribute attribute = new NodeAttribute(this, (XmlElement)childNode);
-                            this.Attributes.Add(attribute.Name, attribute);
+                            string name = childNode.Attributes["name"].Value;
+                            XmlNode childNode2 = childNode.ChildNodes[0];
+                            XmlCDataSection cdataSection = childNode2 as XmlCDataSection;
+                            string value = cdataSection.Value;
+
+                            this.Attributes.Add(name, value);
                             break;
                         }
                     case "file":
@@ -327,20 +316,18 @@ namespace Ksd.Mediatum
             }
         }
 
-        internal Node(Server server, UInt32 nodeId)
+        internal static Node CreateNode(Server server, UInt32 nodeId)
         {
-            this.Server = server;
             Uri uri;
-            string result = this.Server.Export(nodeId, "", out uri);
-            this.Xml = result;
+            string result = server.Export(nodeId, "", out uri);
             XmlNode xmlNodeResponse = GetXmlNodeResponse(uri, result);
             XmlElement xmlNode = (XmlElement)xmlNodeResponse["node"];
+            string typeOfNewNode = xmlNode.Attributes["type"].Value;
 
-            Parse(xmlNode);
-            this.Server.nodeTable.Add(this.ID, this);
+            return server.CreateNode(typeOfNewNode, xmlNode, result);
         }
 
-        internal Node(Server server, XmlElement xmlNode, string xml)
+        public Node(Server server, XmlElement xmlNode, string xml)
         {
             this.Server = server;
             this.Xml = xml;
@@ -364,7 +351,7 @@ namespace Ksd.Mediatum
         public Node Upload(string type, string name, string metadata, byte[] data)
         {
             UInt32 newId = this.Server.Upload(this.ID, type, name, metadata, data);
-            Node newNode = new Node(this.Server, newId);
+            Node newNode = Node.CreateNode(this.Server, newId);
             if (this.children != null)
                 this.children.Add(newNode);
 

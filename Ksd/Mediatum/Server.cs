@@ -7,6 +7,7 @@ using System.Net;
 using System.IO;
 using System.Web;
 using System.Net.Http;
+using System.Xml;
 
 namespace Ksd.Mediatum
 {
@@ -241,9 +242,22 @@ namespace Ksd.Mediatum
         {
             Node node;
             if (!this.nodeTable.TryGetValue(nodeId, out node))
-                return new Node(this, nodeId);
+                return Node.CreateNode(this, nodeId);
 
             return node;
+        }
+
+        internal Dictionary<string, Type> typeTable = new Dictionary<string, Type>();
+
+        internal Node CreateNode(string typeAsString, XmlElement xmlNode, string xml)
+        {
+            Type type;
+            if (!this.typeTable.TryGetValue(typeAsString, out type))
+                type = typeof(Node);
+
+            Object[] args = new Object[] { this, xmlNode, xml };
+
+            return (Node)Activator.CreateInstance(type, args);
         }
     }
 }
