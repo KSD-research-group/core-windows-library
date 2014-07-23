@@ -47,6 +47,13 @@ namespace Ksd.Mediatum
         public String ExportPath { get; set; }
 
         /**
+         <summary>  Gets or sets the file path. </summary>
+        
+         <value>    The export path. </value>
+         */
+        public String FilePath { get; set; }
+
+        /**
          <summary>  Gets or sets the OAuth profile of the user. </summary>
         
          <value>    The OAuth profile of the user. </value>
@@ -68,6 +75,7 @@ namespace Ksd.Mediatum
             this.UploadPath = "services/upload/new";
             this.UpdatePath = "services/update";
             this.ExportPath = "services/export";
+            this.FilePath = "file";
         }
 
         /**
@@ -143,6 +151,26 @@ namespace Ksd.Mediatum
             string idString = col["NodeID"];
 
             return Convert.ToUInt32(idString);
+        }
+
+        internal byte[] Download(UInt32 nodeId, string fileName, out Uri uri)
+        {
+            // http://mediatum.ub.tum.de/file
+
+            string prefix = this.FilePath + '/' + nodeId.ToString() + '/' + fileName;
+
+            String uriString = "https://" + this.ServerName + '/' + prefix;
+            uri = new Uri(uriString);
+
+            System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection();
+            this.User.GetMd5Hash(prefix, parameters);
+            String callString = uriString + "/?" + OAuth.GetSortedParameterString(parameters);
+
+            WebClient wc = new WebClient();
+            byte[] result = wc.DownloadData(uriString);
+            WebHeaderCollection col = wc.ResponseHeaders;
+
+            return result;
         }
 
         /**

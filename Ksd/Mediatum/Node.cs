@@ -389,5 +389,15 @@ namespace Ksd.Mediatum
             this.Masks.Clear();
             Parse(xmlNode);
         }
+
+        public byte[] Download()
+        {
+            Uri uri;
+            foreach (NodeFile file in this.Files)
+                if (file.Type == "original")
+                    return this.Server.Download(this.ID, file.Filename, out uri);
+
+            throw new System.NullReferenceException();
+        }
     }
 }
