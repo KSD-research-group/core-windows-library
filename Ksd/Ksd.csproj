@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mediatum\FloorPlanNode.cs" />
     <Compile Include="Mediatum\Node.cs" />
     <Compile Include="Mediatum\OAuth.cs" />
     <Compile Include="Mediatum\Server.cs" />

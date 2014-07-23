@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Net;
 using System.IO;
 using System.Web;
+using System.Net;
 using System.Net.Http;
 using System.Xml;
 
@@ -247,7 +247,7 @@ namespace Ksd.Mediatum
             return node;
         }
 
-        internal Dictionary<string, Type> typeTable = new Dictionary<string, Type>();
+        public Dictionary<string, Type> typeTable = new Dictionary<string, Type>();
 
         internal Node CreateNode(string typeAsString, XmlElement xmlNode, string xml)
         {

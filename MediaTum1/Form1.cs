@@ -29,10 +29,13 @@ namespace MediaTum1
             // BIMServer 1219448
             // ar:searchbox 1085713
             Ksd.Mediatum.Server server = new Ksd.Mediatum.Server(this.oAuth);
-            Ksd.Mediatum.Node node = server.GetNode(1225255);
-            List<Ksd.Mediatum.Node> children = new List<Ksd.Mediatum.Node>(node.Children);
-            List<Ksd.Mediatum.Node> parents = new List<Ksd.Mediatum.Node>(node.Parents);
-            foreach (Ksd.Mediatum.NodeFile file in node.Files)
+            server.typeTable.Add("image/project-arc", typeof(Ksd.Mediatum.FloorPlanNode));
+
+            Ksd.Mediatum.FloorPlanNode floorNode = (Ksd.Mediatum.FloorPlanNode)server.GetNode(1225255);
+            string result = floorNode.GetGraphMl();
+            List<Ksd.Mediatum.Node> children = new List<Ksd.Mediatum.Node>(floorNode.Children);
+            List<Ksd.Mediatum.Node> parents = new List<Ksd.Mediatum.Node>(floorNode.Parents);
+            foreach (Ksd.Mediatum.NodeFile file in floorNode.Files)
                 file.Download();
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -67,7 +70,7 @@ namespace MediaTum1
 	        String type = "image/project-arc";
 	        String metadata = "{\"nodename\":\"arno_test_node\"}";
 
-            node = server.GetNode(parent);
+            Ksd.Mediatum.Node node = server.GetNode(parent);
 
             Ksd.Mediatum.Node loadedNode = node.Upload(type, name, metadata, binaryData);
 
