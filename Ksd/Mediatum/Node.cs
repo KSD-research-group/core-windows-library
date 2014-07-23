@@ -48,7 +48,11 @@ namespace Ksd.Mediatum
             this.Type = xmlNode.Attributes["type"].Value;
         }
 
-        //void Download (string fileName, Node parent, string user, string )
+        public byte[] Download()
+        {
+            Uri uri;
+            return this.Parent.Server.Download(this.Parent.ID, Filename, out uri);
+        }
     }
 
     [Serializable()]
@@ -388,16 +392,6 @@ namespace Ksd.Mediatum
             this.Attributes.Clear();
             this.Masks.Clear();
             Parse(xmlNode);
-        }
-
-        public byte[] Download()
-        {
-            Uri uri;
-            foreach (NodeFile file in this.Files)
-                if (file.Type == "original")
-                    return this.Server.Download(this.ID, file.Filename, out uri);
-
-            throw new System.NullReferenceException();
         }
     }
 }

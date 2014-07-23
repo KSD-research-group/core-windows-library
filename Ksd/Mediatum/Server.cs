@@ -26,10 +26,17 @@ namespace Ksd.Mediatum
         public String ServerName { get; set; }
 
         /**
-         <summary>  Gets or sets the upload path. </summary>
+         <summary>  Gets or sets the sign path. </summary>
         
-         <value>    The upload path. </value>
+         <value>    The sign path. </value>
          */
+        public String SignPath { get; set; }
+
+        /**
+          <summary>  Gets or sets the upload path. </summary>
+        
+          <value>    The upload path. </value>
+          */
         public String UploadPath { get; set; }
 
         /**
@@ -72,6 +79,7 @@ namespace Ksd.Mediatum
         {
             this.User = user;
             this.ServerName = serverName;
+            this.SignPath = "services/upload/calcsign";
             this.UploadPath = "services/upload/new";
             this.UpdatePath = "services/update";
             this.ExportPath = "services/export";
@@ -110,7 +118,23 @@ namespace Ksd.Mediatum
 
             return result;
         }
+/*
+        string GetOAuthSignFromServer(string key, )
+        {
+//    values = {'key': params['key'], 'url': "%s?metadata=%s&name=%s&parent=%s&type=%s&user=%s" % (uploadurl, metadata, nodename, params['parentnode'], schemaname, params['user'])}
+//    response = requests.get("%s%s" % (servername, signurl), params=values)
 
+            System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection
+            {
+                { "key", key },
+                { "url", type },
+                { "name", name },
+                { "metadata", Uri.EscapeUriString(metadata) },
+//                { "metadata", metadata },
+                { "data", base64String },
+            };
+        }
+        */
         /**
          <summary>  Uploads a file to an node . </summary>
         

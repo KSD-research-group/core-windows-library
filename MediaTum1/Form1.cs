@@ -29,9 +29,11 @@ namespace MediaTum1
             // BIMServer 1219448
             // ar:searchbox 1085713
             Ksd.Mediatum.Server server = new Ksd.Mediatum.Server(this.oAuth);
-            Ksd.Mediatum.Node node = server.GetNode(1219448);
+            Ksd.Mediatum.Node node = server.GetNode(1225255);
             List<Ksd.Mediatum.Node> children = new List<Ksd.Mediatum.Node>(node.Children);
             List<Ksd.Mediatum.Node> parents = new List<Ksd.Mediatum.Node>(node.Parents);
+            foreach (Ksd.Mediatum.NodeFile file in node.Files)
+                file.Download();
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
@@ -68,7 +70,6 @@ namespace MediaTum1
             node = server.GetNode(parent);
 
             Ksd.Mediatum.Node loadedNode = node.Upload(type, name, metadata, binaryData);
-            byte[] file = loadedNode.Download();
 
             loadedNode.Update(name, metadata);
         }
