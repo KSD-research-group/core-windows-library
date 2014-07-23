@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaTum1", "MediaTum1\MediaTum1.csproj", "{0C053660-C711-4E45-B8AD-9280F14D16DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaTumBrowser", "MediaTum1\MediaTumBrowser.csproj", "{0C053660-C711-4E45-B8AD-9280F14D16DB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ksd", "Ksd\Ksd.csproj", "{A287423D-8F31-43E3-9A4F-B2CE4738D81C}"
 EndProject

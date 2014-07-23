@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace MediaTum1
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
 //        Ksd.Mediatum.OAuth oAuth = new Ksd.Mediatum.OAuth("ga76juy", "b33db3e738ee71a");
         Ksd.Mediatum.OAuth oAuth = new Ksd.Mediatum.OAuth("ga54yoc", "6ababd6e13fe7df");
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
