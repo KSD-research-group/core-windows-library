@@ -55,6 +55,20 @@ namespace Ksd.Mediatum
         public String ExportPath { get; set; }
 
         /**
+         <summary>  Gets or sets the metadata path. </summary>
+        
+         <value>    The metadata path. </value>
+         */
+        public String MetadataPath { get; set; }
+
+        /**
+         <summary>  Gets or sets the app definitions path path. </summary>
+        
+         <value>    The app definitions path. </value>
+         */
+        public String AppDefinitionsPath { get; set; }
+
+        /**
          <summary>  Gets or sets the file path. </summary>
         
          <value>    The export path. </value>
@@ -82,8 +96,10 @@ namespace Ksd.Mediatum
             this.ServerName = serverName;
             this.SignPath = "services/upload/calcsign";
             this.UploadPath = "services/upload/new";
-            this.UpdatePath = "services/update";
+            this.UpdatePath = "services/upload/update";
             this.ExportPath = "services/export";
+            this.MetadataPath = "services/metadata/scheme";
+            this.AppDefinitionsPath = "services/appdefinitions";
             this.FilePath = "file";
         }
 
@@ -98,7 +114,7 @@ namespace Ksd.Mediatum
         
          <returns>  The result string of the request. </returns>
          */
-        public string Export(UInt32 nodeId, string postfix, out Uri uri)
+        internal string Export(UInt32 nodeId, string postfix, out Uri uri)
         {
             // http://mediatum.ub.tum.de/services/export
 
@@ -119,6 +135,65 @@ namespace Ksd.Mediatum
 
             return result;
         }
+
+        /**
+         <summary>  Meta data. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 24.07.2014. </remarks>
+        
+         <param name="name">    The name of scheme. </param>
+         <param name="uri">     [out] The URI of the request. </param>
+        
+         <returns>  The scheme as XML. </returns>
+         */
+        public string MetaData(string name, out Uri uri)
+        {
+            // http://mediatum.ub.tum.de/services/metadata/scheme
+
+            string prefix = this.MetadataPath + '/' + name;
+            String uriString = "https://" + this.ServerName + '/' + prefix;
+            uri = new Uri(uriString);
+
+            System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection();
+            this.User.GetMd5Hash(prefix, parameters);
+            String callString = uriString + "/?" + OAuth.GetSortedParameterString(parameters);
+
+            WebClient wc = new WebClient();
+            string result = wc.DownloadString(callString);
+            WebHeaderCollection col = wc.ResponseHeaders;
+
+            return result;
+        }
+
+        /**
+         <summary>  Application definitions. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 24.07.2014. </remarks>
+        
+         <param name="name">    The name of scheme. </param>
+         <param name="uri">     [out] The URI of the request. </param>
+        
+         <returns>  The application definitions as html. </returns>
+         */
+        public string AppDefinitions(string name, out Uri uri)
+        {
+            // http://mediatum.ub.tum.de/services/metadata/appdefinitions
+
+            string prefix = this.AppDefinitionsPath + '/' + name;
+            String uriString = "https://" + this.ServerName + '/' + prefix;
+            uri = new Uri(uriString);
+
+            System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection();
+            this.User.GetMd5Hash(prefix, parameters);
+            String callString = uriString + "/?" + OAuth.GetSortedParameterString(parameters);
+
+            WebClient wc = new WebClient();
+            string result = wc.DownloadString(callString);
+            WebHeaderCollection col = wc.ResponseHeaders;
+
+            return result;
+        }
+
 /*
         string GetOAuthSignFromServer(string key, )
         {

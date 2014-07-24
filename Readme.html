@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=windows-1252">
+  <title></title>
+  <style type="text/css">
+	<!--
+		@page { size: 21cm 29.7cm; margin: 2cm }
+		P { margin-bottom: 0.21cm }
+		H1 { margin-bottom: 0.21cm; page-break-after: avoid }
+		H1.western { font-family: "Arial", sans-serif; font-size: 16pt; font-weight: bold }
+		H1.cjk { font-family: "Microsoft YaHei"; font-size: 16pt; font-weight: bold }
+		H1.ctl { font-family: "Mangal"; font-size: 16pt; font-weight: bold }
+		H2 { margin-bottom: 0.21cm; page-break-after: avoid }
+		H2.western { font-family: "Arial", sans-serif; font-size: 14pt; font-style: italic; font-weight: bold }
+		H2.cjk { font-family: "Microsoft YaHei"; font-size: 14pt; font-style: italic; font-weight: bold }
+		H2.ctl { font-family: "Mangal"; font-size: 14pt; font-style: italic; font-weight: bold }
+		A:link { color: #000080; so-language: zxx; text-decoration: underline }
+		A:visited { color: #800000; so-language: zxx; text-decoration: underline }
+	-->
+	</style>
+</head>
+<body dir="ltr" lang="de-DE" link="#000080" vlink="#800000">
+
+<h1 class="western">Project name</h1>
+
+<h2 class="western">Quick Guide for Windows</h2>
+
+<p>This is a tutorial on how to build the project.</p>
+<p>The following tools have to be installed for that purpose::</p>
+<ul>
+  <li>
+    <p>Visual Studio 2010 or 2012</p>
+  </li>
+  <li>
+    <p>boost library 1.51 or higher (tested with 1.51 and 1.53)<br>
+    <a href="http://www.boost.org/">http://www.boost.org/</a></p>
+  </li>
+  <li>
+    <p>doxygen 1.8.3.1 or higher (tested with 1.8.3.1)<br>
+    <a href="http://www.stack.nl/%7Edimitri/doxygen/download.html">http://www.stack.nl/~dimitri/doxygen/download.html</a></p>
+  </li>
+  <li>
+    <p>MiKTeX 2.9 (optional for building the PDF documentation)<br>
+    <a href="http://www.miktex.org/download">http://www.miktex.org/download</a></p>
+  </li>
+</ul>
+<p>An environment variable BOOST_DIR has to be set pointing to the root directory of the Boost library installation
+    e.g. &bdquo;D:\boost\boost_1_53_0&ldquo;.</p>
+<p>After that the project folder MakeAll.sln is loaded into the root directory of the project
+and the while system is built by a batch file.</p>
+<p>After a successful build, the root directory will contain the documentation file RefMan.pdf.
+The application directory will also contain the Release and Debug versions of the libraries and applications in the respective sub directory debug or release.</p>
+
+<h2 class="western">Quick Guide for Linux</h2>
+
+<p>You'll need a complete Gnu C++ build system with Gnu make, as well as the appropriate Boost library (version 1.51 or higher)
+Change to the directory ... and start <code>make</code>.
+The application is being built.
+Temporary files are eliminated with <code>make clean</code>.</p>
+
+<h2 class="western">Directory Tree</h2>
+
+<p>For a better understanding of the project structure the directory structure is getting explained now.</p>
+<ul>
+  <li>
+    <b>Readme.html</b><br>
+    This help file<br>
+  </li>
+  <li>
+    <b>MakeAll.sln</b><br>
+    Project solution by which the whole system and the documentation can be builed.<br>
+  </li>
+  <li>
+    <b>style.bat</b><br>
+    Batch file by which the source code of the measurement system can be formatted after the chair style.
+    This ueses the Artistics Style to be downloaded from
+    <a href="http://sourceforge.net/projects/astyle/files/">http://sourceforge.net/projects/astyle/files/</a>.<br>
+  </li>
+  <li>
+    <b>application</b><br>
+    Will contain the compiled components.<br>
+    <ul>
+    <li>
+      <b>debug</b><br>
+      Will contain the debug variant of the build.<br>
+    </li>
+    <li>
+      <b>release</b><br>
+      Will contain the release variant of the build.<br>
+    </li>
+  </ul>  
+  </li>  
+  <li>
+    <b>doc</b><br>
+    Contains the graphics and description text components for building the documentation with Doxygen.<br>
+  <ul>
+    <li>
+      <b>main_ger.md</b><br>
+      Contains the user manual of the system in markdown format including some Doxygen extensions.<br>
+    </li>
+    <li>
+      <b>Doxyfile</b><br>
+      Doxygen configuration file<br>
+    </li>
+    <li>
+      <b>make.bat</b><br>
+      Batch file starting the documentation by means of Doxygen and MiXTeX.<br>
+    </li>
+    <li>
+      <b>Pictures<br></b>
+      Contains the graphics of the documentation.<br>
+    </li>
+  </ul>
+  </li>
+  <li>
+    <b>include</b><br>
+    Contains all header files for the project.<br>
+  </li>
+  <li>
+    <b>src</b><br>
+    Contains all source files for the project.<br>
+  </li>
+</ul>
+<p style="margin-bottom: 0cm;"><br>
+</p>
+</body>
+</html>

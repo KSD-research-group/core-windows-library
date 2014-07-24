@@ -1,4 +1,4 @@
-﻿namespace MediaTum1
+﻿namespace MediaTumBrowser
 {
     partial class MainForm
     {

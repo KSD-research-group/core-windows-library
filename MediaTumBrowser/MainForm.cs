@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
-namespace MediaTum1
+namespace MediaTumBrowser
 {
     public partial class MainForm : Form
     {
@@ -30,6 +31,11 @@ namespace MediaTum1
             // ar:searchbox 1085713
             Ksd.Mediatum.Server server = new Ksd.Mediatum.Server(this.oAuth);
             server.typeTable.Add("image/project-arc", typeof(Ksd.Mediatum.FloorPlanNode));
+
+            Uri uri;
+            string scheme = server.MetaData("image/project-arc", out uri);
+
+            string appdefinitions = server.AppDefinitions("image/project-arc", out uri);
 
             Ksd.Mediatum.FloorPlanNode floorNode = (Ksd.Mediatum.FloorPlanNode)server.GetNode(1225255);
             string result = floorNode.GetGraphMl();

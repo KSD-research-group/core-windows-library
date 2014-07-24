@@ -1,0 +1,887 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodelist exportversion="1.1a" rootname="project-arc" roottype="metadatatype" original_nodeid="1085852">
+<node name="project-arc" id="1085852" type="metadatatype" read="Architekturinformatik,ar_searchbox_write,TUARL05GV-0SBWRITE" >
+    <attribute name="active"><![CDATA[1]]></attribute>
+    <attribute name="datatypes"><![CDATA[image, document]]></attribute>
+    <attribute name="description"><![CDATA[Projekt des Lehrstuhls für Architekturinformatik (Prof. Petzold)]]></attribute>
+    <attribute name="longname"><![CDATA[Projekt-ARC]]></attribute>
+    <child id="1085887" type="mask"/>
+    <child id="1085903" type="mask"/>
+    <child id="1085919" type="mask"/>
+    <child id="1091547" type="mask"/>
+    <child id="1137417" type="mask"/>
+    <child id="1200837" type="mask"/>
+    <child id="1085853" type="metafield"/>
+    <child id="1086605" type="metafield"/>
+    <child id="1085858" type="metafield"/>
+    <child id="1085880" type="metafield"/>
+    <child id="1085881" type="metafield"/>
+    <child id="1085882" type="metafield"/>
+    <child id="1085884" type="metafield"/>
+    <child id="1085885" type="metafield"/>
+    <child id="1085886" type="metafield"/>
+    <child id="1092614" type="metafield"/>
+    <child id="1092627" type="metafield"/>
+    <child id="1092623" type="metafield"/>
+    <child id="1091543" type="metafield"/>
+    <child id="1086604" type="metafield"/>
+    <child id="1092621" type="metafield"/>
+    <child id="1085854" type="metafield"/>
+    <child id="1085879" type="metafield"/>
+    <child id="1091931" type="metafield"/>
+    <child id="1085859" type="metafield"/>
+    <child id="1085855" type="metafield"/>
+    <child id="1085857" type="metafield"/>
+    <child id="1085877" type="metafield"/>
+    <child id="1085878" type="metafield"/>
+    <child id="1225233" type="metafield"/>
+</node>
+<node name="editmask" id="1085887" type="mask" >
+    <attribute name="defaultmask"><![CDATA[True]]></attribute>
+    <attribute name="masktype"><![CDATA[edit]]></attribute>
+    <attribute name="separator"><![CDATA[<br/>]]></attribute>
+    <attribute name="description"><![CDATA[Editormaske für das Gesamtprojekt]]></attribute>
+    <child id="1091544" type="maskitem"/>
+    <child id="1085888" type="maskitem"/>
+    <child id="1086607" type="maskitem"/>
+    <child id="1092622" type="maskitem"/>
+    <child id="1085889" type="maskitem"/>
+    <child id="1086606" type="maskitem"/>
+    <child id="1085890" type="maskitem"/>
+    <child id="1085891" type="maskitem"/>
+    <child id="1085893" type="maskitem"/>
+    <child id="1085894" type="maskitem"/>
+    <child id="1085895" type="maskitem"/>
+    <child id="1085896" type="maskitem"/>
+    <child id="1095835" type="maskitem"/>
+    <child id="1085897" type="maskitem"/>
+    <child id="1225236" type="maskitem"/>
+    <child id="1085898" type="maskitem"/>
+    <child id="1085899" type="maskitem"/>
+    <child id="1085900" type="maskitem"/>
+    <child id="1085901" type="maskitem"/>
+    <child id="1085902" type="maskitem"/>
+    <child id="1092624" type="maskitem"/>
+    <child id="1092628" type="maskitem"/>
+</node>
+<node name="Projektbezeichnung (kurz)" id="1091544" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[1]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1091543" type="metafield"/>
+</node>
+<node name="nodename" id="1091543" type="metafield" >
+    <attribute name="type"><![CDATA[text]]></attribute>
+    <attribute name="label"><![CDATA[Projektbezeichnung (kurz)]]></attribute>
+</node>
+<node name="Projektbezeichnung (lang)" id="1085888" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085853" type="metafield"/>
+</node>
+<node name="project-name-long" id="1085853" type="metafield" >
+    <attribute name="type"><![CDATA[text]]></attribute>
+    <attribute name="description"><![CDATA[Name des Projekts]]></attribute>
+    <attribute name="label"><![CDATA[Projektname]]></attribute>
+</node>
+<node name="Land" id="1086607" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[1]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1086604" type="metafield"/>
+</node>
+<node name="country" id="1086604" type="metafield" >
+    <attribute name="type"><![CDATA[ilist]]></attribute>
+    <attribute name="label"><![CDATA[Land]]></attribute>
+</node>
+<node name="Stadt" id="1092622" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[1]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1092621" type="metafield"/>
+</node>
+<node name="city" id="1092621" type="metafield" >
+    <attribute name="type"><![CDATA[ilist]]></attribute>
+    <attribute name="opts"><![CDATA[s]]></attribute>
+    <attribute name="label"><![CDATA[Stadt]]></attribute>
+</node>
+<node name="Adresse" id="1085889" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085854" type="metafield"/>
+</node>
+<node name="addres" id="1085854" type="metafield" >
+    <attribute name="type"><![CDATA[text]]></attribute>
+    <attribute name="label"><![CDATA[Adresse]]></attribute>
+</node>
+<node name="Karte" id="1086606" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1086605" type="metafield"/>
+</node>
+<node name="map" id="1086605" type="metafield" >
+    <attribute name="type"><![CDATA[url]]></attribute>
+    <attribute name="valuelist"><![CDATA[;;;_blank]]></attribute>
+    <attribute name="label"><![CDATA[Karte (GoogleMaps, OpenStreetMap etc.)]]></attribute>
+</node>
+<node name="Architekt(en)" id="1085890" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[1]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085855" type="metafield"/>
+</node>
+<node name="architect" id="1085855" type="metafield" >
+    <attribute name="type"><![CDATA[ilist]]></attribute>
+    <attribute name="opts"><![CDATA[os]]></attribute>
+    <attribute name="label"><![CDATA[Architekt(en)]]></attribute>
+</node>
+<node name="Anzahl der Geschosse" id="1085891" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[1]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085857" type="metafield"/>
+</node>
+<node name="floor" id="1085857" type="metafield" >
+    <attribute name="type"><![CDATA[number]]></attribute>
+    <attribute name="opts"><![CDATA[o]]></attribute>
+    <attribute name="label"><![CDATA[Anzahl der Geschosse]]></attribute>
+</node>
+<node name="Schlagwort(e)" id="1085893" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085859" type="metafield"/>
+</node>
+<node name="keywords" id="1085859" type="metafield" >
+    <attribute name="type"><![CDATA[ilist]]></attribute>
+    <attribute name="opts"><![CDATA[s]]></attribute>
+    <attribute name="label"><![CDATA[Schlagwort(e)]]></attribute>
+</node>
+<node name="Baujahr / Jahr der Fertigstellung" id="1085894" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085877" type="metafield"/>
+</node>
+<node name="year" id="1085877" type="metafield" >
+    <attribute name="type"><![CDATA[number]]></attribute>
+    <attribute name="opts"><![CDATA[os]]></attribute>
+    <attribute name="label"><![CDATA[Baujahr / Jahr der Fertigstellung]]></attribute>
+</node>
+<node name="Jahr des Entwurfs" id="1085895" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085878" type="metafield"/>
+</node>
+<node name="year-draft" id="1085878" type="metafield" >
+    <attribute name="type"><![CDATA[number]]></attribute>
+    <attribute name="label"><![CDATA[Jahr des Entwurfs]]></attribute>
+</node>
+<node name="Bautyp" id="1085896" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[1]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085879" type="metafield"/>
+</node>
+<node name="type" id="1085879" type="metafield" >
+    <attribute name="type"><![CDATA[list]]></attribute>
+    <attribute name="valuelist"><![CDATA[*Geschosswohnungsbau;Blockrandbebauung;Baulücke;Eckhäuser;Brandwand;Solitär;Freistehende Zeile;Wohntürme;Terassenhäuser;Raumbildende Strukturen;*Flachbau;Einzelhäuser;Doppelhäuser;Reihenhäuser;Wohnanlage]]></attribute>
+    <attribute name="opts"><![CDATA[os]]></attribute>
+    <attribute name="label"><![CDATA[Bautyp]]></attribute>
+</node>
+<node name="Dokumenttyp" id="1095835" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1091931" type="metafield"/>
+</node>
+<node name="doc-type" id="1091931" type="metafield" >
+    <attribute name="type"><![CDATA[list]]></attribute>
+    <attribute name="valuelist"><![CDATA[*Grundriss
+Grundriss: -2. Etage
+Grundriss: -1. Etage
+Grundriss: 0. Etage
+Grundriss: 1. Etage
+Grundriss: 2. Etage
+Grundriss: 3. Etage
+Grundriss: 4. Etage
+Grundriss: 5. Etage
+*Ansicht
+Ansicht - Nord
+Ansicht - Süd
+Ansicht - West
+Ansicht - Ost
+*Schnitt
+Schnitt
+*Perspektive
+Perspektive
+*Rendering
+Rendering
+*Foto
+Foto
+*Details
+**Gründungen
+***Baugrube
+Detail - Gründungen - Baugrube - nicht verbaut
+Detail - Gründungen - Baugrube - verbaut
+***Fundament
+Detail - Gründungen - Fundament - Flächengründungen
+Detail - Gründungen - Fundament - Pfahlgründungen
+Detail - Gründungen - Fundament - Unterfangungen
+Detail - Gründungen - Fundament - Fundamentenerder
+***Dränage
+Detail - Gründungen - Dränage
+**Außenwände
+***Mauerwerk
+Detail - Außenwände - Mauerwerk - einschalig
+Detail - Außenwände - Mauerwerk - mehrschalig
+***Betonwand
+Detail - Außenwände - Betonwand - einschalig
+Detail - Außenwände - Betonwand - mehrschalig
+***Montagebau
+Detail - Außenwände - Montagebau - Holz
+Detail - Außenwände - Montagebau - Stahlbetonelemente
+Detail - Außenwände - Montagebau - Metallelemente
+Detail - Außenwände - Montagebau - Poren- und Leichtbetonelemente
+Detail - Außenwände - Montagebau - Vorhangfassaden
+**Innenwände
+***einschalig
+Detail - Innenwände - einschalig - gemauerte Trennwände
+Detail - Innenwände - einschalig - Glasbausteine
+***mehrschalig
+Detail - Innenwände - mehrschalig - mit Unterkonstruktion Holz
+Detail - Innenwände - mehrschalig - mit Unterkonstruktion Stahl
+**Dächer
+***Geneigte Dächer
+Detail - geneigte Dächer - belüftet
+geneigte Dächer - nicht belüftet
+***Flachdächer
+Detail - Flachdächer - belüftet
+Flachdächer - nicht belüftet
+**Wandöffnungen
+***Fenster
+Detail - Wandöffnungen - Fenster - Holzfenster
+Detail - Wandöffnungen - Fenster - Metallfenster
+Detail - Wandöffnungen - Fenster - Mischkonstruktionen
+***Türen
+Detail - Wandöffnungen - Türen - Holztüren
+Detail - Wandöffnungen - Türen - Metalltüren
+**Decken
+***Massivdecken
+Detail - Massivdecken - Plattendecken
+Detail - Massivdecken - Balkendecken
+Detail - Massivdecken - Trapezstahldecken
+***Holzbalkendecken
+Detail - Holzbalkendecken - mit sichtbarer Tragkonstruktion
+Detail - Holzbalkendecken - mit verdeckter Tragkonstruktion
+***Balkone
+Detail - Decken - Balkone
+***Unterdecken und Installationsböden
+Detail - Decken - Unterdecken und Installationsböden
+**Treppen
+Detail - Treppen - Beton
+Detail - Treppen - Holz
+Detail - Treppen - Stahl
+Detail - Treppen - Wendeltreppen
+*Flucht- und Rettungsplan
+Flucht- und Rettungsplan: -2. Etage
+Flucht- und Rettungsplan: -1. Etage
+Flucht- und Rettungsplan: 0. Etage
+Flucht- und Rettungsplan: 1. Etage
+Flucht- und Rettungsplan: 2. Etage
+Flucht- und Rettungsplan: 3. Etage
+Flucht- und Rettungsplan: 4. Etage
+Flucht- und Rettungsplan: 5. Etage]]></attribute>
+    <attribute name="label"><![CDATA[Dokumenttyp]]></attribute>
+</node>
+<node name="Freitext" id="1085897" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085880" type="metafield"/>
+</node>
+<node name="memo" id="1085880" type="metafield" >
+    <attribute name="type"><![CDATA[memo]]></attribute>
+    <attribute name="description"><![CDATA[Freitext zur weiteren Beschreibung des Projekts]]></attribute>
+    <attribute name="label"><![CDATA[Freitext]]></attribute>
+</node>
+<node name="Download Raumgraph" id="1225236" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1225233" type="metafield"/>
+</node>
+<node name="roomgraph" id="1225233" type="metafield" >
+    <attribute name="type"><![CDATA[url]]></attribute>
+    <attribute name="valuelist"><![CDATA[;;;_blank]]></attribute>
+    <attribute name="label"><![CDATA[Download Raumgraph]]></attribute>
+</node>
+<node name="Link zum Projekt" id="1085898" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[1]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085881" type="metafield"/>
+</node>
+<node name="link" id="1085881" type="metafield" >
+    <attribute name="type"><![CDATA[url]]></attribute>
+    <attribute name="description"><![CDATA[Externer Link zum Projekt]]></attribute>
+    <attribute name="valuelist"><![CDATA[;;/img/extlink.png;_blank]]></attribute>
+    <attribute name="label"><![CDATA[Link zum Projekt]]></attribute>
+</node>
+<node name="Zusätzlicher Link" id="1085899" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085882" type="metafield"/>
+</node>
+<node name="link-add-on" id="1085882" type="metafield" >
+    <attribute name="type"><![CDATA[url]]></attribute>
+    <attribute name="description"><![CDATA[Link zu weiteren Informationen über das Projekt]]></attribute>
+    <attribute name="valuelist"><![CDATA[;;/img/extlink.png;_blank]]></attribute>
+    <attribute name="label"><![CDATA[Zusätzlicher Link]]></attribute>
+</node>
+<node name="Datenformat" id="1085900" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085884" type="metafield"/>
+</node>
+<node name="format" id="1085884" type="metafield" >
+    <attribute name="type"><![CDATA[list]]></attribute>
+    <attribute name="valuelist"><![CDATA[Rastergrafik;IFC;DWG;3D-Modell]]></attribute>
+    <attribute name="label"><![CDATA[Datenformat]]></attribute>
+</node>
+<node name="Quelle" id="1085901" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085885" type="metafield"/>
+</node>
+<node name="source" id="1085885" type="metafield" >
+    <attribute name="type"><![CDATA[list]]></attribute>
+    <attribute name="valuelist"><![CDATA[Buch;Internet;Studentenprojekt;Zeitschrift]]></attribute>
+    <attribute name="label"><![CDATA[Quelle]]></attribute>
+</node>
+<node name="Informationen zur Quelle" id="1085902" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085886" type="metafield"/>
+</node>
+<node name="source-info" id="1085886" type="metafield" >
+    <attribute name="type"><![CDATA[text]]></attribute>
+    <attribute name="description"><![CDATA[Namen der Quelle; weitere Informationen zur Quelle]]></attribute>
+    <attribute name="label"><![CDATA[Informationen zur Quelle]]></attribute>
+</node>
+<node name="Quelle - Link" id="1092624" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1092623" type="metafield"/>
+</node>
+<node name="source-url" id="1092623" type="metafield" >
+    <attribute name="type"><![CDATA[url]]></attribute>
+    <attribute name="valuelist"><![CDATA[;;/img/extlink.png;_blank]]></attribute>
+    <attribute name="label"><![CDATA[Quelle - Link]]></attribute>
+</node>
+<node name="Vererbung von Information" id="1092628" type="maskitem" >
+    <attribute name="default"><![CDATA[1]]></attribute>
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1092627" type="metafield"/>
+</node>
+<node name="system.inherited" id="1092627" type="metafield" >
+    <attribute name="type"><![CDATA[check]]></attribute>
+    <attribute name="label"><![CDATA[Vererbung]]></attribute>
+</node>
+<node name="nodebig" id="1085903" type="mask" >
+    <attribute name="defaultmask"><![CDATA[False]]></attribute>
+    <attribute name="masktype"><![CDATA[fullview]]></attribute>
+    <attribute name="separator"><![CDATA[<br/>]]></attribute>
+    <child id="1085904" type="maskitem"/>
+    <child id="1086608" type="maskitem"/>
+    <child id="1092626" type="maskitem"/>
+    <child id="1085905" type="maskitem"/>
+    <child id="1086609" type="maskitem"/>
+    <child id="1085906" type="maskitem"/>
+    <child id="1085907" type="maskitem"/>
+    <child id="1085908" type="maskitem"/>
+    <child id="1085909" type="maskitem"/>
+    <child id="1085910" type="maskitem"/>
+    <child id="1085911" type="maskitem"/>
+    <child id="1085912" type="maskitem"/>
+    <child id="1091935" type="maskitem"/>
+    <child id="1085913" type="maskitem"/>
+    <child id="1225238" type="maskitem"/>
+    <child id="1085914" type="maskitem"/>
+    <child id="1092617" type="maskitem"/>
+    <child id="1085915" type="maskitem"/>
+    <child id="1085916" type="maskitem"/>
+    <child id="1085917" type="maskitem"/>
+    <child id="1085918" type="maskitem"/>
+    <child id="1092625" type="maskitem"/>
+</node>
+<node name="Projektname" id="1085904" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085853" type="metafield"/>
+</node>
+<node name="Land" id="1086608" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1086604" type="metafield"/>
+</node>
+<node name="Stadt" id="1092626" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1092621" type="metafield"/>
+</node>
+<node name="Adresse" id="1085905" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085854" type="metafield"/>
+</node>
+<node name="Karte" id="1086609" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1086605" type="metafield"/>
+</node>
+<node name="Architekt(en)" id="1085906" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085855" type="metafield"/>
+</node>
+<node name="Anzahl der Geschosse" id="1085907" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085857" type="metafield"/>
+</node>
+<node name="Anzahl der Wohnungen" id="1085908" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085858" type="metafield"/>
+</node>
+<node name="flat" id="1085858" type="metafield" >
+    <attribute name="type"><![CDATA[number]]></attribute>
+    <attribute name="opts"><![CDATA[o]]></attribute>
+    <attribute name="label"><![CDATA[Anzahl der Wohnungen]]></attribute>
+</node>
+<node name="Schlagwort(e)" id="1085909" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085859" type="metafield"/>
+</node>
+<node name="Baujahr / Jahr der Fertigstellung" id="1085910" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085877" type="metafield"/>
+</node>
+<node name="Jahr des Entwurfs" id="1085911" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085878" type="metafield"/>
+</node>
+<node name="Bautyp" id="1085912" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085879" type="metafield"/>
+</node>
+<node name="Dokumenttyp" id="1091935" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1091931" type="metafield"/>
+</node>
+<node name="Freitext" id="1085913" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085880" type="metafield"/>
+</node>
+<node name="Download Raumgraph" id="1225238" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1225233" type="metafield"/>
+</node>
+<node name="Link zum Projekt" id="1085914" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085881" type="metafield"/>
+</node>
+<node name="Link zum Originaldokument" id="1092617" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1092614" type="metafield"/>
+</node>
+<node name="link-doc" id="1092614" type="metafield" >
+    <attribute name="type"><![CDATA[url]]></attribute>
+    <attribute name="valuelist"><![CDATA[;Originaldokument;/img/extlink.png;_blank]]></attribute>
+    <attribute name="label"><![CDATA[Link zum Originaldokument]]></attribute>
+</node>
+<node name="Zusätzlicher Link" id="1085915" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085882" type="metafield"/>
+</node>
+<node name="Datenformat" id="1085916" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085884" type="metafield"/>
+</node>
+<node name="Quelle" id="1085917" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085885" type="metafield"/>
+</node>
+<node name="Informationen zur Quelle" id="1085918" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085886" type="metafield"/>
+</node>
+<node name="Quelle - Link" id="1092625" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1092623" type="metafield"/>
+</node>
+<node name="nodesmall" id="1085919" type="mask" >
+    <attribute name="defaultmask"><![CDATA[False]]></attribute>
+    <attribute name="masktype"><![CDATA[shortview]]></attribute>
+    <attribute name="separator"><![CDATA[<br/>]]></attribute>
+    <child id="1085920" type="maskitem"/>
+    <child id="1085922" type="maskitem"/>
+    <child id="1085923" type="maskitem"/>
+    <child id="1085924" type="maskitem"/>
+    <child id="1085926" type="maskitem"/>
+    <child id="1085928" type="maskitem"/>
+</node>
+<node name="Projektname" id="1085920" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085853" type="metafield"/>
+</node>
+<node name="Architekt(en)" id="1085922" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085855" type="metafield"/>
+</node>
+<node name="Anzahl der Geschosse" id="1085923" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085857" type="metafield"/>
+</node>
+<node name="Anzahl der Wohnungen" id="1085924" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085858" type="metafield"/>
+</node>
+<node name="Baujahr / Jahr der Fertigstellung" id="1085926" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085877" type="metafield"/>
+</node>
+<node name="Bautyp" id="1085928" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085879" type="metafield"/>
+</node>
+<node name="editmask_detail" id="1091547" type="mask" >
+    <attribute name="defaultmask"><![CDATA[False]]></attribute>
+    <attribute name="masktype"><![CDATA[edit]]></attribute>
+    <attribute name="separator"><![CDATA[<br/>]]></attribute>
+    <attribute name="description"><![CDATA[Editormaske für ein Detail- bzw. Kindobjekt]]></attribute>
+    <child id="1091936" type="maskitem"/>
+    <child id="1092616" type="maskitem"/>
+    <child id="1091556" type="maskitem"/>
+    <child id="1091560" type="maskitem"/>
+    <child id="1091563" type="maskitem"/>
+    <child id="1225239" type="maskitem"/>
+    <child id="1091564" type="maskitem"/>
+    <child id="1091565" type="maskitem"/>
+    <child id="1092629" type="maskitem"/>
+    <child id="1095836" type="maskitem"/>
+</node>
+<node name="Dokumenttyp" id="1091936" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[1]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1091931" type="metafield"/>
+</node>
+<node name="Link zum Originaldokument" id="1092616" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1092614" type="metafield"/>
+</node>
+<node name="Schlagwort(e)" id="1091556" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085859" type="metafield"/>
+</node>
+<node name="Freitext" id="1091560" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085880" type="metafield"/>
+</node>
+<node name="Datenformat" id="1091563" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085884" type="metafield"/>
+</node>
+<node name="Download Raumgraph" id="1225239" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1225233" type="metafield"/>
+</node>
+<node name="Quelle" id="1091564" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085885" type="metafield"/>
+</node>
+<node name="Informationen zur Quelle" id="1091565" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085886" type="metafield"/>
+</node>
+<node name="Vererbung von Information" id="1092629" type="maskitem" >
+    <attribute name="default"><![CDATA[1]]></attribute>
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1092627" type="metafield"/>
+</node>
+<node name="Quelle - Link" id="1095836" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1092623" type="metafield"/>
+</node>
+<node name="mobile_editmask" id="1137417" type="mask" >
+    <attribute name="defaultmask"><![CDATA[False]]></attribute>
+    <attribute name="masktype"><![CDATA[edit]]></attribute>
+    <attribute name="separator"><![CDATA[<br/>]]></attribute>
+    <attribute name="description"><![CDATA[Mobile Editormaske (App)]]></attribute>
+    <child id="1137418" type="maskitem"/>
+    <child id="1137419" type="maskitem"/>
+    <child id="1137420" type="maskitem"/>
+    <child id="1137421" type="maskitem"/>
+    <child id="1137422" type="maskitem"/>
+    <child id="1137423" type="maskitem"/>
+    <child id="1137424" type="maskitem"/>
+    <child id="1137425" type="maskitem"/>
+    <child id="1137426" type="maskitem"/>
+    <child id="1137427" type="maskitem"/>
+    <child id="1137428" type="maskitem"/>
+</node>
+<node name="Name" id="1137418" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[1]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1091543" type="metafield"/>
+</node>
+<node name="Land" id="1137419" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1086604" type="metafield"/>
+</node>
+<node name="Stadt" id="1137420" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1092621" type="metafield"/>
+</node>
+<node name="Adresse" id="1137421" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085854" type="metafield"/>
+</node>
+<node name="Bautyp" id="1137422" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085879" type="metafield"/>
+</node>
+<node name="Dokumenttyp" id="1137423" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[1]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1091931" type="metafield"/>
+</node>
+<node name="Schlagwort(e)" id="1137424" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085859" type="metafield"/>
+</node>
+<node name="Architekt(en)" id="1137425" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085855" type="metafield"/>
+</node>
+<node name="Geschosse" id="1137426" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085857" type="metafield"/>
+</node>
+<node name="Baujahr / Jahr der Fertigstellung" id="1137427" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085877" type="metafield"/>
+</node>
+<node name="Baujahr des Entwurfs" id="1137428" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="required"><![CDATA[0]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085878" type="metafield"/>
+</node>
+<node name="export" id="1200837" type="mask" >
+    <attribute name="masktype"><![CDATA[export]]></attribute>
+    <attribute name="defaultmask"><![CDATA[False]]></attribute>
+    <attribute name="separator"><![CDATA[<br/>]]></attribute>
+    <child id="1200838" type="maskitem"/>
+    <child id="1200839" type="maskitem"/>
+    <child id="1200840" type="maskitem"/>
+    <child id="1200841" type="maskitem"/>
+    <child id="1200842" type="maskitem"/>
+    <child id="1200843" type="maskitem"/>
+    <child id="1200844" type="maskitem"/>
+    <child id="1200845" type="maskitem"/>
+    <child id="1200846" type="maskitem"/>
+    <child id="1200847" type="maskitem"/>
+    <child id="1200848" type="maskitem"/>
+    <child id="1200849" type="maskitem"/>
+    <child id="1200850" type="maskitem"/>
+    <child id="1200851" type="maskitem"/>
+    <child id="1200852" type="maskitem"/>
+    <child id="1200853" type="maskitem"/>
+    <child id="1200854" type="maskitem"/>
+    <child id="1200855" type="maskitem"/>
+    <child id="1200856" type="maskitem"/>
+    <child id="1200857" type="maskitem"/>
+    <child id="1200858" type="maskitem"/>
+    <child id="1200859" type="maskitem"/>
+    <child id="1200860" type="maskitem"/>
+</node>
+<node name="Projektname" id="1200838" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085853" type="metafield"/>
+</node>
+<node name="Karte (GoogleMaps, OpenStreetMap etc.)" id="1200839" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1086605" type="metafield"/>
+</node>
+<node name="Anzahl der Wohnungen" id="1200840" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085858" type="metafield"/>
+</node>
+<node name="Freitext" id="1200841" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085880" type="metafield"/>
+</node>
+<node name="Link zum Projekt" id="1200842" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085881" type="metafield"/>
+</node>
+<node name="Zusätzlicher Link" id="1200843" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085882" type="metafield"/>
+</node>
+<node name="Datenformat" id="1200844" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085884" type="metafield"/>
+</node>
+<node name="Quelle" id="1200845" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085885" type="metafield"/>
+</node>
+<node name="Informationen zur Quelle" id="1200846" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085886" type="metafield"/>
+</node>
+<node name="Link zum Originaldokument" id="1200847" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1092614" type="metafield"/>
+</node>
+<node name="Vererbung" id="1200848" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1092627" type="metafield"/>
+</node>
+<node name="Quelle - Link" id="1200849" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1092623" type="metafield"/>
+</node>
+<node name="Projektbezeichnung (kurz)" id="1200850" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1091543" type="metafield"/>
+</node>
+<node name="Land" id="1200851" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1086604" type="metafield"/>
+</node>
+<node name="Stadt" id="1200852" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1092621" type="metafield"/>
+</node>
+<node name="Adresse" id="1200853" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085854" type="metafield"/>
+</node>
+<node name="Bautyp" id="1200854" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085879" type="metafield"/>
+</node>
+<node name="Dokumenttyp" id="1200855" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1091931" type="metafield"/>
+</node>
+<node name="Schlagwort(e)" id="1200856" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085859" type="metafield"/>
+</node>
+<node name="Architekt(en)" id="1200857" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085855" type="metafield"/>
+</node>
+<node name="Anzahl der Geschosse" id="1200858" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085857" type="metafield"/>
+</node>
+<node name="Baujahr / Jahr der Fertigstellung" id="1200859" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085877" type="metafield"/>
+</node>
+<node name="Jahr des Entwurfs" id="1200860" type="maskitem" >
+    <attribute name="width"><![CDATA[400]]></attribute>
+    <attribute name="type"><![CDATA[field]]></attribute>
+    <child id="1085878" type="metafield"/>
+</node>
+</nodelist>
