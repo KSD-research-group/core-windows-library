@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Threading.Tasks;
-using System.Runtime.Serialization.Json;
 using System.IO;
 
 namespace Ksd.Mediatum
@@ -339,14 +338,10 @@ namespace Ksd.Mediatum
 
         string Attributes2Json()
         {
-            MemoryStream memoryStream = new MemoryStream();
-            DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(IDictionary<string, string>));
-            jsonSerializer.WriteObject(memoryStream, this.Attributes);
-            memoryStream.Position = 0;
-            StreamReader reader = new StreamReader(memoryStream);
-            string json = reader.ReadToEnd();
-
-            return json;
+            Newtonsoft.Json.JsonSerializer jsonSerializer = new Newtonsoft.Json.JsonSerializer();
+            StringWriter textWriter = new StringWriter();
+            jsonSerializer.Serialize(textWriter, this.Attributes);
+            return textWriter.ToString();
         }
 
         /**
