@@ -78,10 +78,10 @@ namespace MediaTumBrowser
 
             Ksd.Mediatum.Node node = server.GetNode(parent);
 
-            Ksd.Mediatum.Node loadedNode = node.Upload(type, name, metadata, binaryData);
-
-            metadata = "{\"architect\":\"Langenhahn Christoph\"}";
-            loadedNode.Update(name, metadata);
+            Ksd.Mediatum.FloorPlanNode loadedNode = (Ksd.Mediatum.FloorPlanNode)node.Upload(type, name, metadata, binaryData);
+            loadedNode.Architect = "Langenhahn Christoph";
+            loadedNode.Country = "Germany";
+            loadedNode.Update();
         }
     }
 }

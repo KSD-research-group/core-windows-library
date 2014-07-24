@@ -47,6 +47,11 @@ namespace Ksd.Mediatum
             {
                 return this.Attributes["architect"];
             }
+
+            set
+            {
+                this.Attributes["architect"] = value;
+            }
         }
 
         public string Country
@@ -54,6 +59,11 @@ namespace Ksd.Mediatum
             get
             {
                 return this.Attributes["country"];
+            }
+
+            set
+            {
+                this.Attributes["country"] = value;
             }
         }
 
@@ -77,6 +87,11 @@ namespace Ksd.Mediatum
                 string uriString = this.Attributes["roomgraph"];
                 string[] res = uriString.Split(';');
                 return new Uri(res[0]);
+            }
+
+            set
+            {
+                this.Attributes["roomgraph"] = value.OriginalString;
             }
         }
 

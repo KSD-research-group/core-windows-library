@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Threading.Tasks;
-
+using System.Runtime.Serialization.Json;
+using System.IO;
 
 namespace Ksd.Mediatum
 {
@@ -75,7 +76,7 @@ namespace Ksd.Mediatum
         
          <value>    The node name. </value>
          */
-        public string Name { get; private set; }
+        public string Name { get; set; }
 
         /**
          <summary>  Gets the node type. </summary>
@@ -336,6 +337,18 @@ namespace Ksd.Mediatum
             this.Server.nodeTable.Add(this.ID, this);
         }
 
+        string Attributes2Json()
+        {
+            MemoryStream memoryStream = new MemoryStream();
+            DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(IDictionary<string, string>));
+            jsonSerializer.WriteObject(memoryStream, this.Attributes);
+            memoryStream.Position = 0;
+            StreamReader reader = new StreamReader(memoryStream);
+            string json = reader.ReadToEnd();
+
+            return json;
+        }
+
         /**
          <summary>  Uploads a file to an node . </summary>
         
@@ -366,9 +379,11 @@ namespace Ksd.Mediatum
          <param name="name">        The new name of node, will be stored in the node table, field name. </param>
          <param name="metadata">    The new metadatafields to given file. Use the json format e.g. {"nodename":"name", ...}. </param>
          */
-        public void Update(string name, string metadata)
+        public void Update()
         {
-            this.Server.Update(this.ID, name, metadata);
+            string metadata = Attributes2Json();
+
+            this.Server.Update(this.ID, this.Name, metadata);
             Uri uri;
             string result = this.Server.Export(this.ID, "", out uri);
             this.Xml = result;
