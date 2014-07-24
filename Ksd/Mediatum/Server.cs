@@ -99,7 +99,7 @@ namespace Ksd.Mediatum
             this.UpdatePath = "services/upload/update";
             this.ExportPath = "services/export";
             this.MetadataPath = "services/metadata/scheme";
-            this.AppDefinitionsPath = "services/appdefinitions";
+            this.AppDefinitionsPath = "services/metadata/appdefinitions";
             this.FilePath = "file";
         }
 
@@ -236,8 +236,7 @@ namespace Ksd.Mediatum
                 { "parent", parent.ToString() },
                 { "type", type },
                 { "name", name },
-                { "metadata", Uri.EscapeUriString(metadata) },
-//                { "metadata", metadata },
+                { "metadata", metadata },
                 { "data", base64String },
             };
 
@@ -291,7 +290,7 @@ namespace Ksd.Mediatum
             System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection
             {
                 { "name", name },
-                { "metadata", Uri.EscapeUriString(metadata) },
+                { "metadata", metadata }
             };
 
             //this.User.GetMd5Hash(this.UploadPath, parameters);

@@ -33,9 +33,9 @@ namespace MediaTumBrowser
             server.typeTable.Add("image/project-arc", typeof(Ksd.Mediatum.FloorPlanNode));
 
             Uri uri;
-            string scheme = server.MetaData("image/project-arc", out uri);
+            //string scheme = server.MetaData("image/project-arc", out uri);
 
-            string appdefinitions = server.AppDefinitions("image/project-arc", out uri);
+            //string appdefinitions = server.AppDefinitions("image/project-arc", out uri);
 
             Ksd.Mediatum.FloorPlanNode floorNode = (Ksd.Mediatum.FloorPlanNode)server.GetNode(1225255);
             string result = floorNode.GetGraphMl();
@@ -74,12 +74,13 @@ namespace MediaTumBrowser
 	        String name = "arno_test_java";
             UInt32 parent = 1219448;
 	        String type = "image/project-arc";
-	        String metadata = "{\"nodename\":\"arno_test_node\"}";
+            String metadata = "{\"architect\":\"Christoph Langenhahn\",\"roomgraph\":\"http://reference.ksd.ai.ar.tum.de:8080/AgraphMLDownloadService/DownloadAgraphml?ifcid=1IEeEPbCv1je0WG2vzMPyH&neo4jurl=http://localhost:7474&floorlevel=0.0\"}";
 
             Ksd.Mediatum.Node node = server.GetNode(parent);
 
             Ksd.Mediatum.Node loadedNode = node.Upload(type, name, metadata, binaryData);
 
+            metadata = "{\"architect\":\"Langenhahn Christoph\"}";
             loadedNode.Update(name, metadata);
         }
     }

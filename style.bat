@@ -1,1 +1,1 @@
-astyle  --style=ansi --indent=spaces=4 --break-blocks --add-brackets --indent-preprocessor --indent-switches --convert-tabs --align-pointer=type --align-reference=type --pad-oper --pad-header --unpad-paren --recursive include\*.h src\*.cpp
+astyle  --style=ansi --indent=spaces=4 --break-blocks --add-brackets --indent-preprocessor --indent-switches --convert-tabs --align-pointer=type --align-reference=type --pad-oper --pad-header --unpad-paren --recursive Ksd\*.cs MediaTumBrowser\*.cs
