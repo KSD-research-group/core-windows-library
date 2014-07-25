@@ -71,14 +71,10 @@ namespace MediaTumBrowser
                 return;
             }
 
-	        String name = "arno_test_java";
             UInt32 parent = 1219448;
-	        String type = "image/project-arc";
-            String metadata = "{\"architect\":\"Christoph Langenhahn\",\"roomgraph\":\"http://reference.ksd.ai.ar.tum.de:8080/AgraphMLDownloadService/DownloadAgraphml?ifcid=1IEeEPbCv1je0WG2vzMPyH&neo4jurl=http://localhost:7474&floorlevel=0.0\"}";
-
             Ksd.Mediatum.Node node = server.GetNode(parent);
 
-            Ksd.Mediatum.FloorPlanNode loadedNode = (Ksd.Mediatum.FloorPlanNode)node.Upload(type, name, metadata, binaryData);
+            Ksd.Mediatum.FloorPlanNode loadedNode = (Ksd.Mediatum.FloorPlanNode)Ksd.Mediatum.FloorPlanNode.CreateFloorPlanNode(node, "Upload Test", "Christoph Langenhahn", "Germany", new Uri("http://reference.ksd.ai.ar.tum.de:8080/AgraphMLDownloadService/DownloadAgraphml?ifcid=1IEeEPbCv1je0WG2vzMPyH&neo4jurl=http://localhost:7474&floorlevel=0.0"), binaryData);
             loadedNode.Architect = "Langenhahn Christoph";
             loadedNode.Country = "Germany";
             loadedNode.Update();

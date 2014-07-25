@@ -8,6 +8,36 @@ using System.IO;
 namespace Ksd.Mediatum
 {
     [Serializable()]
+    public class NodeAttribute
+    {
+        public bool Modifyed { get; internal set; }
+
+        string value;
+        public string Value 
+        {
+            get
+            {
+                return this.value;
+            }
+            
+            set
+            {
+                if (this.value == value)
+                    return;
+
+                this.value = value;
+                this.Modifyed = true;
+            }
+        }
+
+        public NodeAttribute(string value, bool modifyed)
+        {
+            this.value = value;
+            this.Modifyed = modifyed;
+        }
+    }
+
+    [Serializable()]
     public class NodeFile
     {
         public string Type { get; set; }
@@ -209,11 +239,11 @@ namespace Ksd.Mediatum
 
         public string Xml { get; private set; }
 
-        public IDictionary<string, string> Attributes = new Dictionary<string, string>();
+        public IDictionary<string, NodeAttribute> Attributes = new Dictionary<string, NodeAttribute>();
 
-        public Dictionary<string, NodeMask> Masks = new Dictionary<string, NodeMask>();
+        public IDictionary<string, NodeMask> Masks = new Dictionary<string, NodeMask>();
 
-        public List<NodeFile> Files = new List<NodeFile>();
+        public IList<NodeFile> Files = new List<NodeFile>();
 
         static string GetOptionalAttribute(XmlNode xmlNode, string name)
         {
@@ -292,7 +322,7 @@ namespace Ksd.Mediatum
                             XmlCDataSection cdataSection = childNode2 as XmlCDataSection;
                             string value = cdataSection.Value;
 
-                            this.Attributes.Add(name, value);
+                            this.Attributes.Add(name, new NodeAttribute(value, false));
                             break;
                         }
                     case "file":
@@ -316,6 +346,23 @@ namespace Ksd.Mediatum
             }
         }
 
+        public string GetAttributeValue(string name)
+        {
+            return this.Attributes[name].Value;
+        }
+
+        public void SetAttributeValue(string name, string value)
+        {
+            NodeAttribute attribute;
+            if (this.Attributes.TryGetValue(name, out attribute))
+            {
+                attribute.Value = value;
+                return;
+            }
+
+            this.Attributes.Add(name, new NodeAttribute(value, true));
+        }
+
         internal static Node CreateNode(Server server, UInt32 nodeId)
         {
             Uri uri;
@@ -336,12 +383,38 @@ namespace Ksd.Mediatum
             this.Server.nodeTable.Add(this.ID, this);
         }
 
-        string Attributes2Json()
+        /**
+         <summary>  Converts a attribute table to JSON format. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 25.07.2014. </remarks>
+        
+         <param name="table">   The attribute table. </param>
+        
+         <returns>  The attribute table in JSON format. </returns>
+         */
+        public static string AttributeTable2Json(IDictionary<string, string> table)
         {
             Newtonsoft.Json.JsonSerializer jsonSerializer = new Newtonsoft.Json.JsonSerializer();
             StringWriter textWriter = new StringWriter();
-            jsonSerializer.Serialize(textWriter, this.Attributes);
+            jsonSerializer.Serialize(textWriter, table);
             return textWriter.ToString();
+        }
+
+        /**
+         <summary>  Gets all modifyed attributes in JSON format. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 25.07.2014. </remarks>
+        
+         <returns>  The modifyed attributes in JSON format. </returns>
+         */
+        string ModifyedAttributes2Json()
+        {
+            SortedDictionary<string, string> map = new SortedDictionary<string,string>();
+            foreach (KeyValuePair<string, NodeAttribute> pair in this.Attributes)
+                if (pair.Value.Modifyed)
+                    map.Add(pair.Key, pair.Value.Value);
+            
+            return AttributeTable2Json(map);
         }
 
         /**
@@ -367,16 +440,13 @@ namespace Ksd.Mediatum
         }
 
         /**
-         <summary>  Updates an node. </summary>
+         <summary>  Sends all modifications of the node to the server. </summary>
         
-         <remarks>  Dr. Torsten Thurow, TU München, 18.07.2014. </remarks>
-        
-         <param name="name">        The new name of node, will be stored in the node table, field name. </param>
-         <param name="metadata">    The new metadatafields to given file. Use the json format e.g. {"nodename":"name", ...}. </param>
+         <remarks>  Dr. Torsten Thurow, TU München, 18.07.2014. </remarks>        
          */
         public void Update()
         {
-            string metadata = Attributes2Json();
+            string metadata = this.ModifyedAttributes2Json();
 
             this.Server.Update(this.ID, this.Name, metadata);
             Uri uri;
@@ -389,6 +459,32 @@ namespace Ksd.Mediatum
             this.Attributes.Clear();
             this.Masks.Clear();
             Parse(xmlNode);
+        }
+
+        /**
+         <summary>  Gets the creation time oft the node. </summary>
+        
+         <value>    The creation time oft the node. </value>
+         */
+        public DateTime CreationTime
+        {
+            get
+            {
+                return Convert.ToDateTime(this.GetAttributeValue("creationtime"));
+            }
+        }
+
+        /**
+         <summary>  Gets the last update time oft the node. </summary>
+        
+         <value>    The last update time oft the node. </value>
+         */
+        public DateTime UpdateTime
+        {
+            get
+            {
+                return Convert.ToDateTime(this.GetAttributeValue("updatetime"));
+            }
         }
     }
 }

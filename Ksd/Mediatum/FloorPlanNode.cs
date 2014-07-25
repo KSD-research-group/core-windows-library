@@ -29,7 +29,7 @@ namespace Ksd.Mediatum
         {
             get
             {
-                return Convert.ToInt32(this.Attributes["width"]);
+                return Convert.ToInt32(this.GetAttributeValue("width"));
             }
         }
 
@@ -37,7 +37,23 @@ namespace Ksd.Mediatum
         {
             get
             {
-                return Convert.ToInt32(this.Attributes["height"]);
+                return Convert.ToInt32(this.GetAttributeValue("height"));
+            }
+        }
+
+        public int OrigWidth
+        {
+            get
+            {
+                return Convert.ToInt32(this.GetAttributeValue("origwidth"));
+            }
+        }
+
+        public int OrigHeight
+        {
+            get
+            {
+                return Convert.ToInt32(this.GetAttributeValue("origheight"));
             }
         }
 
@@ -45,12 +61,12 @@ namespace Ksd.Mediatum
         {
             get
             {
-                return this.Attributes["architect"];
+                return this.GetAttributeValue("architect");
             }
 
             set
             {
-                this.Attributes["architect"] = value;
+                this.SetAttributeValue("architect", value);
             }
         }
 
@@ -58,20 +74,12 @@ namespace Ksd.Mediatum
         {
             get
             {
-                return this.Attributes["country"];
+                return this.GetAttributeValue("country");
             }
 
             set
             {
-                this.Attributes["country"] = value;
-            }
-        }
-
-        public DateTime CreationTime
-        {
-            get
-            {
-                return Convert.ToDateTime(this.Attributes["creationtime"]);
+                this.SetAttributeValue("country", value);
             }
         }
 
@@ -84,14 +92,14 @@ namespace Ksd.Mediatum
         {
             get 
             {
-                string uriString = this.Attributes["roomgraph"];
+                string uriString = this.GetAttributeValue("roomgraph");
                 string[] res = uriString.Split(';');
                 return new Uri(res[0]);
             }
 
             set
             {
-                this.Attributes["roomgraph"] = value.OriginalString;
+                this.SetAttributeValue("roomgraph", value.OriginalString);
             }
         }
 
@@ -123,6 +131,18 @@ namespace Ksd.Mediatum
             WebClient wc = new WebClient();
             wc.DownloadFile(this.GraphMlUri, path);
             WebHeaderCollection col = wc.ResponseHeaders;
+        }
+
+        public static Node CreateFloorPlanNode(Node parent, string name, string architect, string country, Uri graphMlUri, byte[] data)
+        {
+            Dictionary<string, string> map = new Dictionary<string, string>
+            {
+                {"architect", architect},
+                {"country", country},
+                {"roomgraph", graphMlUri.OriginalString}
+            };
+
+            return parent.Upload("image/project-arc", name, Node.AttributeTable2Json(map), data); 
         }
     }
 }
