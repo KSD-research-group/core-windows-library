@@ -30,7 +30,7 @@ namespace MediaTumBrowser
             // BIMServer 1219448
             // ar:searchbox 1085713
             Ksd.Mediatum.Server server = new Ksd.Mediatum.Server(this.oAuth);
-            server.typeTable.Add("image/project-arc", typeof(Ksd.Mediatum.FloorPlanNode));
+            server.TypeTable.Add("image/project-arc", typeof(Ksd.Mediatum.FloorPlanNode));
 
             Uri uri;
             //string scheme = server.MetaData("image/project-arc", out uri);
@@ -74,8 +74,8 @@ namespace MediaTumBrowser
             UInt32 parent = 1219448;
             Ksd.Mediatum.Node node = server.GetNode(parent);
 
-            Ksd.Mediatum.FloorPlanNode loadedNode = (Ksd.Mediatum.FloorPlanNode)Ksd.Mediatum.FloorPlanNode.CreateFloorPlanNode(node, "Upload Test", "Christoph Langenhahn", "Germany", new Uri("http://reference.ksd.ai.ar.tum.de:8080/AgraphMLDownloadService/DownloadAgraphml?ifcid=1IEeEPbCv1je0WG2vzMPyH&neo4jurl=http://localhost:7474&floorlevel=0.0"), binaryData);
-            loadedNode.Architect = "Langenhahn Christoph";
+            Ksd.Mediatum.FloorPlanNode loadedNode = (Ksd.Mediatum.FloorPlanNode)Ksd.Mediatum.FloorPlanNode.CreateFloorPlanNode(node, "Upload Test", "Christoph Langenhan", "Germany", new Uri("http://reference.ksd.ai.ar.tum.de:8080/AgraphMLDownloadService/DownloadAgraphml?ifcid=1IEeEPbCv1je0WG2vzMPyH&neo4jurl=http://localhost:7474&floorlevel=0.0"), binaryData);
+            loadedNode.Architect = "Langenhan Christoph";
             loadedNode.Country = "Germany";
             loadedNode.Update();
         }

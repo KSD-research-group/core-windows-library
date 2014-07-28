@@ -94,6 +94,7 @@ namespace Ksd.Mediatum
         {
             this.User = user;
             this.ServerName = serverName;
+            
             this.SignPath = "services/upload/calcsign";
             this.UploadPath = "services/upload/new";
             this.UpdatePath = "services/upload/update";
@@ -101,6 +102,8 @@ namespace Ksd.Mediatum
             this.MetadataPath = "services/metadata/scheme";
             this.AppDefinitionsPath = "services/metadata/appdefinitions";
             this.FilePath = "file";
+
+            this.TypeTable = new Dictionary<string, Type>();
         }
 
         /**
@@ -321,12 +324,17 @@ namespace Ksd.Mediatum
             return node;
         }
 
-        public Dictionary<string, Type> typeTable = new Dictionary<string, Type>();
+        /**
+         <summary>  Gets the type table. </summary>
+        
+         <value>    The type table. </value>
+         */
+        public IDictionary<string, Type> TypeTable { get; internal set; }
 
         internal Node CreateNode(string typeAsString, XmlElement xmlNode, string xml)
         {
             Type type;
-            if (!this.typeTable.TryGetValue(typeAsString, out type))
+            if (!this.TypeTable.TryGetValue(typeAsString, out type))
                 type = typeof(Node);
 
             Object[] args = new Object[] { this, xmlNode, xml };

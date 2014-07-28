@@ -25,6 +25,11 @@ namespace Ksd.Mediatum
             :base(server, xmlNode, xml)
         { }
 
+        /**
+         <summary>  Gets the width of the image. </summary>
+        
+         <value>    The width of the image. </value>
+         */
         public int Width 
         {
             get
@@ -33,6 +38,11 @@ namespace Ksd.Mediatum
             }
         }
 
+        /**
+         <summary>  Gets the height of the image. </summary>
+        
+         <value>    The height of the image. </value>
+         */
         public int Height
         {
             get
@@ -41,6 +51,11 @@ namespace Ksd.Mediatum
             }
         }
 
+        /**
+         <summary>  Gets the width of the original image. </summary>
+        
+         <value>    The width of the original image. </value>
+         */
         public int OrigWidth
         {
             get
@@ -49,6 +64,11 @@ namespace Ksd.Mediatum
             }
         }
 
+        /**
+         <summary>  Gets the height of the original image. </summary>
+        
+         <value>    The height of the original image. </value>
+         */
         public int OrigHeight
         {
             get
@@ -57,6 +77,11 @@ namespace Ksd.Mediatum
             }
         }
 
+        /**
+         <summary>  Gets or sets the architect of the floor plan. </summary>
+        
+         <value>    The architect of the floor plan. </value>
+         */
         public string Architect
         {
             get
@@ -70,6 +95,11 @@ namespace Ksd.Mediatum
             }
         }
 
+        /**
+         <summary>  Gets or sets the country of the building. </summary>
+        
+         <value>    The country of the building. </value>
+         */
         public string Country
         {
             get
@@ -133,6 +163,20 @@ namespace Ksd.Mediatum
             WebHeaderCollection col = wc.ResponseHeaders;
         }
 
+        /**
+         <summary>  Creates a floor plan node. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 28.07.2014. </remarks>
+        
+         <param name="parent">      The parent node of the new node. </param>
+         <param name="name">        The name of the new node. </param>
+         <param name="architect">   The architect of the floor plan. </param>
+         <param name="country">     The country of the building. </param>
+         <param name="graphMlUri">  The URI to the GraphML file of the floor plan. </param>
+         <param name="data">        The image of the floor plan in binary format. </param>
+        
+         <returns>  The new floor plan node. </returns>
+         */
         public static Node CreateFloorPlanNode(Node parent, string name, string architect, string country, Uri graphMlUri, byte[] data)
         {
             Dictionary<string, string> map = new Dictionary<string, string>

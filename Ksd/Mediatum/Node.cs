@@ -7,12 +7,28 @@ using System.IO;
 
 namespace Ksd.Mediatum
 {
+    /**
+     <summary>  Attribute for a node. </summary>
+    
+     <remarks>  Dr. Torsten Thurow, TU München, 28.07.2014. </remarks>
+     */
     [Serializable()]
     public class NodeAttribute
     {
+        /**
+         <summary>  Gets a value indicating whether the attribute value is modifyed on client side. </summary>
+        
+         <value>    true if the attribute value is modifyed on client side, false if not. </value>
+         */
         public bool Modifyed { get; internal set; }
 
         string value;
+
+        /**
+         <summary>  Gets or sets the value of the attribute. </summary>
+        
+         <value>    The value. </value>
+         */
         public string Value 
         {
             get
@@ -30,6 +46,14 @@ namespace Ksd.Mediatum
             }
         }
 
+        /**
+         <summary>  Constructor. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 28.07.2014. </remarks>
+        
+         <param name="value">       The value. </param>
+         <param name="modifyed">    true if the attribute value is modifyed on client side, false if not. </param>
+         */
         public NodeAttribute(string value, bool modifyed)
         {
             this.value = value;
@@ -37,19 +61,51 @@ namespace Ksd.Mediatum
         }
     }
 
+    /**
+     <summary>  A node file. </summary>
+    
+     <remarks>  Dr. Torsten Thurow, TU München, 28.07.2014. </remarks>
+     */
     [Serializable()]
     public class NodeFile
     {
-        public string Type { get; set; }
-        public string MimeType { get; set; }
-        public string Filename { get; set; }
+        /**
+         <summary>  Gets the type of the file. </summary>
+        
+         <value>    The type of the file. </value>
+         */
+        public string Type { get; internal set; }
 
-        public Node Parent { get; set; }
+        /**
+         <summary>  Gets the mime type of the file. </summary>
+        
+         <value>    The mime type of the file. </value>
+         */
+        public string MimeType { get; internal set; }
 
-        public NodeFile()
-        { }
+        /**
+         <summary>  Gets the server internal filename of the file. </summary>
+        
+         <value>    The filename. </value>
+         */
+        public string Filename { get; internal set; }
 
-        public NodeFile(Node parent, XmlElement xmlNode)
+        /**
+         <summary>  Gets the parent node of the file. </summary>
+        
+         <value>    The parent. </value>
+         */
+        public Node Parent { get; internal set; }
+
+        /**
+         <summary>  Constructor. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 28.07.2014. </remarks>
+        
+         <param name="parent">  The parent node. </param>
+         <param name="xmlNode"> Element describing the XML node. </param>
+         */
+        internal NodeFile(Node parent, XmlElement xmlNode)
         {
             this.Parent = parent;
             this.Filename = xmlNode.Attributes["filename"].Value;
@@ -57,6 +113,13 @@ namespace Ksd.Mediatum
             this.Type = xmlNode.Attributes["type"].Value;
         }
 
+        /**
+         <summary>  Downloads the file in binary format. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 28.07.2014. </remarks>
+        
+         <returns>  The file in binary format. </returns>
+         */
         public byte[] Download()
         {
             Uri uri;
@@ -67,15 +130,28 @@ namespace Ksd.Mediatum
     [Serializable()]
     public class NodeMask
     {
-        public string Name { get; set; }
-        public string Value { get; set; }
+        /**
+         <summary>  Gets the name of the mask. </summary>
+        
+         <value>    The name of the mask. </value>
+         */
+        public string Name { get; internal set; }
 
-        public Node Parent { get; set; }
+        /**
+         <summary>  Gets the value of the mask. </summary>
+        
+         <value>    The value of the mask. </value>
+         */
+        public string Value { get; internal set; }
 
-        public NodeMask()
-        { }
+        /**
+         <summary>  Gets the parent node. </summary>
+        
+         <value>    The parent node of the mask. </value>
+         */
+        public Node Parent { get; internal set; }
 
-        public NodeMask(Node parent, XmlElement xmlNode)
+        internal NodeMask(Node parent, XmlElement xmlNode)
         {
             this.Parent = parent;
             this.Name = xmlNode.Attributes["name"].Value;
@@ -237,13 +313,33 @@ namespace Ksd.Mediatum
             }
         }
 
+        /**
+         <summary>  Gets the original XML input for this Node. </summary>
+        
+         <value>    The original XML input for this Node. </value>
+         */
         public string Xml { get; private set; }
 
-        public IDictionary<string, NodeAttribute> Attributes = new Dictionary<string, NodeAttribute>();
+        /**
+         <summary>  Gets all attributes of the node. </summary>
+        
+         <value>    The attributes of the node. </value>
+         */
+        public IDictionary<string, NodeAttribute> Attributes { get; internal set; }
 
-        public IDictionary<string, NodeMask> Masks = new Dictionary<string, NodeMask>();
+        /**
+         <summary>  Gets all masks of the node. </summary>
+        
+         <value>    The masks of the node. </value>
+         */
+        public IDictionary<string, NodeMask> Masks { get; internal set; }
 
-        public IList<NodeFile> Files = new List<NodeFile>();
+        /**
+         <summary>  Gets all files of the node. </summary>
+        
+         <value>    The files of the node. </value>
+         */
+        public IList<NodeFile> Files { get; internal set; }
 
         static string GetOptionalAttribute(XmlNode xmlNode, string name)
         {
@@ -311,6 +407,10 @@ namespace Ksd.Mediatum
             this.Write = GetOptionalAttribute(xmlNode, "write");
             this.Data = GetOptionalAttribute(xmlNode, "data");
 
+            this.Attributes = new Dictionary<string, NodeAttribute>();
+            this.Masks = new Dictionary<string, NodeMask>();
+            this.Files = new List<NodeFile>();
+
             foreach (XmlNode childNode in xmlNode)
             {
                 switch (childNode.Name)
@@ -346,11 +446,28 @@ namespace Ksd.Mediatum
             }
         }
 
+        /**
+         <summary>  Gets a attribute value. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 28.07.2014. </remarks>
+        
+         <param name="name">    The name of the attribute. </param>
+        
+         <returns>  The value of the attribute. </returns>
+         */
         public string GetAttributeValue(string name)
         {
             return this.Attributes[name].Value;
         }
 
+        /**
+         <summary>  Sets a attribute value. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 28.07.2014. </remarks>
+        
+         <param name="name">    The name of the attribute. </param>
+         <param name="value">   The new value of the attribute. </param>
+         */
         public void SetAttributeValue(string name, string value)
         {
             NodeAttribute attribute;
@@ -374,6 +491,15 @@ namespace Ksd.Mediatum
             return server.CreateNode(typeOfNewNode, xmlNode, result);
         }
 
+        /**
+         <summary>  Specialised constructor for use only by derived classes. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 28.07.2014. </remarks>
+        
+         <param name="server">  The MediaTUM server. </param>
+         <param name="xmlNode"> Element describing the XML node. </param>
+         <param name="xml">     The original XML input for this Node. </param>
+         */
         public Node(Server server, XmlElement xmlNode, string xml)
         {
             this.Server = server;
@@ -455,9 +581,6 @@ namespace Ksd.Mediatum
             XmlNode xmlNodeResponse = GetXmlNodeResponse(uri, result);
             XmlElement xmlNode = (XmlElement)xmlNodeResponse["node"];
 
-            this.Files.Clear();
-            this.Attributes.Clear();
-            this.Masks.Clear();
             Parse(xmlNode);
         }
 

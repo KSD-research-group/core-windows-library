@@ -36,7 +36,7 @@ namespace Ksd.Mediatum
         
         #endregion
 
-        private static readonly MD5 md5 = MD5.Create(); ///< The MD5 algorithm used to generate the key for the OAuth authentication mechanism.
+        static readonly MD5 md5 = MD5.Create(); ///< The MD5 algorithm used to generate the key for the OAuth authentication mechanism.
 
         /**
          <summary>  Constructor. </summary>
