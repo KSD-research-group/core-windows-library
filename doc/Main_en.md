@@ -1,7 +1,7 @@
-Projektname	{#mainpage}
+Ksd Library	{#mainpage}
 =========================
 
-# Überschrift 1 {#LabelUeberschrift1}
+# Einführung {#LabelUeberschrift1}
 
 ## Überschrift 2 {#LabelUeberschrift2}
  

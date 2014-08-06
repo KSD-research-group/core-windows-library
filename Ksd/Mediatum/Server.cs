@@ -8,6 +8,7 @@ using System.Web;
 using System.Net;
 using System.Net.Http;
 using System.Xml;
+using System.Diagnostics;
 
 namespace Ksd.Mediatum
 {
@@ -19,6 +20,8 @@ namespace Ksd.Mediatum
     [Serializable()]
     public class Server
     {
+        public static TraceSwitch traceSwitch = new TraceSwitch("General", "Entire Application");
+
         /**
          <summary>  Gets or sets the network name or address of the server. </summary>
         
@@ -133,7 +136,9 @@ namespace Ksd.Mediatum
             String callString = uriString + "/?" + OAuth.GetSortedParameterString(parameters);
 
             WebClient wc = new WebClient();
+            System.Diagnostics.Trace.WriteIf(traceSwitch.TraceInfo, String.Format("Get {0}", callString));
             string result = wc.DownloadString(callString);
+            System.Diagnostics.Trace.WriteIf(traceSwitch.TraceInfo, String.Format("Response is {0}", result));
             WebHeaderCollection col = wc.ResponseHeaders;
 
             return result;
@@ -162,7 +167,9 @@ namespace Ksd.Mediatum
             String callString = uriString + "/?" + OAuth.GetSortedParameterString(parameters);
 
             WebClient wc = new WebClient();
+            System.Diagnostics.Trace.WriteIf(traceSwitch.TraceInfo, String.Format("Get {0}", callString));
             string result = wc.DownloadString(callString);
+            System.Diagnostics.Trace.WriteIf(traceSwitch.TraceInfo, String.Format("Response is {0}", result));
             WebHeaderCollection col = wc.ResponseHeaders;
 
             return result;
@@ -191,7 +198,9 @@ namespace Ksd.Mediatum
             String callString = uriString + "/?" + OAuth.GetSortedParameterString(parameters);
 
             WebClient wc = new WebClient();
+            System.Diagnostics.Trace.WriteIf(traceSwitch.TraceInfo, String.Format("Get {0}", callString));
             string result = wc.DownloadString(callString);
+            System.Diagnostics.Trace.WriteIf(traceSwitch.TraceInfo, String.Format("Response is {0}", result));
             WebHeaderCollection col = wc.ResponseHeaders;
 
             return result;
@@ -246,6 +255,9 @@ namespace Ksd.Mediatum
             //this.User.GetMd5Hash(this.UploadPath, parameters);
 
             WebClient wc = new WebClient();
+
+            //byte[] result = wc.UploadValues("uri", "POST", parameters);
+
             byte[] result = wc.UploadValues(uri, parameters);
             string s = Encoding.UTF8.GetString(result, 0, result.Length);
             WebHeaderCollection col = wc.ResponseHeaders;
@@ -269,7 +281,9 @@ namespace Ksd.Mediatum
             String callString = uriString + "/?" + OAuth.GetSortedParameterString(parameters);
 
             WebClient wc = new WebClient();
+            System.Diagnostics.Trace.WriteIf(traceSwitch.TraceInfo, String.Format("Get {0}", callString));
             byte[] result = wc.DownloadData(uriString);
+            System.Diagnostics.Trace.WriteIf(traceSwitch.TraceInfo, String.Format("Response has length {0}", result.Length));
             WebHeaderCollection col = wc.ResponseHeaders;
 
             return result;

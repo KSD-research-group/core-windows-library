@@ -19,6 +19,7 @@ namespace MediaTumBrowser
         public MainForm()
         {
             InitializeComponent();
+            Ksd.Mediatum.Server.traceSwitch.Level = System.Diagnostics.TraceLevel.Info;
         }
 
  
