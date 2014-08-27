@@ -207,22 +207,30 @@ namespace Ksd.Mediatum
         }
 
 /*
-        string GetOAuthSignFromServer(string key, )
+        string GetOAuthSignFromServer(UInt32 parent, string type, string name, string metadata)
         {
+            string url = '/' + UploadPath + "?metadata=" + metadata + "&name=" + name + "&parent=" + parent + "&type=" + type + "&user=" + this.User.UserName;
 //    values = {'key': params['key'], 'url': "%s?metadata=%s&name=%s&parent=%s&type=%s&user=%s" % (uploadurl, metadata, nodename, params['parentnode'], schemaname, params['user'])}
 //    response = requests.get("%s%s" % (servername, signurl), params=values)
 
             System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection
             {
-                { "key", key },
-                { "url", type },
-                { "name", name },
-                { "metadata", Uri.EscapeUriString(metadata) },
-//                { "metadata", metadata },
-                { "data", base64String },
+                { "key", this.User.PresharedTag },
+                { "url", url },
             };
+
+            string uri = "https://" + this.ServerName + '/' + this.SignPath;
+            WebClient wc = new WebClient();
+
+            //byte[] result = wc.UploadValues("uri", "POST", parameters);
+
+            byte[] result = wc. .DownloadString(uri, parameters);
+            string s = Encoding.UTF8.GetString(result, 0, result.Length);
+            WebHeaderCollection col = wc.ResponseHeaders;
+
+            return "test";
         }
-        */
+*/
         /**
          <summary>  Uploads a file to an node . </summary>
         
@@ -239,7 +247,9 @@ namespace Ksd.Mediatum
         internal UInt32 Upload(UInt32 parent, string type, string name, string metadata, byte[] data)
         {
             // http://mediatum.ub.tum.de/services/upload
-            
+
+//            string test = GetOAuthSignFromServer(parent, type, name, metadata);
+
             string base64String = System.Convert.ToBase64String(data, 0, data.Length);
             string uri = "https://" + this.ServerName + '/' + this.UploadPath;
             
@@ -265,6 +275,36 @@ namespace Ksd.Mediatum
             string idString = col["NodeID"];
 
             return Convert.ToUInt32(idString);
+        }
+
+        internal UInt32 Upload2(UInt32 parent, string type, string name, string metadata, byte[] data)
+        {
+            // http://mediatum.ub.tum.de/services/upload
+
+            string uri = "https://" + this.ServerName + '/' + this.UploadPath;
+
+            System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection
+            {
+                { "parent", parent.ToString() },
+                { "type", type },
+                { "name", name },
+                { "metadata", metadata }
+            };
+
+            //this.User.GetMd5Hash(this.UploadPath, parameters);
+
+            var client = new HttpClient(new HttpClientHandler { UseProxy = false });
+            var request = new HttpRequestMessage(HttpMethod.Post, uri);
+            MemoryStream stream = new MemoryStream(data);
+            StreamContent streamContent = new StreamContent(stream);
+            //streamContent.Headers.
+            //request.Content = streamContent;
+            //HttpResponseMessage response = await client.SendAsync(request);
+            //response.EnsureSuccessStatusCode();
+           // string idString = response.Headers.GetValues("NodeID")[0];
+            
+            //return Convert.ToUInt32(idString);
+            return 0;
         }
 
         internal byte[] Download(UInt32 nodeId, string fileName, out Uri uri)

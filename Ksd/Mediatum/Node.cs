@@ -8,160 +8,6 @@ using System.IO;
 namespace Ksd.Mediatum
 {
     /**
-     <summary>  Attribute for a node. </summary>
-    
-     <remarks>  Dr. Torsten Thurow, TU München, 28.07.2014. </remarks>
-     */
-    [Serializable()]
-    public class NodeAttribute
-    {
-        /**
-         <summary>  Gets a value indicating whether the attribute value is modifyed on client side. </summary>
-        
-         <value>    true if the attribute value is modifyed on client side, false if not. </value>
-         */
-        public bool Modifyed { get; internal set; }
-
-        string value;
-
-        /**
-         <summary>  Gets or sets the value of the attribute. </summary>
-        
-         <value>    The value. </value>
-         */
-        public string Value 
-        {
-            get
-            {
-                return this.value;
-            }
-            
-            set
-            {
-                if (this.value == value)
-                    return;
-
-                this.value = value;
-                this.Modifyed = true;
-            }
-        }
-
-        /**
-         <summary>  Constructor. </summary>
-        
-         <remarks>  Dr. Torsten Thurow, TU München, 28.07.2014. </remarks>
-        
-         <param name="value">       The value. </param>
-         <param name="modifyed">    true if the attribute value is modifyed on client side, false if not. </param>
-         */
-        public NodeAttribute(string value, bool modifyed)
-        {
-            this.value = value;
-            this.Modifyed = modifyed;
-        }
-    }
-
-    /**
-     <summary>  A node file. </summary>
-    
-     <remarks>  Dr. Torsten Thurow, TU München, 28.07.2014. </remarks>
-     */
-    [Serializable()]
-    public class NodeFile
-    {
-        /**
-         <summary>  Gets the type of the file. </summary>
-        
-         <value>    The type of the file. </value>
-         */
-        public string Type { get; internal set; }
-
-        /**
-         <summary>  Gets the mime type of the file. </summary>
-        
-         <value>    The mime type of the file. </value>
-         */
-        public string MimeType { get; internal set; }
-
-        /**
-         <summary>  Gets the server internal filename of the file. </summary>
-        
-         <value>    The filename. </value>
-         */
-        public string Filename { get; internal set; }
-
-        /**
-         <summary>  Gets the parent node of the file. </summary>
-        
-         <value>    The parent. </value>
-         */
-        public Node Parent { get; internal set; }
-
-        /**
-         <summary>  Constructor. </summary>
-        
-         <remarks>  Dr. Torsten Thurow, TU München, 28.07.2014. </remarks>
-        
-         <param name="parent">  The parent node. </param>
-         <param name="xmlNode"> Element describing the XML node. </param>
-         */
-        internal NodeFile(Node parent, XmlElement xmlNode)
-        {
-            this.Parent = parent;
-            this.Filename = xmlNode.Attributes["filename"].Value;
-            this.MimeType = xmlNode.Attributes["mime-type"].Value;
-            this.Type = xmlNode.Attributes["type"].Value;
-        }
-
-        /**
-         <summary>  Downloads the file in binary format. </summary>
-        
-         <remarks>  Dr. Torsten Thurow, TU München, 28.07.2014. </remarks>
-        
-         <returns>  The file in binary format. </returns>
-         */
-        public byte[] Download()
-        {
-            Uri uri;
-            return this.Parent.Server.Download(this.Parent.ID, Filename, out uri);
-        }
-    }
-
-    [Serializable()]
-    public class NodeMask
-    {
-        /**
-         <summary>  Gets the name of the mask. </summary>
-        
-         <value>    The name of the mask. </value>
-         */
-        public string Name { get; internal set; }
-
-        /**
-         <summary>  Gets the value of the mask. </summary>
-        
-         <value>    The value of the mask. </value>
-         */
-        public string Value { get; internal set; }
-
-        /**
-         <summary>  Gets the parent node. </summary>
-        
-         <value>    The parent node of the mask. </value>
-         */
-        public Node Parent { get; internal set; }
-
-        internal NodeMask(Node parent, XmlElement xmlNode)
-        {
-            this.Parent = parent;
-            this.Name = xmlNode.Attributes["name"].Value;
-            XmlNode childNode = xmlNode.ChildNodes[0];
-            XmlCDataSection cdataSection = childNode as XmlCDataSection;
-            this.Value = cdataSection.Value;
-        }
-    }
-
-    /**
      <summary>  Represents a node in MediaTUM. </summary>
     
      <remarks>  Dr. Torsten Thurow, TU München, 22.07.2014. </remarks>
@@ -585,9 +431,22 @@ namespace Ksd.Mediatum
         }
 
         /**
-         <summary>  Gets the creation time oft the node. </summary>
+         <summary>  Gets the creator of the node. </summary>
         
-         <value>    The creation time oft the node. </value>
+         <value>    The creator of the node. </value>
+         */
+        public string Creator
+        {
+            get
+            {
+                return this.GetAttributeValue("creator");
+            }
+        }
+
+        /**
+         <summary>  Gets the creation time of the node. </summary>
+        
+         <value>    The creation time of the node. </value>
          */
         public DateTime CreationTime
         {
@@ -598,9 +457,22 @@ namespace Ksd.Mediatum
         }
 
         /**
-         <summary>  Gets the last update time oft the node. </summary>
+         <summary>  Gets the update user of the node. </summary>
         
-         <value>    The last update time oft the node. </value>
+         <value>    The update user of the node. </value>
+         */
+        public string UpdateUser
+        {
+            get
+            {
+                return this.GetAttributeValue("updateuser");
+            }
+        }
+
+        /**
+         <summary>  Gets the last update time of the node. </summary>
+        
+         <value>    The last update time of the node. </value>
          */
         public DateTime UpdateTime
         {

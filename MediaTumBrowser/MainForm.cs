@@ -39,7 +39,7 @@ namespace MediaTumBrowser
             //string appdefinitions = server.AppDefinitions("image/project-arc", out uri);
 
             Ksd.Mediatum.FloorPlanNode floorNode = (Ksd.Mediatum.FloorPlanNode)server.GetNode(1225255);
-            string result = floorNode.GetGraphMl();
+//            string result = floorNode.GetGraphMl();
             List<Ksd.Mediatum.Node> children = new List<Ksd.Mediatum.Node>(floorNode.Children);
             List<Ksd.Mediatum.Node> parents = new List<Ksd.Mediatum.Node>(floorNode.Parents);
             foreach (Ksd.Mediatum.NodeFile file in floorNode.Files)
@@ -78,6 +78,7 @@ namespace MediaTumBrowser
             Ksd.Mediatum.FloorPlanNode loadedNode = (Ksd.Mediatum.FloorPlanNode)Ksd.Mediatum.FloorPlanNode.CreateFloorPlanNode(node, "Upload Test", "Christoph Langenhan", "Germany", new Uri("http://reference.ksd.ai.ar.tum.de:8080/AgraphMLDownloadService/DownloadAgraphml?ifcid=1IEeEPbCv1je0WG2vzMPyH&neo4jurl=http://localhost:7474&floorlevel=0.0"), binaryData);
             loadedNode.Architect = "Langenhan Christoph";
             loadedNode.Country = "Germany";
+            loadedNode.SetAttributeValue("link", "http://heise.de");
             loadedNode.Update();
         }
     }

@@ -54,6 +54,13 @@
   <ItemGroup>
     <Compile Include="Mediatum\FloorPlanNode.cs" />
     <Compile Include="Mediatum\Node.cs" />
+    <Compile Include="Mediatum\NodeAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Mediatum\NodeFile.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Mediatum\NodeMask.cs" />
     <Compile Include="Mediatum\OAuth.cs" />
     <Compile Include="Mediatum\Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
