@@ -128,7 +128,7 @@ namespace Ksd.Mediatum
             if (postfix != "")
                 prefix += '/' + postfix;
             
-            String uriString = "https://" + this.ServerName + '/' + prefix;
+            String uriString = "http://" + this.ServerName + '/' + prefix;
             uri = new Uri(uriString);
 
             System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection();
@@ -159,7 +159,7 @@ namespace Ksd.Mediatum
             // http://mediatum.ub.tum.de/services/metadata/scheme
 
             string prefix = this.MetadataPath + '/' + name;
-            String uriString = "https://" + this.ServerName + '/' + prefix;
+            String uriString = "http://" + this.ServerName + '/' + prefix;
             uri = new Uri(uriString);
 
             System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection();
@@ -190,7 +190,7 @@ namespace Ksd.Mediatum
             // http://mediatum.ub.tum.de/services/metadata/appdefinitions
 
             string prefix = this.AppDefinitionsPath + '/' + name;
-            String uriString = "https://" + this.ServerName + '/' + prefix;
+            String uriString = "http://" + this.ServerName + '/' + prefix;
             uri = new Uri(uriString);
 
             System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection();
@@ -206,31 +206,20 @@ namespace Ksd.Mediatum
             return result;
         }
 
-/*
         string GetOAuthSignFromServer(UInt32 parent, string type, string name, string metadata)
         {
             string url = '/' + UploadPath + "?metadata=" + metadata + "&name=" + name + "&parent=" + parent + "&type=" + type + "&user=" + this.User.UserName;
-//    values = {'key': params['key'], 'url': "%s?metadata=%s&name=%s&parent=%s&type=%s&user=%s" % (uploadurl, metadata, nodename, params['parentnode'], schemaname, params['user'])}
-//    response = requests.get("%s%s" % (servername, signurl), params=values)
 
-            System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection
-            {
-                { "key", this.User.PresharedTag },
-                { "url", url },
-            };
-
-            string uri = "https://" + this.ServerName + '/' + this.SignPath;
+            string uri = "http://" + this.ServerName + '/' + this.SignPath;
             WebClient wc = new WebClient();
-
-            //byte[] result = wc.UploadValues("uri", "POST", parameters);
-
-            byte[] result = wc. .DownloadString(uri, parameters);
-            string s = Encoding.UTF8.GetString(result, 0, result.Length);
+            wc.QueryString.Add("key", this.User.PresharedTag);
+            wc.QueryString.Add("url", url);
+            string s = wc.DownloadString(uri);
             WebHeaderCollection col = wc.ResponseHeaders;
 
-            return "test";
+            return s;
         }
-*/
+
         /**
          <summary>  Uploads a file to an node . </summary>
         
@@ -248,10 +237,10 @@ namespace Ksd.Mediatum
         {
             // http://mediatum.ub.tum.de/services/upload
 
-//            string test = GetOAuthSignFromServer(parent, type, name, metadata);
+            string test = GetOAuthSignFromServer(parent, type, name, metadata);
 
             string base64String = System.Convert.ToBase64String(data, 0, data.Length);
-            string uri = "https://" + this.ServerName + '/' + this.UploadPath;
+            string uri = "http://" + this.ServerName + '/' + this.UploadPath;
             
             System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection
             {
@@ -281,7 +270,7 @@ namespace Ksd.Mediatum
         {
             // http://mediatum.ub.tum.de/services/upload
 
-            string uri = "https://" + this.ServerName + '/' + this.UploadPath;
+            string uri = "http://" + this.ServerName + '/' + this.UploadPath;
 
             System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection
             {
@@ -313,7 +302,7 @@ namespace Ksd.Mediatum
 
             string prefix = this.FilePath + '/' + nodeId.ToString() + '/' + fileName;
 
-            String uriString = "https://" + this.ServerName + '/' + prefix;
+            String uriString = "http://" + this.ServerName + '/' + prefix;
             uri = new Uri(uriString);
 
             System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection();
@@ -342,7 +331,7 @@ namespace Ksd.Mediatum
         {
             // http://mediatum.ub.tum.de/services/update
 
-            string uri = "https://" + this.ServerName + '/' + this.UpdatePath + '/' + nodeId.ToString();
+            string uri = "http://" + this.ServerName + '/' + this.UpdatePath + '/' + nodeId.ToString();
 
             System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection
             {
