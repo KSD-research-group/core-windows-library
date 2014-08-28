@@ -80,6 +80,8 @@ namespace MediaTumBrowser
             loadedNode.Country = "Germany";
             loadedNode.SetAttributeValue("link", "http://heise.de");
             loadedNode.Update();
+            foreach (Ksd.Mediatum.NodeFile file in loadedNode.Files)
+                file.Download();
         }
     }
 }

@@ -237,8 +237,6 @@ namespace Ksd.Mediatum
         {
             // http://mediatum.ub.tum.de/services/upload
 
-            string test = GetOAuthSignFromServer(parent, type, name, metadata);
-
             string base64String = System.Convert.ToBase64String(data, 0, data.Length);
             string uri = "http://" + this.ServerName + '/' + this.UploadPath;
             
@@ -279,6 +277,10 @@ namespace Ksd.Mediatum
                 { "name", name },
                 { "metadata", metadata }
             };
+
+            string test = GetOAuthSignFromServer(parent, type, name, metadata);
+
+            MultipartFormDataContent form = new MultipartFormDataContent();
 
             //this.User.GetMd5Hash(this.UploadPath, parameters);
 
