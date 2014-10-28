@@ -1,11 +1,12 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaTumBrowser", "MediaTumBrowser\MediaTumBrowser.csproj", "{0C053660-C711-4E45-B8AD-9280F14D16DB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ksd", "Ksd\Ksd.csproj", "{A287423D-8F31-43E3-9A4F-B2CE4738D81C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestKsd", "UnitTestKsd\UnitTestKsd.csproj", "{BF767BEF-C9E9-4C16-9FA2-B9D4BBFEE3C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +22,10 @@ Global
 		{A287423D-8F31-43E3-9A4F-B2CE4738D81C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A287423D-8F31-43E3-9A4F-B2CE4738D81C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A287423D-8F31-43E3-9A4F-B2CE4738D81C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF767BEF-C9E9-4C16-9FA2-B9D4BBFEE3C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF767BEF-C9E9-4C16-9FA2-B9D4BBFEE3C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF767BEF-C9E9-4C16-9FA2-B9D4BBFEE3C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF767BEF-C9E9-4C16-9FA2-B9D4BBFEE3C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
