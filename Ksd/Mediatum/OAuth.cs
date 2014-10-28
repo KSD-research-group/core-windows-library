@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Security.Cryptography;
-
+using Microsoft.Win32;
 
 namespace Ksd.Mediatum
 {
@@ -33,6 +33,54 @@ namespace Ksd.Mediatum
          <value>    The preshared tag for OAuth requests. </value>
          */
         public String PresharedTag { get; set; }
+
+        /**
+         <summary>  Gets or sets the user name in registry. </summary>
+         <remarks>  The registry key is HKEY_CURRENT_USER\\SOFTWARE\\Mediatum\\UserName. </remarks>
+        
+         <value>    The user name in registry. </value>
+         */
+        public static String UserNameInRegistry
+        {
+            get { return (string)Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Mediatum", @"UserName", "deployment"); }
+
+            set { Registry.SetValue(@"HKEY_CURRENT_USER\SOFTWARE\Mediatum", @"UserName", value); }
+        }
+
+        /**
+         <summary>  Gets or sets the preshared tag in registry. </summary>
+         <remarks>  The registry key is HKEY_CURRENT_USER\\SOFTWARE\\Mediatum\\PresharedTag. </remarks>
+        
+         <value>    The preshared tag in registry. </value>
+         */
+        public static String PresharedTagInRegistry
+        {
+            get { return (string)Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Mediatum", @"PresharedTag", "deployment"); }
+
+            set { Registry.SetValue(@"HKEY_CURRENT_USER\SOFTWARE\Mediatum", @"PresharedTag", value); }
+        }
+
+        /**
+         <summary>  Read the user name and preshared tag from the registry. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 22.10.2014. </remarks>
+         */
+        public void ReadSigningConfigFromRegistry()
+        {
+            this.UserName = UserNameInRegistry;
+            this.PresharedTag = PresharedTagInRegistry;
+        }
+
+        /**
+         <summary>  Writes the user name and preshared tag to registry. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 22.10.2014. </remarks>
+         */
+        public void WriteSigningConfigToRegistry()
+        {
+            UserNameInRegistry = this.UserName;
+            PresharedTagInRegistry = this.PresharedTag;
+        }
         
         #endregion
 
@@ -50,6 +98,16 @@ namespace Ksd.Mediatum
         {
             this.UserName = userName;
             this.PresharedTag = presharedTag;
+        }
+
+        /**
+         <summary>  Default constructor, reads the user name and preshared tag from the registry. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 22.10.2014. </remarks>
+         */
+        public OAuth ()
+        {
+            ReadSigningConfigFromRegistry();
         }
 
         /**
@@ -153,14 +211,49 @@ namespace Ksd.Mediatum
         }
 
         /**
-         <summary>  Gets Md5 hash for OAuth. </summary>
+         <summary>  Gets a signed URI. </summary>
         
          <remarks>  Dr. Torsten Thurow, TU München, 22.07.2014. </remarks>
         
          <param name="prefix">      The prefix of the URI. </param>
          <param name="parameters">  The parameters of the URI, this function adds the parameters user and sign. </param>
          */
-        public void GetMd5Hash(String prefix, System.Collections.Specialized.NameValueCollection parameters)
+        public string GetSignedUri(String prefix, System.Collections.Specialized.NameValueCollection parameters = null)
+        {
+            System.Collections.Specialized.NameValueCollection parametersCopy
+                = parameters != null ?
+                new System.Collections.Specialized.NameValueCollection(parameters) :
+                new System.Collections.Specialized.NameValueCollection();
+
+            parametersCopy.Add("user", this.UserName);
+            string input = this.PresharedTag + '/' + prefix + '/' + GetSortedParameterString(parametersCopy);
+            string sign = GetMd5Hash(input);
+
+            string result = prefix + "/?";
+
+            for (int index = 0; index < parametersCopy.Count; index++)
+            {
+                string key = parametersCopy.GetKey(index);
+                string[] values = parametersCopy.GetValues(index);
+                Array.Sort<string>(values);
+                foreach (string value in values)
+                    result += key + '=' + value + '&';
+            }
+
+            result += "sign=" + sign;
+
+            return result;
+        }
+
+        /**
+         <summary>  Adds signs parameters to 'parameters'. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 23.10.2014. </remarks>
+        
+         <param name="prefix">      The prefix of the URI. </param>
+         <param name="parameters">  [in,out] parameters to add. </param>
+         */
+        public void AddSignParams(String prefix, ref System.Collections.Specialized.NameValueCollection parameters)
         {
             parameters.Add("user", this.UserName);
             string input = this.PresharedTag + '/' + prefix + '/' + GetSortedParameterString(parameters);

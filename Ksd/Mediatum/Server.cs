@@ -7,8 +7,10 @@ using System.IO;
 using System.Web;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Xml;
 using System.Diagnostics;
+using Microsoft.Win32;
 
 namespace Ksd.Mediatum
 {
@@ -21,6 +23,20 @@ namespace Ksd.Mediatum
     public class Server
     {
         public static TraceSwitch traceSwitch = new TraceSwitch("General", "Entire Application");
+
+        public static readonly String DefaultServerName = @"mediatum.ub.tum.de";    ///< The default server name
+
+        /**
+         <summary>  Gets or sets the server name in registry. </summary>
+        
+         <value>    The server name in registry. </value>
+         */
+        public static String ServerNameInRegistry 
+        {
+            get { return (string)Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Mediatum", @"URI", DefaultServerName); }
+
+            set { Registry.SetValue(@"HKEY_CURRENT_USER\SOFTWARE\Mediatum", @"URI", value); }
+        }
 
         /**
          <summary>  Gets or sets the network name or address of the server. </summary>
@@ -93,7 +109,7 @@ namespace Ksd.Mediatum
          <param name="user">        The OAuth profile of the user. </param>
          <param name="serverName">  (Optional) The network name or address of the server. </param>
          */
-        public Server(OAuth user, string serverName = "mediatum.ub.tum.de")
+        public Server(OAuth user, string serverName)
         {
             this.User = user;
             this.ServerName = serverName;
@@ -131,15 +147,16 @@ namespace Ksd.Mediatum
             String uriString = "http://" + this.ServerName + '/' + prefix;
             uri = new Uri(uriString);
 
-            System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection();
-            this.User.GetMd5Hash(prefix, parameters);
-            String callString = uriString + "/?" + OAuth.GetSortedParameterString(parameters);
+            //String callString = uriString + "/?" + OAuth.GetSortedParameterString(parameters); // unsigned
+            String callString = "http://" + this.ServerName + '/' + this.User.GetSignedUri(prefix); // signed
 
             WebClient wc = new WebClient();
             System.Diagnostics.Trace.WriteIf(traceSwitch.TraceInfo, String.Format("Get {0}", callString));
             string result = wc.DownloadString(callString);
             System.Diagnostics.Trace.WriteIf(traceSwitch.TraceInfo, String.Format("Response is {0}", result));
             WebHeaderCollection col = wc.ResponseHeaders;
+
+//            File.WriteAllText("output" + nodeId.ToString() + postfix + ".xml", result);
 
             return result;
         }
@@ -162,9 +179,8 @@ namespace Ksd.Mediatum
             String uriString = "http://" + this.ServerName + '/' + prefix;
             uri = new Uri(uriString);
 
-            System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection();
-            this.User.GetMd5Hash(prefix, parameters);
-            String callString = uriString + "/?" + OAuth.GetSortedParameterString(parameters);
+            //String callString = uriString + "/?" + OAuth.GetSortedParameterString(parameters); // unsigned
+            String callString = "http://" + this.ServerName + '/' + this.User.GetSignedUri(prefix); // signed
 
             WebClient wc = new WebClient();
             System.Diagnostics.Trace.WriteIf(traceSwitch.TraceInfo, String.Format("Get {0}", callString));
@@ -193,9 +209,8 @@ namespace Ksd.Mediatum
             String uriString = "http://" + this.ServerName + '/' + prefix;
             uri = new Uri(uriString);
 
-            System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection();
-            this.User.GetMd5Hash(prefix, parameters);
-            String callString = uriString + "/?" + OAuth.GetSortedParameterString(parameters);
+            //String callString = uriString + "/?" + OAuth.GetSortedParameterString(parameters); // unsigned
+            String callString = "http://" + this.ServerName + '/' + this.User.GetSignedUri(prefix); // signed
 
             WebClient wc = new WebClient();
             System.Diagnostics.Trace.WriteIf(traceSwitch.TraceInfo, String.Format("Get {0}", callString));
@@ -281,6 +296,14 @@ namespace Ksd.Mediatum
             string test = GetOAuthSignFromServer(parent, type, name, metadata);
 
             MultipartFormDataContent form = new MultipartFormDataContent();
+            var fileContent1 = new ByteArrayContent(data); 
+            fileContent1.Headers.ContentDisposition = new ContentDispositionHeaderValue("data") 
+            { 
+                FileName = "Sample.pdf" 
+            };
+
+            form.Add(fileContent1);
+
 
             //this.User.GetMd5Hash(this.UploadPath, parameters);
 
@@ -307,9 +330,8 @@ namespace Ksd.Mediatum
             String uriString = "http://" + this.ServerName + '/' + prefix;
             uri = new Uri(uriString);
 
-            System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection();
-            this.User.GetMd5Hash(prefix, parameters);
-            String callString = uriString + "/?" + OAuth.GetSortedParameterString(parameters);
+            //String callString = uriString + "/?" + OAuth.GetSortedParameterString(parameters); // unsigned
+            String callString = "http://" + this.ServerName + '/' + this.User.GetSignedUri(prefix); // signed
 
             WebClient wc = new WebClient();
             System.Diagnostics.Trace.WriteIf(traceSwitch.TraceInfo, String.Format("Get {0}", callString));
@@ -341,6 +363,7 @@ namespace Ksd.Mediatum
                 { "metadata", metadata }
             };
 
+            //this.User.AddSignParams(this.UpdatePath + '/' + nodeId.ToString(), ref parameters);
             //this.User.GetMd5Hash(this.UploadPath, parameters);
 
             WebClient wc = new WebClient();

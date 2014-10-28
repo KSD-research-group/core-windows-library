@@ -33,7 +33,7 @@ Temporary files are eliminated with `make clean`.
 
 For a better understanding of the project structure the directory structure is getting explained now.
 
-* **Readme.html**  
+* **Readme.md**  
    This help file
 
 * **MakeAll.sln**  
@@ -41,16 +41,16 @@ For a better understanding of the project structure the directory structure is g
 
 * **style.bat**  
   Batch file by which the source code of the measurement system can be formatted after the chair style.  
-  This ueses the Artistics Style to be downloaded from http://sourceforge.net/projects/astyle/files/.
+  This uses the Artistics Style to be downloaded from http://sourceforge.net/projects/astyle/files/.
 
 * **application**  
   Will contain the compiled components.
   
     * **debug**  
-      Will contain the debug variant of the build.<br>
+      Will contain the debug variant of the build.
 
     * **release**  
-      Will contain the release variant of the build.<br>
+      Will contain the release variant of the build.
 
 * **doc**  
   Contains the graphics and description text components for building the documentation with Doxygen.

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<response status="ok" retrievaldate="2014-10-27T17:10:11" servicereactivity="0.011 sec." oauthuser="ga54yoc" username="Thurow Torsten" userid="ga54yoc">
+<node name="ar:searchbox" id="1085713" type="collection" read="Jeder" write="TUARL05GV-0SBWRITE" data="mediaTUM-admin,TUARL05GV-0SBREAD,TUARL05GV-0SBWRITE" >
+    <attribute name="updatesearchindex"><![CDATA[2011-10-18T14:01:02]]></attribute>
+    <attribute name="updateuser"><![CDATA[Langenhan Christoph]]></attribute>
+    <attribute name="style"><![CDATA[list]]></attribute>
+    <attribute name="edit.lastmask"><![CDATA[editmask2]]></attribute>
+    <attribute name="searchtype"><![CDATA[own]]></attribute>
+    <attribute name="creator"><![CDATA[Teichert Astrid]]></attribute>
+    <attribute name="startpagedescr.html/1085713_1.html"><![CDATA[ar:searchbox - Rechercheportal der Architektur]]></attribute>
+    <attribute name="startpage.selector"><![CDATA[de:html/1085713_1.html;en:]]></attribute>
+    <attribute name="en.name"><![CDATA[Project Architecture]]></attribute>
+    <attribute name="creationtime"><![CDATA[2011-10-14T13:59:32]]></attribute>
+    <attribute name="updatetime"><![CDATA[2011-10-17T14:33:59]]></attribute>
+    <attribute name="searchmaskname"><![CDATA[ece00a9c]]></attribute>
+    <attribute name="hit_statistic.file"><![CDATA[8210]]></attribute>
+    <file filename="1085713_1.html" mime-type="text/html" type="content"/>
+    <file filename="816514.jpg" mime-type="image/jpeg" type="image"/>
+    <mask name="default"><![CDATA[<b>Kollektionsname:</b> ar:searchbox]]></mask>
+</node>
+<listinfo sortfield="" sortdirection="">
+</listinfo>
+</response>

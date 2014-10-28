@@ -186,7 +186,7 @@ namespace Ksd.Mediatum
                 {"roomgraph", graphMlUri.OriginalString}
             };
 
-            return parent.Upload("image/project-arc", name, Node.AttributeTable2Json(map), data); 
+            return parent.Upload("image/project-arc", name, map, data); 
         }
     }
 }

@@ -8,37 +8,50 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using Microsoft.Win32;
+
 
 namespace MediaTumBrowser
 {
     public partial class MainForm : Form
     {
-//        Ksd.Mediatum.OAuth oAuth = new Ksd.Mediatum.OAuth("ga76juy", "b33db3e738ee71a");
-        Ksd.Mediatum.OAuth oAuth = new Ksd.Mediatum.OAuth("ga54yoc", "6ababd6e13fe7df");
-
         public MainForm()
         {
             InitializeComponent();
+            this.textBoxUserName.Text = Ksd.Mediatum.OAuth.UserNameInRegistry;
+            this.textBoxPresharedTag.Text = Ksd.Mediatum.OAuth.PresharedTagInRegistry;
+            this.textBoxMediaTumUri.Text = Ksd.Mediatum.Server.ServerNameInRegistry;
+
             Ksd.Mediatum.Server.traceSwitch.Level = System.Diagnostics.TraceLevel.Info;
         }
 
- 
         private void buttonCheck_Click(object sender, EventArgs e)
         {
+            Ksd.Mediatum.OAuth oAuth = new Ksd.Mediatum.OAuth(this.textBoxUserName.Text, this.textBoxPresharedTag.Text);
+            oAuth.WriteSigningConfigToRegistry();
+            
+            Ksd.Mediatum.Server server = new Ksd.Mediatum.Server(oAuth, this.textBoxMediaTumUri.Text);
+            Ksd.Mediatum.Server.ServerNameInRegistry = server.ServerName;
+            
+            server.TypeTable.Add("image/project-arc", typeof(Ksd.Mediatum.FloorPlanNode));
+
+            Ksd.Mediatum.Node rootNode = server.GetNode(1085713);
+
+
+            Ksd.Mediatum.FloorPlanNode floorNode = (Ksd.Mediatum.FloorPlanNode)server.GetNode(1229104);
+
+            // Test 1222076
             // Test 1085713 // frei sichtbar
             // Grundrissanalyse 1220070 // verborgen
             // Mobil 1219454
             // BIMServer 1219448
             // ar:searchbox 1085713
-            Ksd.Mediatum.Server server = new Ksd.Mediatum.Server(this.oAuth);
-            server.TypeTable.Add("image/project-arc", typeof(Ksd.Mediatum.FloorPlanNode));
 
             Uri uri;
             //string scheme = server.MetaData("image/project-arc", out uri);
 
             //string appdefinitions = server.AppDefinitions("image/project-arc", out uri);
 
-            Ksd.Mediatum.FloorPlanNode floorNode = (Ksd.Mediatum.FloorPlanNode)server.GetNode(1225255);
 //            string result = floorNode.GetGraphMl();
             List<Ksd.Mediatum.Node> children = new List<Ksd.Mediatum.Node>(floorNode.Children);
             List<Ksd.Mediatum.Node> parents = new List<Ksd.Mediatum.Node>(floorNode.Parents);

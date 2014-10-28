@@ -16,6 +16,13 @@ namespace Ksd.Mediatum
     public class Node
     {
         /**
+         <summary>  Gets the MediaTUM server. </summary>
+        
+         <value>    The MediaTUM server. </value>
+         */
+        public Server Server { get; private set; }
+        
+        /**
          <summary>  Gets the node id. </summary>
         
          <value>    The node id. </value>
@@ -86,29 +93,6 @@ namespace Ksd.Mediatum
             }
         }
 
-        /**
-         <summary>  Gets the read roles. </summary>
-        
-         <value>    The read roles. </value>
-         */
-        public string Read { get; private set; }
-
-        /**
-         <summary>  Gets the write roles. </summary>
-        
-         <value>    The write roles. </value>
-         */
-        public string Write { get; private set; }
-
-        public string Data { get; private set; }
-
-        /**
-         <summary>  Gets the MediaTUM server. </summary>
-        
-         <value>    The MediaTUM server. </value>
-         */
-        public Server Server { get; private set; }
-
         private List<Node> children;
 
         /**
@@ -118,7 +102,7 @@ namespace Ksd.Mediatum
          */
         public IEnumerable<Node> Children
         {
-            get 
+            get
             {
                 if (this.children != null)
                     return this.children;
@@ -160,6 +144,22 @@ namespace Ksd.Mediatum
         }
 
         /**
+         <summary>  Gets the read roles. </summary>
+        
+         <value>    The read roles. </value>
+         */
+        public string Read { get; private set; }
+
+        /**
+         <summary>  Gets the write roles. </summary>
+        
+         <value>    The write roles. </value>
+         */
+        public string Write { get; private set; }
+
+        public string Data { get; private set; }
+
+        /**
          <summary>  Gets the original XML input for this Node. </summary>
         
          <value>    The original XML input for this Node. </value>
@@ -180,12 +180,14 @@ namespace Ksd.Mediatum
          */
         public IDictionary<string, NodeMask> Masks { get; internal set; }
 
+        private IList<NodeFile> files;
+
         /**
          <summary>  Gets all files of the node. </summary>
         
          <value>    The files of the node. </value>
          */
-        public IList<NodeFile> Files { get; internal set; }
+        public IEnumerable<NodeFile> Files { get { return this.files; } }
 
         static string GetOptionalAttribute(XmlNode xmlNode, string name)
         {
@@ -255,7 +257,7 @@ namespace Ksd.Mediatum
 
             this.Attributes = new Dictionary<string, NodeAttribute>();
             this.Masks = new Dictionary<string, NodeMask>();
-            this.Files = new List<NodeFile>();
+            this.files = new List<NodeFile>();
 
             foreach (XmlNode childNode in xmlNode)
             {
@@ -274,7 +276,7 @@ namespace Ksd.Mediatum
                     case "file":
                         {
                             NodeFile file = new NodeFile(this, (XmlElement)childNode);
-                            this.Files.Add(file);
+                            this.files.Add(file);
                             break;
                         }
                     case "mask":
@@ -364,7 +366,7 @@ namespace Ksd.Mediatum
         
          <returns>  The attribute table in JSON format. </returns>
          */
-        public static string AttributeTable2Json(IDictionary<string, string> table)
+        static string AttributeTable2Json(IDictionary<string, string> table)
         {
             Newtonsoft.Json.JsonSerializer jsonSerializer = new Newtonsoft.Json.JsonSerializer();
             StringWriter textWriter = new StringWriter();
@@ -396,14 +398,14 @@ namespace Ksd.Mediatum
         
          <param name="type">        The nodetype of new node. User full quantifier objectype/schema. </param>
          <param name="name">        The name of node, will be stored in the node table, field name. </param>
-         <param name="metadata">    The metadatafields to given file. Use the json format e.g. {"nodename":"name", ...}. </param>
+         <param name="metadata">    The metadatafields to given file. </param>
          <param name="data">        The file in binary form. </param>
         
          <returns>  The new node of the uploaded file; </returns>
          */
-        public Node Upload(string type, string name, string metadata, byte[] data)
+        public Node Upload(string type, string name, IDictionary<string, string> metadata, byte[] data)
         {
-            UInt32 newId = this.Server.Upload(this.ID, type, name, metadata, data);
+            UInt32 newId = this.Server.Upload(this.ID, type, name, AttributeTable2Json(metadata), data);
             Node newNode = Node.CreateNode(this.Server, newId);
             if (this.children != null)
                 this.children.Add(newNode);

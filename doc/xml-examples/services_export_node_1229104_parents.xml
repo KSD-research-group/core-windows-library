@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<response status="ok" retrievaldate="2014-10-27T17:14:31" servicereactivity="0.013 sec." oauthuser="ga54yoc" username="Thurow Torsten" userid="ga54yoc">
+<nodelist start="0" count="100" countall="1">
+<node name="Testdaten" id="1229636" type="directory" read="Jeder" >
+    <attribute name="updateuser"><![CDATA[Langenhan Christoph]]></attribute>
+    <attribute name="updatetime"><![CDATA[2014-09-02T18:39:48]]></attribute>
+    <attribute name="edit.lastmask"><![CDATA[editmask]]></attribute>
+    <attribute name="creator"><![CDATA[Langenhan Christoph]]></attribute>
+    <attribute name="en.name"><![CDATA[Testdata]]></attribute>
+    <attribute name="creationtime"><![CDATA[2014-08-28T15:31:48]]></attribute>
+    <mask name="default"><![CDATA[<b>Name:</b> Testdaten]]></mask>
+</node>
+</nodelist>
+<listinfo sortfield="" sortdirection="">
+</listinfo>
+</response>

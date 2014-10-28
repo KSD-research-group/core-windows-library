@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<response status="ok" retrievaldate="2014-10-27T17:12:32" servicereactivity="0.013 sec." oauthuser="ga54yoc" username="Thurow Torsten" userid="ga54yoc">
+<node name="Floorplan_0.0_1IEeEPbCv1je0WG2vzMPyH" id="1229104" type="image/project-arc" >
+    <attribute name="origwidth"><![CDATA[425]]></attribute>
+    <attribute name="roomgraph"><![CDATA[http://reference.ksd.ai.ar.tum.de:8080/AgraphMLDownloadService/DownloadAgraphml?ifcid=1IEeEPbCv1je0WG2vzMPyH&neo4jurl=http://localhost:7474&floorlevel=0.0;Download Raumgraphen als AGraphML-Datei]]></attribute>
+    <attribute name="creator"><![CDATA[Gast]]></attribute>
+    <attribute name="origsize"><![CDATA[4914]]></attribute>
+    <attribute name="creationtime"><![CDATA[2014-08-22T11:46:28]]></attribute>
+    <attribute name="height"><![CDATA[354]]></attribute>
+    <attribute name="width"><![CDATA[425]]></attribute>
+    <attribute name="hit_statistic.file"><![CDATA[23]]></attribute>
+    <attribute name="origheight"><![CDATA[354]]></attribute>
+    <file filename="350790.svg" mime-type="image/svg+xml" type="image"/>
+    <file filename="350790.svg" mime-type="image/svg+xml" type="original"/>
+    <file filename="0e70ce6c.thumb" mime-type="image/jpeg" type="thumb"/>
+    <file filename="0e70ce6c.thumb2" mime-type="image/jpeg" type="presentation"/>
+    <mask name="default"><![CDATA[]]></mask>
+</node>
+<listinfo sortfield="" sortdirection="">
+</listinfo>
+</response>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<response status="ok" retrievaldate="2014-10-27T17:15:26" servicereactivity="0.011 sec." oauthuser="ga54yoc" username="Thurow Torsten" userid="ga54yoc">
+<node name="BIMServer" id="1219448" type="directory" read="TUARL05GV-0SBWRITE" write="Jeder" data="Jeder" >
+    <attribute name="updatesearchindex"><![CDATA[2014-05-30T19:57:54]]></attribute>
+    <attribute name="updateuser"><![CDATA[Langenhan Christoph]]></attribute>
+    <attribute name="updatetime"><![CDATA[2014-05-27T17:08:43]]></attribute>
+    <attribute name="edit.lastmask"><![CDATA[editmask]]></attribute>
+    <attribute name="creator"><![CDATA[Langenhan Christoph]]></attribute>
+    <attribute name="en.name"><![CDATA[BIMServer]]></attribute>
+    <attribute name="creationtime"><![CDATA[2014-05-27T17:05:10]]></attribute>
+    <attribute name="hit_statistic.file"><![CDATA[9]]></attribute>
+    <file filename="49293.svg" mime-type="image/svg+xml" type="image"/>
+    <mask name="default"><![CDATA[<b>Name:</b> BIMServer]]></mask>
+</node>
+<listinfo sortfield="" sortdirection="">
+</listinfo>
+</response>
