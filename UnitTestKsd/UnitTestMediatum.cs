@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 
@@ -10,15 +12,15 @@ namespace UnitTestKsd
     public class UnitTestMediatum
     {
         OAuth oAuth;
-        Server server;
+        Ksd.Mediatum.Server server;
 
         public UnitTestMediatum()
         {
             oAuth = new OAuth();
-            server = new Server(oAuth, Server.ServerNameInRegistry);
+            server = new Ksd.Mediatum.Server(oAuth, Server.ServerNameInRegistry);
             server.TypeTable.Add("image/project-arc", typeof(FloorPlanNode));
         }
-        
+
         [TestMethod]
         public void TestParentsAndChildren()
         {

@@ -114,13 +114,13 @@ namespace Ksd.Mediatum
             this.User = user;
             this.ServerName = serverName;
             
-            this.SignPath = "services/upload/calcsign";
-            this.UploadPath = "services/upload/new";
-            this.UpdatePath = "services/upload/update";
-            this.ExportPath = "services/export";
-            this.MetadataPath = "services/metadata/scheme";
-            this.AppDefinitionsPath = "services/metadata/appdefinitions";
-            this.FilePath = "file";
+            this.SignPath = "/services/upload/calcsign";
+            this.UploadPath = "/services/upload/new";
+            this.UpdatePath = "/services/upload/update";
+            this.ExportPath = "/services/export";
+            this.MetadataPath = "/services/metadata/scheme";
+            this.AppDefinitionsPath = "/services/metadata/appdefinitions";
+            this.FilePath = "/file";
 
             this.TypeTable = new Dictionary<string, Type>();
         }
@@ -144,11 +144,11 @@ namespace Ksd.Mediatum
             if (postfix != "")
                 prefix += '/' + postfix;
             
-            String uriString = "http://" + this.ServerName + '/' + prefix;
+            String uriString = "http://" + this.ServerName + prefix;
             uri = new Uri(uriString);
 
             //String callString = uriString + "/?" + OAuth.GetSortedParameterString(parameters); // unsigned
-            String callString = "http://" + this.ServerName + '/' + this.User.GetSignedUri(prefix); // signed
+            String callString = "http://" + this.ServerName + this.User.GetSignedUri(prefix); // signed
 
             WebClient wc = new WebClient();
             System.Diagnostics.Trace.WriteIf(traceSwitch.TraceInfo, String.Format("Get {0}", callString));
@@ -176,11 +176,11 @@ namespace Ksd.Mediatum
             // http://mediatum.ub.tum.de/services/metadata/scheme
 
             string prefix = this.MetadataPath + '/' + name;
-            String uriString = "http://" + this.ServerName + '/' + prefix;
+            String uriString = "http://" + this.ServerName + prefix;
             uri = new Uri(uriString);
 
             //String callString = uriString + "/?" + OAuth.GetSortedParameterString(parameters); // unsigned
-            String callString = "http://" + this.ServerName + '/' + this.User.GetSignedUri(prefix); // signed
+            String callString = "http://" + this.ServerName + this.User.GetSignedUri(prefix); // signed
 
             WebClient wc = new WebClient();
             System.Diagnostics.Trace.WriteIf(traceSwitch.TraceInfo, String.Format("Get {0}", callString));
@@ -206,11 +206,11 @@ namespace Ksd.Mediatum
             // http://mediatum.ub.tum.de/services/metadata/appdefinitions
 
             string prefix = this.AppDefinitionsPath + '/' + name;
-            String uriString = "http://" + this.ServerName + '/' + prefix;
+            String uriString = "http://" + this.ServerName + prefix;
             uri = new Uri(uriString);
 
             //String callString = uriString + "/?" + OAuth.GetSortedParameterString(parameters); // unsigned
-            String callString = "http://" + this.ServerName + '/' + this.User.GetSignedUri(prefix); // signed
+            String callString = "http://" + this.ServerName + this.User.GetSignedUri(prefix); // signed
 
             WebClient wc = new WebClient();
             System.Diagnostics.Trace.WriteIf(traceSwitch.TraceInfo, String.Format("Get {0}", callString));
@@ -223,9 +223,9 @@ namespace Ksd.Mediatum
 
         string GetOAuthSignFromServer(UInt32 parent, string type, string name, string metadata)
         {
-            string url = '/' + UploadPath + "?metadata=" + metadata + "&name=" + name + "&parent=" + parent + "&type=" + type + "&user=" + this.User.UserName;
+            string url = UploadPath + "?metadata=" + metadata + "&name=" + name + "&parent=" + parent + "&type=" + type + "&user=" + this.User.UserName;
 
-            string uri = "http://" + this.ServerName + '/' + this.SignPath;
+            string uri = "http://" + this.ServerName + this.SignPath;
             WebClient wc = new WebClient();
             wc.QueryString.Add("key", this.User.PresharedTag);
             wc.QueryString.Add("url", url);
@@ -253,7 +253,7 @@ namespace Ksd.Mediatum
             // http://mediatum.ub.tum.de/services/upload
 
             string base64String = System.Convert.ToBase64String(data, 0, data.Length);
-            string uri = "http://" + this.ServerName + '/' + this.UploadPath;
+            string uri = "http://" + this.ServerName + this.UploadPath;
             
             System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection
             {
@@ -283,7 +283,7 @@ namespace Ksd.Mediatum
         {
             // http://mediatum.ub.tum.de/services/upload
 
-            string uri = "http://" + this.ServerName + '/' + this.UploadPath;
+            string uri = "http://" + this.ServerName + this.UploadPath;
 
             System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection
             {
@@ -327,11 +327,11 @@ namespace Ksd.Mediatum
 
             string prefix = this.FilePath + '/' + nodeId.ToString() + '/' + fileName;
 
-            String uriString = "http://" + this.ServerName + '/' + prefix;
+            String uriString = "http://" + this.ServerName + prefix;
             uri = new Uri(uriString);
 
             //String callString = uriString + "/?" + OAuth.GetSortedParameterString(parameters); // unsigned
-            String callString = "http://" + this.ServerName + '/' + this.User.GetSignedUri(prefix); // signed
+            String callString = "http://" + this.ServerName + this.User.GetSignedUri(prefix); // signed
 
             WebClient wc = new WebClient();
             System.Diagnostics.Trace.WriteIf(traceSwitch.TraceInfo, String.Format("Get {0}", callString));
@@ -355,7 +355,7 @@ namespace Ksd.Mediatum
         {
             // http://mediatum.ub.tum.de/services/update
 
-            string uri = "http://" + this.ServerName + '/' + this.UpdatePath + '/' + nodeId.ToString();
+            string uri = "http://" + this.ServerName + this.UpdatePath + '/' + nodeId.ToString();
 
             System.Collections.Specialized.NameValueCollection parameters = new System.Collections.Specialized.NameValueCollection
             {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Text;
 using System.Security.Cryptography;
@@ -226,7 +227,7 @@ namespace Ksd.Mediatum
                 new System.Collections.Specialized.NameValueCollection();
 
             parametersCopy.Add("user", this.UserName);
-            string input = this.PresharedTag + '/' + prefix + '/' + GetSortedParameterString(parametersCopy);
+            string input = this.PresharedTag + prefix + '/' + GetSortedParameterString(parametersCopy);
             string sign = GetMd5Hash(input);
 
             string result = prefix + "/?";
@@ -243,6 +244,22 @@ namespace Ksd.Mediatum
             result += "sign=" + sign;
 
             return result;
+        }
+
+        /**
+         <summary>  Gets a signed URI. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 10.11.2014. </remarks>
+        
+         <param name="uri"> URI to signed. </param>
+        
+         <returns>  The signed URI. </returns>
+         */
+        public string GetSignedUri(Uri uri)
+        {
+            String prefix = uri.AbsolutePath;
+            System.Collections.Specialized.NameValueCollection parameters = HttpUtility.ParseQueryString(uri.Query);
+            return uri.Scheme + "://" + uri.Host + ':' + uri.Port + GetSignedUri(prefix, parameters);
         }
 
         /**

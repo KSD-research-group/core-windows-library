@@ -69,15 +69,23 @@ Ksd.Mediatum.Server server = new Ksd.Mediatum.Server(oAuth, Ksd.Mediatum.Server.
 Das erzeugte Serverobjekt übernimmt nun die Low Level Kommunikation mit MediaTUM über dessen REST-Schnittstellen. Diese werden zur Vereinfachung weiter abstrahiert, wie in den folgenden Kapiteln erläutert.
 Die wesentlichen REST-Schnittstellen sind:
 
+Schnittstelle                    | Methoden | Eigenschaft
+---------------------------------| ---------|----------------------------------------
+services/upload/calcsign         |          | #Ksd.Mediatum.Server.SignPath
+services/upload/new              | POST     | #Ksd.Mediatum.Server.UploadPath
+services/upload/update           | POST     | #Ksd.Mediatum.Server.UpdatePath
+services/export                  | GET      | #Ksd.Mediatum.Server.ExportPath
+services/metadata/scheme         | GET      | #Ksd.Mediatum.Server.MetadataPath
+services/metadata/appdefinitions | GET      | #Ksd.Mediatum.Server.AppDefinitionsPath
+file                             | GET      | #Ksd.Mediatum.Server.FilePath
+
+In der [Live Instanz der TU München](https://mediatum.ub.tum.de/) von MediaTUM finden sich die Beschreibungen der REST-Schnittstellen unter:
+
 Schnittstelle                    | Eigenschaft
----------------------------------| ---------------------------------------
-services/upload/calcsign         | #Ksd.Mediatum.Server.SignPath
-services/upload/new              | #Ksd.Mediatum.Server.UploadPath
-services/upload/update           | #Ksd.Mediatum.Server.UpdatePath
-services/export                  | #Ksd.Mediatum.Server.ExportPath
-services/metadata/scheme         | #Ksd.Mediatum.Server.MetadataPath
-services/metadata/appdefinitions | #Ksd.Mediatum.Server.AppDefinitionsPath
-file                             | #Ksd.Mediatum.Server.FilePath
+---------------------------------| --------------------------------------------
+services/upload                  | https://mediatum.ub.tum.de/services/upload
+services/export                  | https://mediatum.ub.tum.de/services/export
+services/metadata                | https://mediatum.ub.tum.de/services/metadata
 
 ## Nodes {#LabelMediaTumNodes}
 

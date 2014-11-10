@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="UnitTestMediatum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTestSurfidPlugin.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ksd\Ksd.csproj">
