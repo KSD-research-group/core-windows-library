@@ -12,8 +12,10 @@ namespace Ksd.Mediatum
     
      <remarks>
      Dr. Torsten Thurow, TU München, 16.07.2014.
-       Original code from Patrick Bernhard, ported to C# from Dr. Torsten Thurow
+     
+     Original code from Patrick Bernhard, ported to C# from Dr. Torsten Thurow
        <a href="http://gitlab.ai.ar.tum.de/ksd-research-group/ksd-documentation/wikis/mediaTumBasicAuthentication">here</a>
+     
      </remarks>
      */
     [Serializable()]

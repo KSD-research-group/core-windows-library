@@ -43,6 +43,39 @@ namespace Ksd.Mediatum
          */
         public string Type { get; private set; }
 
+        /**
+         <summary>  Parse a node list. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 11.12.2014. </remarks>
+        
+         <param name="server">              The MediaTUM server. </param>
+         <param name="result">              The original XML result that conatins the node list. </param>
+         <param name="response">            The XML node that contains the response with the node list. </param>
+         <param name="xmlNamespaceManager"> Manager for XML namespace. </param>
+         <param name="prefix">              The right XML prefix. </param>
+         <param name="nodeInsert">          A action for all readed nodes. </param>
+         */
+        internal static void ParseNodeList(Server server, string result, XmlNode response, XmlNamespaceManager xmlNamespaceManager, string prefix, Action<Node> nodeInsert)
+        {
+            XmlNode xmlNodeList = response[prefix + "nodelist"];
+            int numberOfNodes = Convert.ToInt32(xmlNodeList.Attributes["countall"].Value);
+
+            for (int nodeIndex = 0; nodeIndex < numberOfNodes; nodeIndex++)
+            {
+                XmlNode nextXmlNode = xmlNodeList.ChildNodes[nodeIndex];
+                UInt32 newId = Convert.ToUInt32(nextXmlNode.Attributes["id"].Value);
+
+                Node node;
+                if (!server.nodeTable.TryGetValue(newId, out node))
+                {
+                    string typeOfNewNode = nextXmlNode.Attributes["type"].Value;
+                    node = server.CreateNode(typeOfNewNode, (XmlElement)nextXmlNode, result, prefix, xmlNamespaceManager);
+                }
+
+                nodeInsert(node);
+            }
+        }
+
         private List<Node> parents;
 
         /**
@@ -62,27 +95,14 @@ namespace Ksd.Mediatum
                 try
                 {
                     string result = this.Server.Export(this.ID, "parents", out uri);
-                    XmlNode xmlNodeResponse = GetXmlNodeResponse(uri, result);
-                    if (xmlNodeResponse != null)
-                    {
-                        XmlNode xmlNodeList = xmlNodeResponse["nodelist"];
-                        int numberOfNodes = Convert.ToInt32(xmlNodeList.Attributes["countall"].Value);
+                    string cleanedResult = Node.CleanXml(result);
 
-                        for (int parentIndex = 0; parentIndex < numberOfNodes; parentIndex++)
-                        {
-                            XmlNode nextXmlNode = xmlNodeList.ChildNodes[parentIndex];
-                            UInt32 newId = Convert.ToUInt32(nextXmlNode.Attributes["id"].Value);
+                    XmlDocument doc = new XmlDocument();
+                    doc.LoadXml(cleanedResult);
+                    XmlNamespaceManager xmlNamespaceManager = new XmlNamespaceManager(doc.NameTable);
 
-                            Node parentNode;
-                            if (!this.Server.nodeTable.TryGetValue(newId, out parentNode))
-                            {
-                                string typeOfNewNode = nextXmlNode.Attributes["type"].Value;
-                                parentNode = this.Server.CreateNode(typeOfNewNode, (XmlElement)nextXmlNode, result);
-                            }
-   
-                            this.parents.Add(parentNode);
-                        }
-                    }
+                    XmlNode xmlNode = doc["response"];
+                    ParseNodeList(this.Server, result, xmlNode, xmlNamespaceManager, "", (node) => { this.parents.Add(node); });
                 }
                 catch (System.Net.WebException ex)
                 {
@@ -112,27 +132,14 @@ namespace Ksd.Mediatum
                 try
                 {
                     string result = this.Server.Export(this.ID, "children", out uri);
-                    XmlNode xmlNodeResponse = GetXmlNodeResponse(uri, result);
-                    if (xmlNodeResponse != null)
-                    {
-                        XmlNode xmlNodeList = xmlNodeResponse["nodelist"];
-                        int numberOfNodes = Convert.ToInt32(xmlNodeList.Attributes["countall"].Value);
+                    string cleanedResult = Node.CleanXml(result);
 
-                        for (int childrenIndex = 0; childrenIndex < numberOfNodes; childrenIndex++)
-                        {
-                            XmlNode nextXmlNode = xmlNodeList.ChildNodes[childrenIndex];
-                            UInt32 newId = Convert.ToUInt32(nextXmlNode.Attributes["id"].Value);
+                    XmlDocument doc = new XmlDocument();
+                    doc.LoadXml(cleanedResult);
+                    XmlNamespaceManager xmlNamespaceManager = new XmlNamespaceManager(doc.NameTable);
 
-                            Node childNode;
-                            if (!this.Server.nodeTable.TryGetValue(newId, out childNode))
-                            {
-                                string typeOfNewNode = nextXmlNode.Attributes["type"].Value;
-                                childNode = this.Server.CreateNode(typeOfNewNode, (XmlElement)nextXmlNode, result);
-                            }
-
-                            this.children.Add(childNode);
-                        }
-                    }
+                    XmlNode xmlNode = doc["response"];
+                    ParseNodeList(this.Server, result, xmlNode, xmlNamespaceManager, "", (node) => { this.children.Add(node); });
                 }
                 catch (System.Net.WebException ex)
                 {
@@ -198,15 +205,23 @@ namespace Ksd.Mediatum
             return attribute.Value;
         }
 
-        static XmlNode GetXmlNodeResponse(Uri uri, string result)
+        /**
+         <summary>  Clean up MediaTUM XML from wrong CDATA sections. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 10.12.2014. </remarks>
+        
+         <param name="xml"> The original XML input. </param>
+        
+         <returns>  A string that contains the cleaned up XML. </returns>
+         */
+        public static string CleanXml(string xml)
         {
-            if (result == "")
+            if (xml == "")
                 return null;
 
-            string[] resultArray = result.Split('\n');
+            string[] resultArray = xml.Split('\n');
 
             bool ok = true;
-            XmlDocument xmlResponse;
 
             int counter = 0;
 
@@ -217,10 +232,11 @@ namespace Ksd.Mediatum
                 for (int index = 1; index < resultArray.Length; index++)
                     newResult += '\n' + resultArray[index];
 
-                xmlResponse = new XmlDocument();
+                XmlDocument xmlResponse = new XmlDocument();
                 try
                 {
                     xmlResponse.LoadXml(newResult);
+                    return newResult;
                 }
                 catch (System.Xml.XmlException e)
                 {
@@ -228,7 +244,7 @@ namespace Ksd.Mediatum
 
                     if (ok)
                         ;// errors.WriteLine(uri.OriginalString);
-                    
+
                     //errors.WriteLine(String.Format("XmlException by line {0}, position {1}, >>>\"{3}\"<<<", e.LineNumber, e.LinePosition, line));
                     //errors.Flush();
 
@@ -242,10 +258,19 @@ namespace Ksd.Mediatum
             }
             while (!ok && counter < 20);
 
-            return xmlResponse["response"];
+            return null;
         }
 
-        void Parse(XmlElement xmlNode)
+        /**
+         <summary>  Parse a node. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 11.12.2014. </remarks>
+        
+         <param name="xmlNode">             Element describing the XML node. </param>
+         <param name="xmlNamespaceManager"> Manager for XML namespace. </param>
+         <param name="prefix">              The right XML prefix. </param>
+         */
+        void ParseNode(XmlElement xmlNode, XmlNamespaceManager xmlNamespaceManager, string prefix)
         {
             this.Name = xmlNode.Attributes["name"].Value;
             this.ID = Convert.ToUInt32(xmlNode.Attributes["id"].Value);
@@ -259,39 +284,67 @@ namespace Ksd.Mediatum
             this.Masks = new Dictionary<string, NodeMask>();
             this.files = new List<NodeFile>();
 
-            foreach (XmlNode childNode in xmlNode)
+            foreach (XmlNode node in xmlNode.ChildNodes)
             {
-                switch (childNode.Name)
+                switch (node.LocalName)
                 {
                     case "attribute":
                         {
-                            string name = childNode.Attributes["name"].Value;
-                            XmlNode childNode2 = childNode.ChildNodes[0];
-                            XmlCDataSection cdataSection = childNode2 as XmlCDataSection;
-                            string value = cdataSection.Value;
+                            string attributeName = node.Attributes["name"].Value;
+                            string value;
 
-                            this.Attributes.Add(name, new NodeAttribute(value, false));
+                            if (prefix == "")
+                            {
+                                XmlNode childNode = node.ChildNodes[0];
+                                XmlCDataSection cdataSection = childNode as XmlCDataSection;
+                                value = cdataSection.Value;
+                            }
+                            else
+                                value = node.InnerText;
+
+                            this.Attributes.Add(attributeName, new NodeAttribute(value, false));
                             break;
                         }
+
                     case "file":
                         {
-                            NodeFile file = new NodeFile(this, (XmlElement)childNode);
+                            NodeFile file = new NodeFile(this, (XmlElement)node);
                             this.files.Add(file);
                             break;
                         }
+
                     case "mask":
                         {
-                            NodeMask mask = new NodeMask(this, (XmlElement)childNode);
+                            NodeMask mask = new NodeMask(this, (XmlElement)node);
                             this.Masks.Add(mask.Name, mask);
-                            break;
-                        }
-                    default:
-                        {
-                            int a = 3;
                             break;
                         }
                 }
             }
+
+            /*
+            foreach (XmlNode attributeNode in xmlNode.SelectNodes("attribute", xmlNamespaceManager))
+            {
+                string attributeName = attributeNode.Attributes["name"].Value;
+                XmlNode childNode = attributeNode.ChildNodes[0];
+                XmlCDataSection cdataSection = childNode as XmlCDataSection;
+                string value = cdataSection.Value;
+
+                this.Attributes.Add(attributeName, new NodeAttribute(value, false));
+            }
+
+            foreach (XmlNode fileNode in xmlNode.SelectNodes(prefix + "file", xmlNamespaceManager))
+            {
+                NodeFile file = new NodeFile(this, (XmlElement)fileNode);
+                this.files.Add(file);
+            }
+
+            foreach (XmlNode maskNode in xmlNode.SelectNodes(prefix + "mask", xmlNamespaceManager))
+            {
+                NodeMask mask = new NodeMask(this, (XmlElement)maskNode);
+                this.Masks.Add(mask.Name, mask);
+            }
+             */
         }
 
         /**
@@ -328,15 +381,31 @@ namespace Ksd.Mediatum
             this.Attributes.Add(name, new NodeAttribute(value, true));
         }
 
+        /**
+         <summary>  Creates a node. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 11.12.2014. </remarks>
+        
+         <param name="server">  The MediaTUM server. </param>
+         <param name="nodeId">  Identifier for the node. </param>
+        
+         <returns>  The new node. </returns>
+         */
         internal static Node CreateNode(Server server, UInt32 nodeId)
         {
             Uri uri;
             string result = server.Export(nodeId, "", out uri);
-            XmlNode xmlNodeResponse = GetXmlNodeResponse(uri, result);
-            XmlElement xmlNode = (XmlElement)xmlNodeResponse["node"];
+
+            string cleanedResult = Node.CleanXml(result);
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(cleanedResult);
+            XmlNamespaceManager xmlNamespaceManager = new XmlNamespaceManager(doc.NameTable);
+
+            XmlElement xmlNode = (XmlElement)(doc["response"])["node"];
+           
             string typeOfNewNode = xmlNode.Attributes["type"].Value;
 
-            return server.CreateNode(typeOfNewNode, xmlNode, result);
+            return server.CreateNode(typeOfNewNode, xmlNode, result, "", xmlNamespaceManager);
         }
 
         /**
@@ -344,16 +413,18 @@ namespace Ksd.Mediatum
         
          <remarks>  Dr. Torsten Thurow, TU München, 28.07.2014. </remarks>
         
-         <param name="server">  The MediaTUM server. </param>
-         <param name="xmlNode"> Element describing the XML node. </param>
-         <param name="xml">     The original XML input for this Node. </param>
+         <param name="server">              The MediaTUM server. </param>
+         <param name="xmlNode">             Element describing the XML node. </param>
+         <param name="xml">                 The original XML input for this Node. </param>
+         <param name="prefix">              The right XML prefix. </param>
+         <param name="xmlNamespaceManager"> Manager for XML namespace. </param>
          */
-        public Node(Server server, XmlElement xmlNode, string xml)
+        public Node(Server server, XmlElement xmlNode, string xml, string prefix, XmlNamespaceManager xmlNamespaceManager)
         {
             this.Server = server;
             this.Xml = xml;
 
-            Parse(xmlNode);
+            ParseNode(xmlNode, xmlNamespaceManager, prefix);
             this.Server.nodeTable.Add(this.ID, this);
         }
 
@@ -423,13 +494,19 @@ namespace Ksd.Mediatum
             string metadata = this.ModifyedAttributes2Json();
 
             this.Server.Update(this.ID, this.Name, metadata);
+            
             Uri uri;
             string result = this.Server.Export(this.ID, "", out uri);
             this.Xml = result;
-            XmlNode xmlNodeResponse = GetXmlNodeResponse(uri, result);
-            XmlElement xmlNode = (XmlElement)xmlNodeResponse["node"];
 
-            Parse(xmlNode);
+            result = Node.CleanXml(result);
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(result);
+            XmlNamespaceManager xmlNamespaceManager = new XmlNamespaceManager(doc.NameTable);
+
+            XmlElement xmlNode = (XmlElement)(doc["response"])["node"];
+
+            ParseNode(xmlNode, xmlNamespaceManager, "");
         }
 
         /**

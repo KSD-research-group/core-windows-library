@@ -31,13 +31,21 @@ namespace Ksd.Mediatum
          */
         public Node Parent { get; internal set; }
 
+        /**
+         <summary>  Internal constructor for XML reader. </summary>
+        
+         <param name="parent">  The parent node of the mask. </param>
+         <param name="xmlNode"> Element describing the XML node. </param>
+         */
         internal NodeMask(Node parent, XmlElement xmlNode)
         {
             this.Parent = parent;
             this.Name = xmlNode.Attributes["name"].Value;
             XmlNode childNode = xmlNode.ChildNodes[0];
             XmlCDataSection cdataSection = childNode as XmlCDataSection;
-            this.Value = cdataSection.Value;
+
+            if (cdataSection != null)
+                this.Value = cdataSection.Value;
         }
     }
 }

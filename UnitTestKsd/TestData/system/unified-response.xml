@@ -1,0 +1,551 @@
+<res:unifiedResponse xmlns:res="http://ksd.org/unifiedquery/response">
+    <res:response>
+        <res:weight>5</res:weight>
+        <res:responseType>gml-matcher</res:responseType>
+        <res:graphMatcher>
+            <res:graphmls>
+                <res:graphml xmlns:grap="http://ksd.org/gmlmatcher/graph">
+                    <res:key attr.name="roomname" attr.type="string" for="node" id="roomname">
+                        <res:value>Room</res:value>
+                        <res:value>Kitchen</res:value>
+                        <res:value>Living</res:value>
+                        <res:value>Sleeping</res:value>
+                        <res:value>Working</res:value>
+                        <res:value>Corridor</res:value>
+                        <res:value>Toilet</res:value>
+                        <res:value>Bath</res:value>
+                    </res:key>
+                    <res:key attr.name="connection-type" attr.type="string" for="edge" id="connectiontype">
+                        <res:value>Connection</res:value>
+                        <res:value>Door</res:value>
+                        <res:value>Passage</res:value>
+                        <res:value>Wall</res:value>
+                    </res:key>
+                    <res:key attr.name="IfcGlobalID" attr.type="string" for="node" id="IfcGlobalIdNode">
+                        <res:default>NULL</res:default>
+                    </res:key>
+                    <res:key attr.name="IfcGlobalID" attr.type="string" for="node" id="IfcGlobalIdEdge">
+                        <res:default>NULL</res:default>
+                    </res:key>
+                    <res:key attr.name="CenterX" attr.type="long" for="node" id="centerX"/>
+                    <res:key attr.name="CenterY" attr.type="long" for="node" id="centerY"/>
+                    <!--Corners should be semicolon seperated values with format X,Y;X,Y;...-->
+                    <res:key attr.name="Corners" attr.type="string" for="node" id="corners"/>
+                    <res:key attr.name="checksum" attr.type="string" for="graph" id="img_checksum_md5"/>
+                    <res:key attr.name="image_url" attr.type="string" for="graph" id="img_url"/>
+                    <res:key attr.name="validated_manually" attr.type="boolean" for="graph" id="validated_manually"/>
+                    <res:graph edgedefault="undirected" id="floorplan01">
+                        <res:data key="img_url">http://reference.ksd.ai.ar.tum.de:8081/services/surfid/v1/images/184/341320.png</res:data>
+                        <res:data key="img_checksum_md5">9fe803552d99d1424c9eaa69727eb259</res:data>
+                        <res:data key="validated_manually">True</res:data>
+                        <res:node id="OID2deb2f8f-9cf6-41b9-99ac-9bda6a769a71">
+                            <res:data key="roomname">Living</res:data>
+                            <res:data key="centerX">1053</res:data>
+                            <res:data key="centerY">1037</res:data>
+                            <res:data key="corners">1316,1314;1313,732;610,727;609,1316</res:data>
+                        </res:node>
+                        <res:node id="OID55c6f06a-5e46-483f-9eb8-f6825e62a515">
+                            <res:data key="roomname">Living</res:data>
+                            <res:data key="centerX">1055</res:data>
+                            <res:data key="centerY">474</res:data>
+                            <res:data key="corners">1314,714;1307,133;770,122;769,705</res:data>
+                        </res:node>
+                        <res:node id="OIDcd9d602b-fc9e-427f-b881-8bdc02eee8af">
+                            <res:data key="roomname">Kitchen</res:data>
+                            <res:data key="centerX">458</res:data>
+                            <res:data key="centerY">430</res:data>
+                            <res:data key="corners">764,707;770,125;131,126;128,704</res:data>
+                        </res:node>
+                        <res:node id="OIDf822fa12-5073-4521-8e9d-3ed4b321ef55">
+                            <res:data key="roomname">Toilet</res:data>
+                            <res:data key="centerX">502</res:data>
+                            <res:data key="centerY">831</res:data>
+                            <res:data key="corners">599,954;599,729;451,732;451,950</res:data>
+                        </res:node>
+                        <res:node id="OID72ed973c-25d7-430d-8c7e-66062ab5448a">
+                            <res:data key="roomname">Room</res:data>
+                            <res:data key="centerX">488</res:data>
+                            <res:data key="centerY">1023</res:data>
+                            <res:data key="corners">598,1080;598,964;451,961;450,1076</res:data>
+                        </res:node>
+                        <res:node id="OID9c59cb15-6b74-424e-9cc4-8dd91b687ed6">
+                            <res:data key="roomname">Corridor</res:data>
+                            <res:data key="centerX">362</res:data>
+                            <res:data key="centerY">1173</res:data>
+                            <res:data key="corners">604,1312;597,1078;441,1077;435,725;116,722;120,1307</res:data>
+                        </res:node>
+                        <res:node id="OID5bedf59c-b7d2-4b9a-b887-d6ff9d51f819">
+                            <res:data key="roomname">Room</res:data>
+                            <res:data key="centerX">173</res:data>
+                            <res:data key="centerY">630</res:data>
+                            <res:data key="corners">237,712;240,568;126,567;116,712</res:data>
+                        </res:node>
+                        <res:edge id="OIDc7a77c4d-2b1b-4727-8890-a0cb59ef3caa" source="OID2deb2f8f-9cf6-41b9-99ac-9bda6a769a71" target="OID55c6f06a-5e46-483f-9eb8-f6825e62a515">
+                            <res:data key="connectiontype">Connection</res:data>
+                        </res:edge>
+                        <res:edge id="OIDf33b5b32-fcb3-4df1-962f-540ffc11d4bf" source="OID55c6f06a-5e46-483f-9eb8-f6825e62a515" target="OIDcd9d602b-fc9e-427f-b881-8bdc02eee8af">
+                            <res:data key="connectiontype">Connection</res:data>
+                        </res:edge>
+                        <res:edge id="OID2d55c309-ea06-4fad-9856-49f1034d4c75" source="OIDcd9d602b-fc9e-427f-b881-8bdc02eee8af" target="OID9c59cb15-6b74-424e-9cc4-8dd91b687ed6">
+                            <res:data key="connectiontype">Connection</res:data>
+                        </res:edge>
+                        <res:edge id="OID6f5fe740-1772-49c3-abc5-7e5d6fd916a9" source="OID2deb2f8f-9cf6-41b9-99ac-9bda6a769a71" target="OID9c59cb15-6b74-424e-9cc4-8dd91b687ed6">
+                            <res:data key="connectiontype">Connection</res:data>
+                        </res:edge>
+                        <res:edge id="OIDb459dd2d-7348-4ec0-b2ab-e878d3fd91be" source="OID2deb2f8f-9cf6-41b9-99ac-9bda6a769a71" target="OID72ed973c-25d7-430d-8c7e-66062ab5448a">
+                            <res:data key="connectiontype">Wall</res:data>
+                        </res:edge>
+                        <res:edge id="OID5112c1ed-98d3-40bf-980a-1e13612e40a0" source="OIDf822fa12-5073-4521-8e9d-3ed4b321ef55" target="OID72ed973c-25d7-430d-8c7e-66062ab5448a">
+                            <res:data key="connectiontype">Wall</res:data>
+                        </res:edge>
+                        <res:edge id="OIDed3898af-3839-4df0-944d-38e6b765f05a" source="OIDf822fa12-5073-4521-8e9d-3ed4b321ef55" target="OID9c59cb15-6b74-424e-9cc4-8dd91b687ed6">
+                            <res:data key="connectiontype">Connection</res:data>
+                        </res:edge>
+                        <res:edge id="OID08e5c125-38a3-44f4-8415-ca24ca7bb014" source="OIDcd9d602b-fc9e-427f-b881-8bdc02eee8af" target="OIDf822fa12-5073-4521-8e9d-3ed4b321ef55">
+                            <res:data key="connectiontype">Wall</res:data>
+                        </res:edge>
+                        <res:edge id="OIDb4574e96-03c8-40d4-a3e4-cbd727b9af3f" source="OIDcd9d602b-fc9e-427f-b881-8bdc02eee8af" target="OID5bedf59c-b7d2-4b9a-b887-d6ff9d51f819">
+                            <res:data key="connectiontype">Connection</res:data>
+                        </res:edge>
+                        <res:edge id="OID6b426503-da24-44b4-ad79-c0c848b08b6d" source="OID2deb2f8f-9cf6-41b9-99ac-9bda6a769a71" target="OIDcd9d602b-fc9e-427f-b881-8bdc02eee8af">
+                            <res:data key="connectiontype">Connection</res:data>
+                        </res:edge>
+                        <res:edge id="OID8bfc2357-c91e-4aff-850b-38be09b8bdca" source="OID2deb2f8f-9cf6-41b9-99ac-9bda6a769a71" target="OIDf822fa12-5073-4521-8e9d-3ed4b321ef55">
+                            <res:data key="connectiontype">Wall</res:data>
+                        </res:edge>
+                    </res:graph>
+                </res:graphml>
+                <res:graphml xmlns:grap="http://ksd.org/gmlmatcher/graph">
+                    <res:key attr.name="roomname" attr.type="string" for="node" id="roomname">
+                        <res:value>Room</res:value>
+                        <res:value>Kitchen</res:value>
+                        <res:value>Living</res:value>
+                        <res:value>Sleeping</res:value>
+                        <res:value>Working</res:value>
+                        <res:value>Corridor</res:value>
+                        <res:value>Toilet</res:value>
+                        <res:value>Bath</res:value>
+                    </res:key>
+                    <res:key attr.name="connection-type" attr.type="string" for="edge" id="connectiontype">
+                        <res:value>Connection</res:value>
+                        <res:value>Door</res:value>
+                        <res:value>Passage</res:value>
+                        <res:value>Wall</res:value>
+                    </res:key>
+                    <res:key attr.name="IfcGlobalID" attr.type="string" for="node" id="IfcGlobalIdNode">
+                        <res:default>NULL</res:default>
+                    </res:key>
+                    <res:key attr.name="IfcGlobalID" attr.type="string" for="node" id="IfcGlobalIdEdge">
+                        <res:default>NULL</res:default>
+                    </res:key>
+                    <res:key attr.name="CenterX" attr.type="long" for="node" id="centerX"/>
+                    <res:key attr.name="CenterY" attr.type="long" for="node" id="centerY"/>
+                    <!--Corners should be semicolon seperated values with format X,Y;X,Y;...-->
+                    <res:key attr.name="Corners" attr.type="string" for="node" id="corners"/>
+                    <res:key attr.name="checksum" attr.type="string" for="graph" id="img_checksum_md5"/>
+                    <res:key attr.name="image_url" attr.type="string" for="graph" id="img_url"/>
+                    <res:key attr.name="validated_manually" attr.type="boolean" for="graph" id="validated_manually"/>
+                    <res:graph edgedefault="undirected" id="floorplan01">
+                        <res:data key="img_url">http://reference.ksd.ai.ar.tum.de:8081/services/surfid/v1/images/184/341320.png</res:data>
+                        <res:data key="img_checksum_md5">9fe803552d99d1424c9eaa69727eb259</res:data>
+                        <res:data key="validated_manually">True</res:data>
+                        <res:node id="OID2deb2f8f-9cf6-41b9-99ac-9bda6a769a71">
+                            <res:data key="roomname">Living</res:data>
+                            <res:data key="centerX">1053</res:data>
+                            <res:data key="centerY">1037</res:data>
+                            <res:data key="corners">1316,1314;1313,732;610,727;609,1316</res:data>
+                        </res:node>
+                        <res:node id="OID55c6f06a-5e46-483f-9eb8-f6825e62a515">
+                            <res:data key="roomname">Living</res:data>
+                            <res:data key="centerX">1055</res:data>
+                            <res:data key="centerY">474</res:data>
+                            <res:data key="corners">1314,714;1307,133;770,122;769,705</res:data>
+                        </res:node>
+                        <res:node id="OIDcd9d602b-fc9e-427f-b881-8bdc02eee8af">
+                            <res:data key="roomname">Kitchen</res:data>
+                            <res:data key="centerX">458</res:data>
+                            <res:data key="centerY">430</res:data>
+                            <res:data key="corners">764,707;770,125;131,126;128,704</res:data>
+                        </res:node>
+                        <res:node id="OIDf822fa12-5073-4521-8e9d-3ed4b321ef55">
+                            <res:data key="roomname">Toilet</res:data>
+                            <res:data key="centerX">502</res:data>
+                            <res:data key="centerY">831</res:data>
+                            <res:data key="corners">599,954;599,729;451,732;451,950</res:data>
+                        </res:node>
+                        <res:node id="OID72ed973c-25d7-430d-8c7e-66062ab5448a">
+                            <res:data key="roomname">Room</res:data>
+                            <res:data key="centerX">488</res:data>
+                            <res:data key="centerY">1023</res:data>
+                            <res:data key="corners">598,1080;598,964;451,961;450,1076</res:data>
+                        </res:node>
+                        <res:node id="OID9c59cb15-6b74-424e-9cc4-8dd91b687ed6">
+                            <res:data key="roomname">Corridor</res:data>
+                            <res:data key="centerX">362</res:data>
+                            <res:data key="centerY">1173</res:data>
+                            <res:data key="corners">604,1312;597,1078;441,1077;435,725;116,722;120,1307</res:data>
+                        </res:node>
+                        <res:node id="OID5bedf59c-b7d2-4b9a-b887-d6ff9d51f819">
+                            <res:data key="roomname">Room</res:data>
+                            <res:data key="centerX">173</res:data>
+                            <res:data key="centerY">630</res:data>
+                            <res:data key="corners">237,712;240,568;126,567;116,712</res:data>
+                        </res:node>
+                        <res:edge id="OIDc7a77c4d-2b1b-4727-8890-a0cb59ef3caa" source="OID2deb2f8f-9cf6-41b9-99ac-9bda6a769a71" target="OID55c6f06a-5e46-483f-9eb8-f6825e62a515">
+                            <res:data key="connectiontype">Connection</res:data>
+                        </res:edge>
+                        <res:edge id="OIDf33b5b32-fcb3-4df1-962f-540ffc11d4bf" source="OID55c6f06a-5e46-483f-9eb8-f6825e62a515" target="OIDcd9d602b-fc9e-427f-b881-8bdc02eee8af">
+                            <res:data key="connectiontype">Connection</res:data>
+                        </res:edge>
+                        <res:edge id="OID2d55c309-ea06-4fad-9856-49f1034d4c75" source="OIDcd9d602b-fc9e-427f-b881-8bdc02eee8af" target="OID9c59cb15-6b74-424e-9cc4-8dd91b687ed6">
+                            <res:data key="connectiontype">Connection</res:data>
+                        </res:edge>
+                        <res:edge id="OID6f5fe740-1772-49c3-abc5-7e5d6fd916a9" source="OID2deb2f8f-9cf6-41b9-99ac-9bda6a769a71" target="OID9c59cb15-6b74-424e-9cc4-8dd91b687ed6">
+                            <res:data key="connectiontype">Connection</res:data>
+                        </res:edge>
+                        <res:edge id="OIDb459dd2d-7348-4ec0-b2ab-e878d3fd91be" source="OID2deb2f8f-9cf6-41b9-99ac-9bda6a769a71" target="OID72ed973c-25d7-430d-8c7e-66062ab5448a">
+                            <res:data key="connectiontype">Wall</res:data>
+                        </res:edge>
+                        <res:edge id="OID5112c1ed-98d3-40bf-980a-1e13612e40a0" source="OIDf822fa12-5073-4521-8e9d-3ed4b321ef55" target="OID72ed973c-25d7-430d-8c7e-66062ab5448a">
+                            <res:data key="connectiontype">Wall</res:data>
+                        </res:edge>
+                        <res:edge id="OIDed3898af-3839-4df0-944d-38e6b765f05a" source="OIDf822fa12-5073-4521-8e9d-3ed4b321ef55" target="OID9c59cb15-6b74-424e-9cc4-8dd91b687ed6">
+                            <res:data key="connectiontype">Connection</res:data>
+                        </res:edge>
+                        <res:edge id="OID08e5c125-38a3-44f4-8415-ca24ca7bb014" source="OIDcd9d602b-fc9e-427f-b881-8bdc02eee8af" target="OIDf822fa12-5073-4521-8e9d-3ed4b321ef55">
+                            <res:data key="connectiontype">Wall</res:data>
+                        </res:edge>
+                        <res:edge id="OIDb4574e96-03c8-40d4-a3e4-cbd727b9af3f" source="OIDcd9d602b-fc9e-427f-b881-8bdc02eee8af" target="OID5bedf59c-b7d2-4b9a-b887-d6ff9d51f819">
+                            <res:data key="connectiontype">Connection</res:data>
+                        </res:edge>
+                        <res:edge id="OID6b426503-da24-44b4-ad79-c0c848b08b6d" source="OID2deb2f8f-9cf6-41b9-99ac-9bda6a769a71" target="OIDcd9d602b-fc9e-427f-b881-8bdc02eee8af">
+                            <res:data key="connectiontype">Connection</res:data>
+                        </res:edge>
+                        <res:edge id="OID8bfc2357-c91e-4aff-850b-38be09b8bdca" source="OID2deb2f8f-9cf6-41b9-99ac-9bda6a769a71" target="OIDf822fa12-5073-4521-8e9d-3ed4b321ef55">
+                            <res:data key="connectiontype">Wall</res:data>
+                        </res:edge>
+                    </res:graph>
+                </res:graphml>
+            </res:graphmls>
+        </res:graphMatcher>
+    </res:response>
+    <res:response>
+        <res:weight>4</res:weight>
+        <res:responseType>mediatum-city</res:responseType>
+        <res:mediatumByCity>
+            <res:response oauthuser="ga76juy" retrievaldate="2014-07-02T20:51:12" servicereactivity="0.114 sec." status="ok" userid="ga76juy" username="">
+                <res:nodelist count="100" countall="5" start="0">
+                    <res:node id="1093277" name="Lenbach Gärten - Loftwohnungen" type="document/project-arc">
+                        <res:attribute name="updatesearchindex"><![CDATA[2013-03-28T09:09:25]]></res:attribute>
+                        <res:attribute name="creator"><![CDATA[Jelenic Renata]]></res:attribute>
+                        <res:attribute name="creationtime"><![CDATA[2011-12-06T10:26:12]]></res:attribute>
+                        <res:attribute name="pdf_page size"><![CDATA[1190 x 842 pts]]></res:attribute>
+                        <res:attribute name="edit.lastmask"><![CDATA[editmask_detail]]></res:attribute>
+                        <res:attribute name="hit_statistic.file"><![CDATA[5]]></res:attribute>
+                        <res:attribute name="pdf_encrypted"><![CDATA[no]]></res:attribute>
+                        <res:attribute name="city"><![CDATA[München]]></res:attribute>
+                        <res:attribute name="floor"><![CDATA[8]]></res:attribute>
+                        <res:attribute name="source"><![CDATA[Studentenprojekt]]></res:attribute>
+                        <res:attribute name="pdf_pages"><![CDATA[1]]></res:attribute>
+                        <res:attribute name="pdf_producer"><![CDATA[PDFTron PDFNet]]></res:attribute>
+                        <res:attribute name="source-url"><![CDATA[;]]></res:attribute>
+                        <res:attribute name="pdf_tagged"><![CDATA[no]]></res:attribute>
+                        <res:attribute name="type"><![CDATA[Raumbildende Strukturen]]></res:attribute>
+                        <res:attribute name="map"><![CDATA[;]]></res:attribute>
+                        <res:attribute name="format"><![CDATA[Rastergrafik]]></res:attribute>
+                        <res:attribute name="link-doc"><![CDATA[;]]></res:attribute>
+                        <res:attribute name="link"><![CDATA[http://;]]></res:attribute>
+                        <res:attribute name="updateuser"><![CDATA[Sahm Alexander]]></res:attribute>
+                        <res:attribute name="updatetime"><![CDATA[2013-03-28T09:08:17]]></res:attribute>
+                        <res:attribute name="link-add-on"><![CDATA[;]]></res:attribute>
+                        <res:attribute name="country"><![CDATA[Deutschland]]></res:attribute>
+                        <res:attribute name="pdf_file size"><![CDATA[333571 bytes]]></res:attribute>
+                        <res:attribute name="doc-type"><![CDATA[Ansicht - Nord]]></res:attribute>
+                        <res:attribute name="architect"><![CDATA[Steidle Architekten]]></res:attribute>
+                        <res:attribute name="pdf_optimized"><![CDATA[no]]></res:attribute>
+                        <res:file filename="320429.pdf" mime-type="application/pdf" type="document"/>
+                        <res:file filename="320429.thumb" mime-type="image/jpeg" type="thumb"/>
+                        <res:file filename="320429.thumb2" mime-type="image/jpeg" type="presentation"/>
+                        <res:file filename="320429.txt" mime-type="text/plain" type="fulltext"/>
+                        <res:file filename="320429.info" mime-type="text/plain" type="fileinfo"/>
+                        <res:mask name="default"><![CDATA[
+                            
+                            
+                            <res:b>
+                                Architekt(en):</res:b>Steidle Architekten
+                            
+                            
+                            <res:br/>
+                            <res:b>
+                                Anzahl der Geschosse:</res:b>8
+                            
+                            
+                            <res:br/>
+                            <res:b>
+                                Bautyp:</res:b>Raumbildende Strukturen]]></res:mask>
+                    </res:node>
+                    <res:node id="1093068" name="Fassadenschnitt 1_20.pdf" type="document/project-arc">
+                        <res:attribute name="updatesearchindex"><![CDATA[2013-03-28T09:09:06]]></res:attribute>
+                        <res:attribute name="pdf_moddate"><![CDATA[Wed Jan 14 14:08:31 2009]]></res:attribute>
+                        <res:attribute name="creator"><![CDATA[Jelenic Renata]]></res:attribute>
+                        <res:attribute name="creationtime"><![CDATA[2011-11-29T13:44:25]]></res:attribute>
+                        <res:attribute name="pdf_page size"><![CDATA[2383.94 x 1683.78 pts]]></res:attribute>
+                        <res:attribute name="doc-type"><![CDATA[Grundriss: -2. Etage]]></res:attribute>
+                        <res:attribute name="hit_statistic.file"><![CDATA[1]]></res:attribute>
+                        <res:attribute name="pdf_creator"><![CDATA[Adobe InDesign CS3 (5.0.2)]]></res:attribute>
+                        <res:attribute name="pdf_encrypted"><![CDATA[no]]></res:attribute>
+                        <res:attribute name="city"><![CDATA[München]]></res:attribute>
+                        <res:attribute name="floor"><![CDATA[8]]></res:attribute>
+                        <res:attribute name="source"><![CDATA[Buch]]></res:attribute>
+                        <res:attribute name="pdf_pages"><![CDATA[1]]></res:attribute>
+                        <res:attribute name="pdf_producer"><![CDATA[Adobe PDF Library 8.0]]></res:attribute>
+                        <res:attribute name="source-url"><![CDATA[;]]></res:attribute>
+                        <res:attribute name="pdf_tagged"><![CDATA[yes]]></res:attribute>
+                        <res:attribute name="type"><![CDATA[Blockrandbebauung]]></res:attribute>
+                        <res:attribute name="map"><![CDATA[;]]></res:attribute>
+                        <res:attribute name="edit.lastmask"><![CDATA[editmask_detail]]></res:attribute>
+                        <res:attribute name="format"><![CDATA[Rastergrafik]]></res:attribute>
+                        <res:attribute name="link"><![CDATA[http;]]></res:attribute>
+                        <res:attribute name="updateuser"><![CDATA[Sahm Alexander]]></res:attribute>
+                        <res:attribute name="updatetime"><![CDATA[2013-03-28T09:08:16]]></res:attribute>
+                        <res:attribute name="link-add-on"><![CDATA[;]]></res:attribute>
+                        <res:attribute name="country"><![CDATA[Deutschland]]></res:attribute>
+                        <res:attribute name="pdf_file size"><![CDATA[267379 bytes]]></res:attribute>
+                        <res:attribute name="pdf_creationdate"><![CDATA[Wed Jan 14 14:08:30 2009]]></res:attribute>
+                        <res:attribute name="architect"><![CDATA[Steidle Architekten]]></res:attribute>
+                        <res:attribute name="pdf_optimized"><![CDATA[yes]]></res:attribute>
+                        <res:file filename="392638.pdf" mime-type="application/pdf" type="document"/>
+                        <res:file filename="392638.thumb" mime-type="image/jpeg" type="thumb"/>
+                        <res:file filename="392638.thumb2" mime-type="image/jpeg" type="presentation"/>
+                        <res:file filename="392638.txt" mime-type="text/plain" type="fulltext"/>
+                        <res:file filename="392638.info" mime-type="text/plain" type="fileinfo"/>
+                        <res:mask name="default"><![CDATA[
+                            
+                            
+                            <res:b>
+                                Architekt(en):</res:b>Steidle Architekten
+                            
+                            
+                            <res:br/>
+                            <res:b>
+                                Anzahl der Geschosse:</res:b>8
+                            
+                            
+                            <res:br/>
+                            <res:b>
+                                Bautyp:</res:b>Blockrandbebauung]]></res:mask>
+                    </res:node>
+                    <res:node id="1206697" name="Wohnhaus mit Restaurant in der Schellingstrasse" type="image/project-arc">
+                        <res:attribute name="updatesearchindex"><![CDATA[2014-04-23T12:51:33]]></res:attribute>
+                        <res:attribute name="exif_EXIF_Tag_0xA403"><![CDATA[0]]></res:attribute>
+                        <res:attribute name="exif_EXIF_ColorSpace"><![CDATA[1]]></res:attribute>
+                        <res:attribute name="exif_EXIF_Tag_0xA420"><![CDATA[45fdfc13735c13b03ee66e625e2eda6b]]></res:attribute>
+                        <res:attribute name="exif_EXIF_ApertureValue"><![CDATA[4281/1441]]></res:attribute>
+                        <res:attribute name="exif_EXIF_FNumber"><![CDATA[14/5]]></res:attribute>
+                        <res:attribute name="exif_Image_ExifOffset"><![CDATA[2356]]></res:attribute>
+                        <res:attribute name="exif_EXIF_ExposureTime"><![CDATA[1/265]]></res:attribute>
+                        <res:attribute name="creationtime"><![CDATA[2014-04-15T18:18:08]]></res:attribute>
+                        <res:attribute name="exif_EXIF_DateTimeDigitized"><![CDATA[2012:12:03 11:16:58]]></res:attribute>
+                        <res:attribute name="height"><![CDATA[2592]]></res:attribute>
+                        <res:attribute name="exif_Thumbnail_JPEGInterchangeFormat"><![CDATA[4958]]></res:attribute>
+                        <res:attribute name="edit.lastmask"><![CDATA[editmask]]></res:attribute>
+                        <res:attribute name="exif_Image_ResolutionUnit"><![CDATA[Pixels/Inch]]></res:attribute>
+                        <res:attribute name="exif_Thumbnail_XResolution"><![CDATA[72]]></res:attribute>
+                        <res:attribute name="year"><![CDATA[1890]]></res:attribute>
+                        <res:attribute name="exif_EXIF_Tag_0xA406"><![CDATA[0]]></res:attribute>
+                        <res:attribute name="Thumbnail"><![CDATA[True]]></res:attribute>
+                        <res:attribute name="origwidth"><![CDATA[1936]]></res:attribute>
+                        <res:attribute name="city"><![CDATA[Muenchen]]></res:attribute>
+                        <res:attribute name="exif_EXIF_Tag_0xA40A"><![CDATA[2]]></res:attribute>
+                        <res:attribute name="exif_EXIF_FocalLength"><![CDATA[77/20]]></res:attribute>
+                        <res:attribute name="exif_Image_YCbCrPositioning"><![CDATA[1]]></res:attribute>
+                        <res:attribute name="exif_Image_Tag_0xEA1C"><![CDATA[[28, 234, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]]></res:attribute>
+                        <res:attribute name="addres"><![CDATA[Schellingstrasse 62]]></res:attribute>
+                        <res:attribute name="origsize"><![CDATA[2340963]]></res:attribute>
+                        <res:attribute name="exif_EXIF_ExifVersion"><![CDATA[0221]]></res:attribute>
+                        <res:attribute name="exif_EXIF_MeteringMode"><![CDATA[Spot]]></res:attribute>
+                        <res:attribute name="creator"><![CDATA[Zank Dorian]]></res:attribute>
+                        <res:attribute name="exif_EXIF_ExifImageLength"><![CDATA[2592]]></res:attribute>
+                        <res:attribute name="exif_EXIF_ExposureProgram"><![CDATA[Program Normal]]></res:attribute>
+                        <res:attribute name="exif_Image_PhotometricInterpretation"><![CDATA[2]]></res:attribute>
+                        <res:attribute name="source"><![CDATA[Buch]]></res:attribute>
+                        <res:attribute name="exif_Image_Make"><![CDATA[Apple]]></res:attribute>
+                        <res:attribute name="exif_EXIF_BrightnessValue"><![CDATA[17453/2438]]></res:attribute>
+                        <res:attribute name="exif_Thumbnail_Compression"><![CDATA[JPEG Compressed]]></res:attribute>
+                        <res:attribute name="exif_Image_SamplesPerPixel"><![CDATA[3]]></res:attribute>
+                        <res:attribute name="exif_EXIF_Tag_0x9214"><![CDATA[[1571, 836, 484, 484]]]></res:attribute>
+                        <res:attribute name="type"><![CDATA[Eckhäuser]]></res:attribute>
+                        <res:attribute name="exif_EXIF_ComponentsConfiguration"><![CDATA[YCbCr]]></res:attribute>
+                        <res:attribute name="origheight"><![CDATA[2592]]></res:attribute>
+                        <res:attribute name="map"><![CDATA[;]]></res:attribute>
+                        <res:attribute name="exif_EXIF_Tag_0xA402"><![CDATA[0]]></res:attribute>
+                        <res:attribute name="format"><![CDATA[Rastergrafik]]></res:attribute>
+                        <res:attribute name="exif_EXIF_ExifImageWidth"><![CDATA[1936]]></res:attribute>
+                        <res:attribute name="exif_Image_DateTime"><![CDATA[2013:02:10 18:13:06]]></res:attribute>
+                        <res:attribute name="exif_EXIF_ShutterSpeedValue"><![CDATA[9955/1237]]></res:attribute>
+                        <res:attribute name="exif_EXIF_DateTimeOriginal"><![CDATA[2012:12:03 11:16:58]]></res:attribute>
+                        <res:attribute name="exif_EXIF_SensingMethod"><![CDATA[2]]></res:attribute>
+                        <res:attribute name="levels"><![CDATA[4]]></res:attribute>
+                        <res:attribute name="link"><![CDATA[;]]></res:attribute>
+                        <res:attribute name="exif_Thumbnail_YResolution"><![CDATA[72]]></res:attribute>
+                        <res:attribute name="source-url"><![CDATA[;]]></res:attribute>
+                        <res:attribute name="exif_EXIF_FlashPixVersion"><![CDATA[0100]]></res:attribute>
+                        <res:attribute name="exif_EXIF_Tag_0xEA1C"><![CDATA[[28, 234, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]]></res:attribute>
+                        <res:attribute name="exif_Image_ImageLength"><![CDATA[2592]]></res:attribute>
+                        <res:attribute name="exif_Image_ImageWidth"><![CDATA[1936]]></res:attribute>
+                        <res:attribute name="updateuser"><![CDATA[Zank Dorian]]></res:attribute>
+                        <res:attribute name="updatetime"><![CDATA[2014-04-23T12:51:23]]></res:attribute>
+                        <res:attribute name="link-add-on"><![CDATA[;]]></res:attribute>
+                        <res:attribute name="exif_EXIF_ISOSpeedRatings"><![CDATA[80]]></res:attribute>
+                        <res:attribute name="exif_Image_Model"><![CDATA[iPhone 4]]></res:attribute>
+                        <res:attribute name="exif_Image_XResolution"><![CDATA[72]]></res:attribute>
+                        <res:attribute name="country"><![CDATA[Deutschland]]></res:attribute>
+                        <res:attribute name="floor"><![CDATA[5]]></res:attribute>
+                        <res:attribute name="exif_Thumbnail_JPEGInterchangeFormatLength"><![CDATA[7298]]></res:attribute>
+                        <res:attribute name="exif_Image_BitsPerSample"><![CDATA[[8, 8, 8]]]></res:attribute>
+                        <res:attribute name="exif_EXIF_Flash"><![CDATA[Off]]></res:attribute>
+                        <res:attribute name="doc-type"><![CDATA[Perspektive]]></res:attribute>
+                        <res:attribute name="architect"><![CDATA[Johann Lihm]]></res:attribute>
+                        <res:attribute name="exif_Thumbnail_ResolutionUnit"><![CDATA[Pixels/Inch]]></res:attribute>
+                        <res:attribute name="exif_Image_YResolution"><![CDATA[72]]></res:attribute>
+                        <res:attribute name="exif_Image_Software"><![CDATA[Adobe Photoshop CS5.1 Windows]]></res:attribute>
+                        <res:attribute name="width"><![CDATA[1936]]></res:attribute>
+                        <res:attribute name="exif_Image_Orientation"><![CDATA[Horizontal (normal)]]></res:attribute>
+                        <res:file filename="376296.jpg" mime-type="image/jpeg" type="image"/>
+                        <res:file filename="376296.jpg" mime-type="image/jpeg" type="original"/>
+                        <res:file filename="f131c181.thumb" mime-type="image/jpeg" type="thumb"/>
+                        <res:file filename="f131c181.thumb2" mime-type="image/jpeg" type="presentation"/>
+                        <res:file filename="zoom1206697.zip" mime-type="application/zip" type="zoom"/>
+                        <res:file filename="286319.jpg" mime-type="image/jpeg" type="image"/>
+                        <res:mask name="default"><![CDATA[
+                            
+                            
+                            <res:b>
+                                Architekt(en):</res:b>Johann Lihm
+                            
+                            
+                            <res:br/>
+                            <res:b>
+                                Anzahl der Geschosse:</res:b>5
+                            
+                            
+                            <res:br/>
+                            <res:b>
+                                Baujahr / Jahr der Fertigstellung:</res:b>1890
+                            
+                            
+                            <res:br/>
+                            <res:b>
+                                Bautyp:</res:b>Eckhäuser]]></res:mask>
+                    </res:node>
+                    <res:node id="1207494" name="Ackermannbogen" type="image/project-arc">
+                        <res:attribute name="updatesearchindex"><![CDATA[2014-04-23T15:10:34]]></res:attribute>
+                        <res:attribute name="creator"><![CDATA[Fleischer Katrin]]></res:attribute>
+                        <res:attribute name="creationtime"><![CDATA[2014-04-23T12:47:28]]></res:attribute>
+                        <res:attribute name="height"><![CDATA[410]]></res:attribute>
+                        <res:attribute name="project-name-long"><![CDATA[Mehrfamilienhaus am Ackermannbogen]]></res:attribute>
+                        <res:attribute name="origwidth"><![CDATA[717]]></res:attribute>
+                        <res:attribute name="city"><![CDATA[München]]></res:attribute>
+                        <res:attribute name="floor"><![CDATA[5]]></res:attribute>
+                        <res:attribute name="origsize"><![CDATA[55282]]></res:attribute>
+                        <res:attribute name="source"><![CDATA[Buch]]></res:attribute>
+                        <res:attribute name="source-url"><![CDATA[;]]></res:attribute>
+                        <res:attribute name="type"><![CDATA[Wohntürme]]></res:attribute>
+                        <res:attribute name="map"><![CDATA[;]]></res:attribute>
+                        <res:attribute name="edit.lastmask"><![CDATA[editmask]]></res:attribute>
+                        <res:attribute name="format"><![CDATA[Rastergrafik]]></res:attribute>
+                        <res:attribute name="link"><![CDATA[http://www.bodensteiner-fest.de/projekte/2004/ackermannbogen.php;]]></res:attribute>
+                        <res:attribute name="origheight"><![CDATA[410]]></res:attribute>
+                        <res:attribute name="updateuser"><![CDATA[Fleischer Katrin]]></res:attribute>
+                        <res:attribute name="updatetime"><![CDATA[2014-04-23T15:10:24]]></res:attribute>
+                        <res:attribute name="link-add-on"><![CDATA[;]]></res:attribute>
+                        <res:attribute name="country"><![CDATA[Deutschland]]></res:attribute>
+                        <res:attribute name="doc-type"><![CDATA[Perspektive]]></res:attribute>
+                        <res:attribute name="architect"><![CDATA[bodensteiner fest]]></res:attribute>
+                        <res:attribute name="width"><![CDATA[717]]></res:attribute>
+                        <res:file filename="903375.jpg" mime-type="image/jpeg" type="image"/>
+                        <res:file filename="903375.jpg" mime-type="image/jpeg" type="original"/>
+                        <res:file filename="f0ba6cbc.thumb" mime-type="image/jpeg" type="thumb"/>
+                        <res:file filename="f0ba6cbc.thumb2" mime-type="image/jpeg" type="presentation"/>
+                        <res:mask name="default"><![CDATA[
+                            
+                            
+                            <res:b>
+                                Projektname:</res:b>Mehrfamilienhaus am Ackermannbogen
+                            
+                            
+                            <res:br/>
+                            <res:b>
+                                Architekt(en):</res:b>bodensteiner fest
+                            
+                            
+                            <res:br/>
+                            <res:b>
+                                Anzahl der Geschosse:</res:b>5
+                            
+                            
+                            <res:br/>
+                            <res:b>
+                                Bautyp:</res:b>Wohntürme]]></res:mask>
+                    </res:node>
+                    <res:node id="1166667" name="Alte Pinakothek" type="image/project-arc">
+                        <res:attribute name="updatesearchindex"><![CDATA[2013-07-09T16:08:02]]></res:attribute>
+                        <res:attribute name="exif_Image_ExifOffset"><![CDATA[50]]></res:attribute>
+                        <res:attribute name="creator"><![CDATA[Langenhan Christoph]]></res:attribute>
+                        <res:attribute name="creationtime"><![CDATA[2013-07-09T16:06:30]]></res:attribute>
+                        <res:attribute name="height"><![CDATA[960]]></res:attribute>
+                        <res:attribute name="doc-type"><![CDATA[Perspektive]]></res:attribute>
+                        <res:attribute name="exif_GPS_GPSLongitudeRef"><![CDATA[E]]></res:attribute>
+                        <res:attribute name="exif_Image_Orientation"><![CDATA[Horizontal (normal)]]></res:attribute>
+                        <res:attribute name="origwidth"><![CDATA[720]]></res:attribute>
+                        <res:attribute name="city"><![CDATA[München]]></res:attribute>
+                        <res:attribute name="addres"><![CDATA[Arcisstraße 21]]></res:attribute>
+                        <res:attribute name="origsize"><![CDATA[230538]]></res:attribute>
+                        <res:attribute name="width"><![CDATA[720]]></res:attribute>
+                        <res:attribute name="exif_EXIF_ExifImageLength"><![CDATA[960]]></res:attribute>
+                        <res:attribute name="edit.lastmask"><![CDATA[editmask]]></res:attribute>
+                        <res:attribute name="exif_Image_GPSInfo"><![CDATA[92]]></res:attribute>
+                        <res:attribute name="exif_EXIF_ExifImageWidth"><![CDATA[720]]></res:attribute>
+                        <res:attribute name="origheight"><![CDATA[960]]></res:attribute>
+                        <res:attribute name="exif_GPS_GPSLatitude"><![CDATA[[48, 889/100, 0]]]></res:attribute>
+                        <res:attribute name="country"><![CDATA[Deutschland]]></res:attribute>
+                        <res:attribute name="exif_EXIF_ColorSpace"><![CDATA[1]]></res:attribute>
+                        <res:attribute name="exif_GPS_GPSLongitude"><![CDATA[[11, 3409/100, 0]]]></res:attribute>
+                        <res:attribute name="exif_GPS_GPSAltitude"><![CDATA[57586/105]]></res:attribute>
+                        <res:attribute name="exif_GPS_GPSLatitudeRef"><![CDATA[N]]></res:attribute>
+                        <res:file filename="uploadTest.jpg" mime-type="image/jpeg" type="image"/>
+                        <res:file filename="uploadTest.jpg" mime-type="image/jpeg" type="original"/>
+                        <res:file filename="a8bb4341.thumb" mime-type="image/jpeg" type="thumb"/>
+                        <res:file filename="a8bb4341.thumb2" mime-type="image/jpeg" type="presentation"/>
+                        <res:file filename="923633.graphml" mime-type="inode/file" type="attachment"/>
+                        <res:mask name="default"><![CDATA[]]></res:mask>
+                    </res:node>
+                </res:nodelist>
+                <res:listinfo sortdirection="" sortfield=""/>
+            </res:response>
+        </res:mediatumByCity>
+    </res:response>
+    <res:response>
+        <res:weight>3</res:weight>
+        <res:responseType>mediatum-gps</res:responseType>
+        <res:mediatumByGpsRect>
+            <!-- deprecated -->
+        </res:mediatumByGpsRect>
+    </res:response>
+    <res:response>
+        <res:weight>2</res:weight>
+        <res:responseType>neo4j</res:responseType>
+        <res:neo4jByRooms>
+            <res:floorplan>
+                <res:imageUri>http://www.abc.de</res:imageUri>
+                <res:id>Aim9mae0heed8O</res:id>
+                <res:validatedMannually>true</res:validatedMannually>
+            </res:floorplan>
+            <res:floorplan>
+                <res:imageUri>http://www.abc.de/1234</res:imageUri>
+                <res:id>OoL5Ielie4hiewo</res:id>
+                <res:validatedMannually>false</res:validatedMannually>
+            </res:floorplan>
+        </res:neo4jByRooms>
+    </res:response>
+</res:unifiedResponse>

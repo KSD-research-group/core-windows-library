@@ -65,7 +65,7 @@ namespace Ksd.Mediatum.Surfid
 
                 String uriString = "http://" + this.ServerName + prefix;
 
-                return GetImages(new Uri(uriString));
+                return this.GetImages(new Uri(uriString));
             }
         }
 
@@ -95,6 +95,18 @@ namespace Ksd.Mediatum.Surfid
 
                 return ProjectNode.GetProjects(this, result);
             }
+        }
+
+        internal void GetFingerprint(Uri uri)
+        {
+            string signedUri = this.User.GetSignedUri(uri);
+            WebClient wc = new WebClient();
+            System.Diagnostics.Trace.WriteIf(traceSwitch.TraceInfo, String.Format("Get {0}", uri));
+            string result = wc.DownloadString(signedUri);
+            System.Diagnostics.Trace.WriteIf(traceSwitch.TraceInfo, String.Format("Response is {0}", result));
+            WebHeaderCollection col = wc.ResponseHeaders;
+
+            Fingerprint.Fingerprint.GetFingerprint(this, result);
         }
     }
 }

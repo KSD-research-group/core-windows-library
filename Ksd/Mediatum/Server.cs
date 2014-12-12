@@ -399,13 +399,13 @@ namespace Ksd.Mediatum
          */
         public IDictionary<string, Type> TypeTable { get; internal set; }
 
-        internal Node CreateNode(string typeAsString, XmlElement xmlNode, string xml)
+        internal Node CreateNode(string typeAsString, XmlElement xmlNode, string xml, string prefix, XmlNamespaceManager xmlNamespaceManager)
         {
             Type type;
             if (!this.TypeTable.TryGetValue(typeAsString, out type))
                 type = typeof(Node);
 
-            Object[] args = new Object[] { this, xmlNode, xml };
+            Object[] args = new Object[] { this, xmlNode, xml, prefix, xmlNamespaceManager };
 
             return (Node)Activator.CreateInstance(type, args);
         }

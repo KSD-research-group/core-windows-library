@@ -72,6 +72,11 @@ namespace Ksd.Mediatum.Surfid
          */
         public Uri FingerprintUri { get; private set; }
 
+        public void GetFingerprint ()
+        {
+            this.Server.GetFingerprint(this.FingerprintUri);
+        }
+
         /**
          <summary>  Gets an image. </summary>
         
@@ -92,19 +97,16 @@ namespace Ksd.Mediatum.Surfid
         
          <remarks>  Dr. Torsten Thurow, TU München, 10.11.2014. </remarks>
         
-         <param name="server">          The MediaTUM server with Surfid plugin. </param>
-         <param name="imageUri">        The image URI. </param>
-         <param name="thumb2Uri">       The Thumb2 image URI. </param>
-         <param name="thumbUri">        The Thumb image URI. </param>
-         <param name="fingerprintUri">  The fingerprint URI. </param>
+         <param name="server">  The MediaTUM server with Surfid plugin. </param>
+         <param name="json">    The dynamic JSON input object. </param>
          */
-        protected ImageNode(Server server, Uri imageUri, Uri thumb2Uri, Uri thumbUri, Uri fingerprintUri)
+        protected virtual void LoadJson(Server server, dynamic json)
         {
             this.Server = server;
-            this.ImageUri = imageUri;
-            this.Thumb2Uri = thumb2Uri;
-            this.ThumbUri = thumbUri;
-            this.FingerprintUri = fingerprintUri;
+            this.ImageUri = json.image;
+            this.Thumb2Uri = json.thumb2;
+            this.ThumbUri = json.thumbUri;
+            this.FingerprintUri = json.fingerprintUri;
         }
 
         internal static IEnumerable<ImageNode> GetImages(Server server, string value)
@@ -114,15 +116,8 @@ namespace Ksd.Mediatum.Surfid
 
             List<ImageNode> result = new List<ImageNode>();
 
-            foreach (dynamic entry in images)
-            {
-                Uri image = entry.image;
-                Uri thumb2 = entry.thumb2;
-                Uri thumb = entry.thumb;
-                Uri fingerprint = entry.fingerprint;
-
-                result.Add(new ImageNode(server, image, thumb2, thumb, fingerprint));
-            }
+            foreach (dynamic entry in images) ;
+                //; result.Add(new ImageNode(server, entry));
 
             return result;
         }

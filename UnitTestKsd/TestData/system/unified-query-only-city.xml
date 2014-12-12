@@ -1,0 +1,13 @@
+<req:unifiedRequest xmlns:req="http://ksd.org/unified/request">
+    <req:query>
+        <req:weight>4</req:weight>
+        <req:queryType>mediatum-city</req:queryType>
+        <req:mediatumByCity>
+            <req:city>München</req:city>
+            <req:mediatumCredentials>
+                <req:username>ga76juy</req:username>
+                <req:sharedSecret>b33db3e738ee71a</req:sharedSecret>
+            </req:mediatumCredentials>
+        </req:mediatumByCity>
+    </req:query>
+</req:unifiedRequest>

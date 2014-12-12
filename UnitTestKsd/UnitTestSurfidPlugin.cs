@@ -30,6 +30,7 @@ namespace UnitTestKsd
                 image = imageNode.Thumb2;
                 image = imageNode.Thumb;
                 Uri uri = imageNode.FingerprintUri;
+                imageNode.GetFingerprint();
             }
         }
 
@@ -42,6 +43,7 @@ namespace UnitTestKsd
                 image = projectNode.Thumb2;
                 image = projectNode.Thumb;
                 Uri uri = projectNode.FingerprintUri;
+                projectNode.GetFingerprint();
                 IEnumerable<Ksd.Mediatum.Surfid.ImageNode> children = projectNode.Children;
             }
         }

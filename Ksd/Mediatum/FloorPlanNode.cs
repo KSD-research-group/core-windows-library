@@ -21,8 +21,8 @@ namespace Ksd.Mediatum
          <param name="xmlNode"> Element describing the XML node. </param>
          <param name="xml">     The XML. </param>
          */
-        public FloorPlanNode(Server server, XmlElement xmlNode, string xml)
-            :base(server, xmlNode, xml)
+        public FloorPlanNode(Server server, XmlElement xmlNode, string xml, string prefix, XmlNamespaceManager xmlNamespaceManager)
+            : base(server, xmlNode, xml, prefix, xmlNamespaceManager)
         { }
 
         /**

@@ -44,7 +44,7 @@ namespace Ksd.Mediatum
         public Node Parent { get; internal set; }
 
         /**
-         <summary>  Constructor. </summary>
+         <summary>  Internal constructor for XML reader. </summary>
         
          <remarks>  Dr. Torsten Thurow, TU München, 28.07.2014. </remarks>
         
