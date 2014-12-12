@@ -68,11 +68,6 @@
     <Compile Include="Mediatum\NodeMask.cs" />
     <Compile Include="Mediatum\OAuth.cs" />
     <Compile Include="Mediatum\Server.cs" />
-    <Compile Include="Mediatum\Surfid\Fingerprint\Fingerprint.cs" />
-    <Compile Include="Mediatum\Surfid\Fingerprint\Object.cs" />
-    <Compile Include="Mediatum\Surfid\Image.cs" />
-    <Compile Include="Mediatum\Surfid\Project.cs" />
-    <Compile Include="Mediatum\Surfid\Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryWeighting\Server.cs" />
     <Compile Include="QueryWeighting\QueryResult.cs" />

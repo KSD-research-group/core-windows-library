@@ -22,7 +22,7 @@ namespace UnitTestKsd
         }
 
         [TestMethod]
-        public void TestParentsAndChildren()
+        public void TestMediatumParentsAndChildren()
         {
             Node arSearchboxNode = server.GetNode(1085713);
             foreach (Node parent in arSearchboxNode.Parents) ;
@@ -30,13 +30,13 @@ namespace UnitTestKsd
         }
 
         [TestMethod]
-        public void TestFloorPlanNode()
+        public void TestMediatumFloorPlanNode()
         {
             FloorPlanNode floorNode = (FloorPlanNode)server.GetNode(1229104);
         }
 
         [TestMethod]
-        public void TestUploadAndUpdate()
+        public void TestMediatumUploadAndUpdate()
         {
             System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(100, 100);
             MemoryStream stream = new MemoryStream();

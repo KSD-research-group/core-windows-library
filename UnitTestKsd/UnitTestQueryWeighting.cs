@@ -21,27 +21,45 @@ namespace UnitTestKsd
         }
 
         [TestMethod]
-        public void TestStatusCheck()
+        public void TestQueryWeightingStatusCheck()
         {
             server.StatusCheck();
         }
 
-        [TestMethod]
-        public void Unified()
-        {
-            QueryResult result = server.Unified(File.ReadAllText("../../TestData/system/unified-query.xml"));
-            foreach(Ksd.Mediatum.Node node in result.MediaTumNodes)
-            {
-                foreach(Ksd.Mediatum.Node child in node.Children)
-                    ;
-                
-                foreach(Ksd.Mediatum.Node parent in node.Parents)
-                    ;
-            }
 
-            result = server.Unified(File.ReadAllText("../../TestData/system/unified-query-only-city.xml"));
-            result = server.Unified(File.ReadAllText("../../TestData/system/unified-query-only-graph.xml"));
-            result = server.Unified(File.ReadAllText("../../TestData/system/unified-query-only-neo4j.xml"));
+        void TestChildren(Ksd.Mediatum.Node node)
+        {
+            foreach (Ksd.Mediatum.Node child in node.Children)
+                TestChildren(child);
+        }
+
+        void TestParent(Ksd.Mediatum.Node node)
+        {
+            foreach (Ksd.Mediatum.Node parent in node.Parents)
+                TestParent(parent);
+        }
+
+        [TestMethod]
+        public void TestQueryWeightingUnified()
+        {
+            string[] querys =
+            {
+                "../../TestData/system/unified-query.xml",
+                "../../TestData/system/unified-query-only-city.xml",
+                "../../TestData/system/unified-query-only-graph.xml",
+                "../../TestData/system/unified-query-only-neo4j.xml"
+            };
+
+            foreach (string query in querys)
+            {
+                QueryResult result = server.Unified(File.ReadAllText(query));
+
+                foreach (Ksd.Mediatum.Node node in result.MediaTumNodes)
+                {
+                    TestParent(node);
+                    TestChildren(node);
+                }
+            }
         }
     }
 }
