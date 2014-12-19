@@ -267,21 +267,13 @@ Nicht vergessen:
 
 Sie benötigen folgende installierte Werkzeuge:
 
-- z.B. Visual Studio 2010 oder 2012
-- z.B. boost library 1.51 oder höher (getestet 1.51 und 1.53), http://www.boost.org/
-- z.B. doxygen 1.8.3.1 oder höher (getestet 1.8.3.1), http://www.stack.nl/~dimitri/doxygen/download.html
-- z.B. MiKTeX 2.9 (optional für die PDF-Erstellung der Dokumentation), http://www.miktex.org/download
-
-Es muss eine Umgebungsvariable BOOST_DIR angelegt werden, welche als Wert den Pfad des Stammverzeichnisses der boost library besitzt, z.B. D:\boost\boost_1_53_0.
+- Visual Studio 2013 oder höher (getestet 2013 Ultimate)
+- doxygen 1.8.8 oder höher (getestet 1.8.8), http://www.stack.nl/~dimitri/doxygen/download.html
+- MiKTeX 2.9 (optional für die PDF-Erstellung der Dokumentation), http://www.miktex.org/download
 
 Anschließend wird die Projektmappe MakeAll.sln im Stammverzeichnis des Projektes geladen und über Batch erstellen das gesammte System erstellt.
 
 Nach einem erfolgreichen Durchlauf befindet sich u.a. im Stammverzeichnis die Dokumentationsdatei RefMan.pdf. Im Verzeichnis application befinden sich unter den Unterverzeichnissen debug und release die Bibliotheks- und Anwendungsversionen als Debug und Release kompiliert.
-
-
-# Schnelleinführung unter Linux {#Buildprocess_Linux}
-
-Sie benötigen ein eingerichtetes Buildsystem mit g++ und maketools, sowie installierter boost library. Wechseln Sie in das Unterverzeichnis ... und starten Sie make. Es wird die Applikation ... erzeugt. Zwischendateien können Sie mit make clean beseitigen.
 
 
 # Verzeichnisübersicht {#Directories}
