@@ -56,7 +56,6 @@
     <Compile Include="UnitTestMediatum.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UnitTestQueryWeighting.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ksd\Ksd.csproj">
@@ -65,18 +64,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Content Include="TestData\integration\smoke_test.4.xml" />
-    <Content Include="TestData\system\smoke_test.4.xml" />
-    <Content Include="TestData\system\unified-query-only-city.xml" />
-    <Content Include="TestData\system\unified-query-only-graph.xml" />
-    <Content Include="TestData\system\unified-query-only-neo4j.xml" />
-    <Content Include="TestData\system\unified-query.xml" />
-    <Content Include="TestData\system\unified-response.xml" />
-    <Content Include="TestData\unit\smoke_test.4.xml" />
-    <Content Include="TestData\unit\unified-query.xml" />
-    <Content Include="TestData\unit\unified-response.xml" />
-  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

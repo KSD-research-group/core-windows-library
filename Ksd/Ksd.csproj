@@ -69,8 +69,6 @@
     <Compile Include="Mediatum\OAuth.cs" />
     <Compile Include="Mediatum\Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryWeighting\Server.cs" />
-    <Compile Include="QueryWeighting\QueryResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
