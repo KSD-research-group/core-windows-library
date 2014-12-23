@@ -22,7 +22,7 @@ namespace Ksd.Mediatum
     [Serializable()]
     public class Server
     {
-        public static TraceSwitch traceSwitch = new TraceSwitch("General", "Entire Application");
+        public static TraceSwitch traceSwitch = new TraceSwitch("General", "Entire Application");   ///< The trace switch
 
         public static readonly String DefaultServerName = @"mediatum.ub.tum.de";    ///< The default server name
 

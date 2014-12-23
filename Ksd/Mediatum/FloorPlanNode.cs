@@ -17,9 +17,11 @@ namespace Ksd.Mediatum
         
          <remarks>  Dr. Torsten Thurow, TU München, 23.07.2014. </remarks>
         
-         <param name="server">  The server. </param>
-         <param name="xmlNode"> Element describing the XML node. </param>
-         <param name="xml">     The XML. </param>
+         <param name="server">              The server object to connect MediaTUM. </param>
+         <param name="xmlNode">             Element describing the XML node. </param>
+         <param name="xml">                 The original XML, witch contains the node. </param>
+         <param name="prefix">              The XML prefix (namespace). </param>
+         <param name="xmlNamespaceManager"> Manager for XML namespace. </param>
          */
         public FloorPlanNode(Server server, XmlElement xmlNode, string xml, string prefix, XmlNamespaceManager xmlNamespaceManager)
             : base(server, xmlNode, xml, prefix, xmlNamespaceManager)

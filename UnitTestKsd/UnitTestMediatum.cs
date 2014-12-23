@@ -4,10 +4,20 @@ using System.Drawing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 
+/**
+// namespace: UnitTestKsd
+//
+// summary:	Tests for API to MediaTUM.
+ */
 namespace UnitTestKsd
 {
     using Ksd.Mediatum;
 
+    /**
+     <summary>  Unit tests for API to MediaTUM. </summary>
+    
+     <remarks>  Dr. Torsten Thurow, TU München, 22.12.2014. </remarks>
+     */
     [TestClass]
     public class UnitTestMediatum
     {
@@ -29,12 +39,22 @@ namespace UnitTestKsd
             foreach (Node child in arSearchboxNode.Parents) ;
         }
 
+        /**
+         <summary>  (Unit Test Method) Test get a floorplan from MediaTUM. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 19.12.2014. </remarks>
+         */
         [TestMethod]
         public void TestMediatumFloorPlanNode()
         {
             FloorPlanNode floorNode = (FloorPlanNode)server.GetNode(1229104);
         }
 
+        /**
+         <summary>  (Unit Test Method) Test generate and update a new floorplan on MediaTUM. </summary>
+        
+         <remarks>  Dr. Torsten Thurow, TU München, 19.12.2014. </remarks>
+         */
         [TestMethod]
         public void TestMediatumUploadAndUpdate()
         {

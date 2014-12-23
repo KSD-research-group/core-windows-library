@@ -33,6 +33,8 @@ Es wird ein entsprechender Preshared Tag erzeugt (siehe auch #Ksd.Mediatum.OAuth
 
 Die Klasse #Ksd.Mediatum.OAuth unterstützt die Generierung signierter Zugriffe auf MediaTUM. Es wird dazu eine Instanz generiert. Es stehen dazu zwei Konstruktoren zur Verfügung. 
 #Ksd.Mediatum.OAuth.OAuth(String, String) wird unter Angabe des User Names und des Preshared Tag generiert. #Ksd.Mediatum.OAuth.OAuth() liest dagegen diese Werte aus der Registry.
+Die Plätze in der Registry sind dabei die Keys `UserName` und `PresharedTag` unter dem Pfad `HKEY_CURRENT_USER\SOFTWARE\Mediatum`.
+
 Das Wertepaar #Ksd.Mediatum.OAuth.UserName und #Ksd.Mediatum.OAuth.PresharedTag kann mittels der Methoden #Ksd.Mediatum.OAuth.ReadSigningConfigFromRegistry und #Ksd.Mediatum.OAuth.WriteSigningConfigToRegistry von der Registry gelesen bzw.
 in diese geschrieben werden. Die Registry Werte können auch separat mittels der statischen Eigenschaften #Ksd.Mediatum.OAuth.UserNameInRegistry und #Ksd.Mediatum.OAuth.PresharedTagInRegistry ausgelesen und geschrieben werden.
 
@@ -50,17 +52,12 @@ Die Methode #Ksd.Mediatum.OAuth.AddSignParams hingegen ist für die Zusammenarbei
 In diesem Fall werden der Parameterkollektion die Parameter user und sign hinzugefügt. ACHTUNG: die Signierung von MediaTUM arbeitet zum Stand der Dokumentation nur teilweise korrekt. Daher werden als work arround zunächst
 viele REST-Schnittstellen unsigniert genutzt.
 
-Schnittstelle | Zugriff
-------------- | ----------
-Export        | signiert
-Download      | signiert
-Upload        | unsigniert
-Update        | unsigniert
-
 ## Kommunikation mit dem MediaTUM-Server {#LabelMediaTumKommunikation}
 
 Die Kommunikation zu MediaTUM dient die Klasse #Ksd.Mediatum.Server. Der Konstruktor verlangt ein #Ksd.Mediatum.OAuth Objekt für die Signierungen der Webaufrufe und die Angabe der Server URI. 
-Die statische Eigenschaft #Ksd.Mediatum.Server.ServerNameInRegistry kann dabei genutzt werden, um die URI des Servers aus der Registry zu lesen oder in diese zu schreiben.
+Die statische Eigenschaft #Ksd.Mediatum.Server.ServerNameInRegistry kann dabei genutzt werden, um die URI des Servers aus der Registry zu lesen oder in diese zu schreiben. 
+Der Platz in der Registry ist dabei für die URI der Key `URI` unter dem Pfad `HKEY_CURRENT_USER\SOFTWARE\Mediatum`.
+
 ~~~~~~~~~~~~~~~{.cs}
 Ksd.Mediatum.OAuth oAuth = new Ksd.Mediatum.OAuth();
 Ksd.Mediatum.Server server = new Ksd.Mediatum.Server(oAuth, Ksd.Mediatum.Server.ServerNameInRegistry);
@@ -69,15 +66,15 @@ Ksd.Mediatum.Server server = new Ksd.Mediatum.Server(oAuth, Ksd.Mediatum.Server.
 Das erzeugte Serverobjekt übernimmt nun die Low Level Kommunikation mit MediaTUM über dessen REST-Schnittstellen. Diese werden zur Vereinfachung weiter abstrahiert, wie in den folgenden Kapiteln erläutert.
 Die wesentlichen REST-Schnittstellen sind:
 
-Schnittstelle                    | Methoden | Eigenschaft
----------------------------------| ---------|----------------------------------------
-services/upload/calcsign         |          | #Ksd.Mediatum.Server.SignPath
-services/upload/new              | POST     | #Ksd.Mediatum.Server.UploadPath
-services/upload/update           | POST     | #Ksd.Mediatum.Server.UpdatePath
-services/export                  | GET      | #Ksd.Mediatum.Server.ExportPath
-services/metadata/scheme         | GET      | #Ksd.Mediatum.Server.MetadataPath
-services/metadata/appdefinitions | GET      | #Ksd.Mediatum.Server.AppDefinitionsPath
-file                             | GET      | #Ksd.Mediatum.Server.FilePath
+Schnittstelle                    | Methoden | Eigenschaft                             | Zugriff (derzeit)
+---------------------------------| ---------|-----------------------------------------|------------------
+services/upload/calcsign         | GET      | #Ksd.Mediatum.Server.SignPath           | unsigniert      
+services/upload/new              | POST     | #Ksd.Mediatum.Server.UploadPath         | unsigniert
+services/upload/update           | POST     | #Ksd.Mediatum.Server.UpdatePath         | unsigniert
+services/export                  | GET      | #Ksd.Mediatum.Server.ExportPath         | signiert
+services/metadata/scheme         | GET      | #Ksd.Mediatum.Server.MetadataPath       | signiert
+services/metadata/appdefinitions | GET      | #Ksd.Mediatum.Server.AppDefinitionsPath | signiert
+file                             | GET      | #Ksd.Mediatum.Server.FilePath           | unsigniert
 
 In der [Live Instanz der TU München](https://mediatum.ub.tum.de/) von MediaTUM finden sich die Beschreibungen der REST-Schnittstellen unter:
 
@@ -218,6 +215,8 @@ Folgende Ausführungen zeigen interne Mechanismen, welche in der Regel nicht vers
 die Werte von Attributen als CDATA übertragen. Leider sind diese Werte oft nicht XML-konform. Daher werden invalide Teile aus den CDATA-Abschnitten iterativ entfernt, bis die XML-Felder valide sind. Anschließend wird
 mittels DOM-Parser geparst. Zur Kontrolle dieses Prozesses kann mittels #Ksd.Mediatum.Node.Xml der ursprüngliche XML-Code abgefragt werden, aus welchem der Node geparst wurde.
 
+
+
 # Beispieldaten {#LabelExampleData}
 
 \page Schema-XML Beispiel einer Schema Datei
@@ -244,36 +243,17 @@ mittels DOM-Parser geparst. Zur Kontrolle dieses Prozesses kann mittels #Ksd.Med
 \page upload-node Beispiel eines XML Nodes nach einem Upload
 \includelineno services_export_node_1232572.xml
 
+# Building {#Build}
 
-\page Anhang Anhang
-
-- Aufzählung
-- Aufzählung
-- Aufzählung
-
-
-Beispiel einer Tabelle:
-
-Fehlercode | Bedeutung
----------- | ----------------------------------------------
--100       | Beschreibung
--101       | Beschreibung
--102       | Beschreibung
-
-Nicht vergessen:
-
-
-# Schnelleinführung unter Windows {#Buildprocess_Windows}
-
-Sie benötigen folgende installierte Werkzeuge:
+Sie benötigen folgende Werkzeuge:
 
 - Visual Studio 2013 oder höher (getestet 2013 Ultimate)
 - doxygen 1.8.8 oder höher (getestet 1.8.8), http://www.stack.nl/~dimitri/doxygen/download.html
 - MiKTeX 2.9 (optional für die PDF-Erstellung der Dokumentation), http://www.miktex.org/download
 
-Anschließend wird die Projektmappe MakeAll.sln im Stammverzeichnis des Projektes geladen und über Batch erstellen das gesammte System erstellt.
+Anschließend wird die Projektmappe KsdLibrary.sln im Stammverzeichnis des Projektes geladen und über Batch erstellen das gesamte System erstellt.
 
-Nach einem erfolgreichen Durchlauf befindet sich u.a. im Stammverzeichnis die Dokumentationsdatei RefMan.pdf. Im Verzeichnis application befinden sich unter den Unterverzeichnissen debug und release die Bibliotheks- und Anwendungsversionen als Debug und Release kompiliert.
+Nach einem erfolgreichen Durchlauf befindet sich u.a. im Stammverzeichnis die Dokumentationsdatei RefMan.pdf. Im Verzeichnis Library befinden sich unter den Unterverzeichnissen Debug und Release die Bibliotheksversionen als Debug und Release kompiliert.
 
 
 # Verzeichnisübersicht {#Directories}
@@ -282,7 +262,7 @@ Zum Verständnis des Projektaufbaus wird die Verzeichnisstruktur erläutert.
 
   Diese Hilfsdatei
 
-- __MakeAll.sln__:
+- __KsdLibrary.sln__:
 
   Projektmappe, mit der das Gesamtsystem und die Dokumentation in einem Batch-Durchgang erstellt werden kann.
 
@@ -290,17 +270,17 @@ Zum Verständnis des Projektaufbaus wird die Verzeichnisstruktur erläutert.
 
   Batchdatei, mit der der gesammte Quellcode des Projektes nach den Konventionen des Lehrstuhls formatiert wird. Setzt installiertes Artistic Style (http://sourceforge.net/projects/astyle/files/) voraus.
 
-- __application__:
+- __Library__:
 
-  Enthält nach dem Makeprozess die kompilierten Komponenten des Projektes.
+  Enthält nach dem Makeprozess die kompilierte KSD Library.
 
   + __debug__:
 
-    Enthält nach erfolreichen Buildprozess die Debugvariante des Systems.
+    Enthält nach erfolgreichen Buildprozess die Debugvariante der KSD Library.
 
   + __release__:
 
-    Enthält nach erfolreichen Buildprozess die Releasevariante des Systems.
+    Enthält nach erfolgreichen Buildprozess die Releasevariante der KSD Library.
 
 - __doc__:
 
@@ -326,15 +306,11 @@ Zum Verständnis des Projektaufbaus wird die Verzeichnisstruktur erläutert.
 
     Enthält alle Grafiken der Dokumentation.
 
-- __include__:
+- __Ksd__:
 
-  Enthält alle Headerdateien des Projektes.
+  Enthält die Sourcen der KSD Library.
 
-- __src__:
+- __UnitTestKsd__:
 
-  Enthält alle Sourcedateien des Projektes..
+  Enthält die Sourcen der Unit Tests.
 
-
-# Fehlertests {#Tests}
-
-Beschreibung von Unittests etc.
